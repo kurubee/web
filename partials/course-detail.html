@@ -1,0 +1,14 @@
+<img ng-src="{{mainImageUrl}}" class="phone">
+ 
+<h1>{{course.name}}</h1>
+ 
+<p>{{course.description}}</p>
+ 
+<ul class="specs">
+  <li>
+    <span>Language: {{course.language_code}}</span>
+  </li>
+  <li>
+    <span>Knowledge Fields: <p ng-repeat="knowledge in course.knowledges">{{knowledge.name}}</p></span>
+  </li>
+</ul>
