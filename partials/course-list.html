@@ -9,17 +9,14 @@
         <option value="name">Alphabetical</option>
         <option value="timestamp">Newest</option>
       </select>
- 
     </div>
     <div class="span10">
       <!--Body content-->
- 	
       <ul class="list-group">
         <li ng-repeat="course in courses | filter:query | orderBy:orderProp" class="list-group-item">
           <a href="#/courses/{{course.id}}">{{course.name}}</a>
         </li>
       </ul>
- 
     </div>
   </div>
 </div>
