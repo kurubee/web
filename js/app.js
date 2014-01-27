@@ -82,7 +82,6 @@ kurubeeApp.config(['$httpProvider', function($httpProvider) {
 				 specific errors. For example:
 				*/
 				if (response.status === 401) {
-                    console.log('asd');
 					// HTTP 401 Error: 
 					// The request requires user authentication
                     $location.path( "/login" );
