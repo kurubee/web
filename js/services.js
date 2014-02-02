@@ -100,7 +100,7 @@ kurubeeServices.service('loginService',['$http',
   function($http){
     var username = undefined;
     var password = undefined;
-    $http.defaults.headers.common['Authorization'] = 'Basic d2VudHdvcnRobWFuOkNoYW5nZV9tZQ==';
+    $http.defaults.headers.common['Authorization'] = 'Basic auth';
     return {
         login:function (username,password) {
             //var encoded = Base64.encode(username + ':' + password);
@@ -118,7 +118,7 @@ kurubeeServices.service('loginService',['$http',
 
 kurubeeServices.factory('Course', ['loginService','$resource', '$http',
   function(loginService, $resource, $http){
-    return $resource('http://0.0.0.0:9090/api/v1/editorcareer/', {}, {
+    return $resource('http://api.key.com:9090/api/v1/editorcareer/', {}, {
 	  query: {method:'GET', params:{courseId:'1'}, isArray:false}//, transformResponse: tastypieDataTransformer($http)} 
     });
   }]);
