@@ -1,15 +1,27 @@
 <div class="container-fluid margedTop">
   <div class="row-fluid">
     <div class="span10">
-      <!--Body content-->
-      <ul class="list-group">
         <div ng-show="!courses">
             Loading Courses...
         </div>
-        <li ng-repeat="course in courses | filter:query | orderBy:orderProp" class="list-group-item">
-          <a href="#/courses/{{course.id}}">{{course.name}}</a>
-        </li>
-      </ul>
+        <table ng-show="courses" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Published</th>
+                <th>Description</th>
+                <th># Downloads</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="course in courses | filter:query | orderBy:orderProp" >
+                <td><a href="#/courses/{{course.id}}">{{course.name}}</a></td>
+                <td>{{course.published}}</td>
+                <td>{{course.description}}</td>
+                <td>{{course.total_downloads}}</td>
+              </tr>
+            </tbody>
+        </table>
     </div>
   </div>
 </div>
