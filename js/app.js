@@ -1,12 +1,13 @@
 var kurubeeApp = angular.module('kurubeeApp', [
   'ngRoute',
+  'ngCookies',
   'kurubeeControllers',
   'kurubeeFilters',
-  'kurubeeServices'
+  'kurubeeServices',
+  'restangular'
 ]);
 
-kurubeeApp.config(['$routeProvider',
-  function($routeProvider) {
+kurubeeApp.config(function($routeProvider,RestangularProvider) {
     $routeProvider.
       when('/courses', {
         templateUrl: 'partials/course-list.html',
@@ -20,14 +21,29 @@ kurubeeApp.config(['$routeProvider',
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl'
       }).
+      when('/auth', {
+        templateUrl: 'partials/login.html',
+        controller: 'AuthCtrl'
+      }).
       otherwise({
         redirectTo: '/courses'
       });
+     RestangularProvider.setBaseUrl('http://0.0.0.0:8000/api/v1/');
+     RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
+        var newResponse;
+        if (operation === "getList") {
+            newResponse = response.objects;
+            newResponse.metadata = response.meta;
+        } else {
+            newResponse = response.data;
+        }
+        return newResponse;
+      });
+      
 
-  }]);
+  });
 
 
-'use strict';
 
 kurubeeApp.config(['$httpProvider', function($httpProvider) {
 
