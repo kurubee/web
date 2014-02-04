@@ -22,7 +22,7 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
         controller: 'LoginCtrl'
       }).
       when('/auth', {
-        templateUrl: 'partials/login.html',
+        templateUrl: 'partials/course-list.html',
         controller: 'AuthCtrl'
       }).
       otherwise({
