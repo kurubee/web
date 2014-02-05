@@ -3,7 +3,7 @@ var kurubeeControllers  = angular.module('kurubeeControllers', []);
 kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStore) {
     Restangular.setDefaultHeaders({'Authorization': 'Basic ' + $cookieStore.get("encoded") });
     Restangular.setDefaultRequestParams({ apiKey: $cookieStore.get("token") }) ;
-    var baseCourses = Restangular.all('editor/career/');
+    var baseCourses = Restangular.all('career');
     // This will query /courses and return a promise.
     baseCourses.getList().then(function(courses) {
         $scope.courses = courses;
@@ -14,7 +14,7 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
 kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieStore, $routeParams) {
     Restangular.setDefaultHeaders({'Authorization': 'Basic ' + $cookieStore.get("encoded") });
     Restangular.setDefaultRequestParams({ apiKey: $cookieStore.get("token") }) ;
-    var baseCourse = Restangular.one('editor/career', $routeParams.courseId+"/");
+    var baseCourse = Restangular.one('career', $routeParams.courseId+'/');
     baseCourse.get().then(function(course1){
         $scope.course = course1;
         console.log(course1);
