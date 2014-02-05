@@ -5,10 +5,9 @@
             <img src="img/loading.gif" class="loading">
         </div>
         <div class="m-template m-template-course" ng-show="course">
-
             <input type="text" ng-model="course.name" class="m-title">
-            <textarea ng-model="course.description" class="m-description">
-            
+            <textarea ng-model="course.description" class="m-description"></textarea>
+            <button ng-click="save()">Save</button>
         </div>
     </div>
   </div>

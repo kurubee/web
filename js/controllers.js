@@ -19,7 +19,9 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieSt
         $scope.course = course1;
         console.log(course1);
     });
-    //console.log(baseCourse);
+    $scope.save = function() {
+        baseCourse.put();
+    };
 });
 
 kurubeeApp.controller('LoginCtrl', function($scope, $location, $routeParams,$cookieStore, Restangular) {
