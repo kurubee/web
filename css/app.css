@@ -45,3 +45,34 @@ body {
     margin-top: -125px;
 }
 
+.m-template {
+    width:308px;
+    height:548px;
+    padding-top:110px;
+    padding-left:45px;
+    padding-right:45px;
+    padding-bottom:100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -154px;
+    margin-top: -250px;    
+}
+
+.m-template-level{
+    background-image:url('../img/m-template.png');
+}
+
+.m-template-course{
+    background-image:url('../img/m-template-course.png');
+}
+
+
+.m-title {
+    line-height: 2.1em;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+}

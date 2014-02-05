@@ -1,14 +1,21 @@
-<img ng-src="{{mainImageUrl}}" class="phone">
- 
-<h1>{{course.name}}</h1>
- 
-<p>{{course.description}}</p>
- 
-<ul class="specs">
-  <li>
-    <span>Language: {{course.language_code}}</span>
-  </li>
-  <li>
-    <span>Knowledge Fields: <p ng-repeat="knowledge in course.knowledges">{{knowledge.name}}</p></span>
-  </li>
-</ul>
+<div class="container-fluid margedTop">
+  <div class="row-fluid">
+    <div class="span10">
+        <div ng-show="!course">
+            <img src="img/loading.gif" class="loading">
+        </div>
+        <div class="m-template m-template-course" ng-show="course">
+
+            <p class="m-title">{{course.name}}</p>
+             
+            <p>{{course.description}}</p>
+             
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div>
+
+</div>
