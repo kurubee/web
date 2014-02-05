@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <div class="well margedTop">
+<div class="container-fluid  margedTop">
+    <div class="well white login">
         <form
             ng-submit="login(loginModel.inputUsername, loginModel.inputPassword)">
             <input
@@ -10,11 +10,13 @@
                 type="password"
                 ng-model="loginModel.inputPassword"
                 placeholder="Password"/><br/>
-            <button
-                class="btn btn-primary margedTop">Submit</button>
-            <button
-                class="btn margedTop"
-                ng-click="hideLoginForm()">Cancel</button>
+            <div class="buttons-login">
+                <button
+                    class="btn btn-primary margedTop">Submit</button>
+                <button
+                    class="btn margedTop"
+                    ng-click="hideLoginForm()">Cancel</button>
+            </div>
         </form>
         <div
             ng-show="loginModel.loginServiceInformation.loginAttemptFailed">

@@ -30,18 +30,17 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
       });
      RestangularProvider.setBaseUrl('http://0.0.0.0:8000/api/v1/');
      RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
+        console.log(response);
         var newResponse;
         if (operation === "getList") {
             newResponse = response.objects;
             newResponse.metadata = response.meta;
-        } else {
-            newResponse = response.data;
+        }  else {
+            newResponse = response;
         }
         return newResponse;
-      });
-      
-
-  });
+     });
+});
 
 
 
