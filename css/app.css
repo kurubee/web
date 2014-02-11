@@ -88,3 +88,15 @@ body {
     font-size: .9em;
     resize: none;
 }
+
+.btn-sencha {
+
+
+}
+
+.bottom-bar {
+    bottom:0px;
+    position:absolute;
+    margin-bottom:124px;
+    margin-left:83px;
+}

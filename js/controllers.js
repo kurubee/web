@@ -3,10 +3,10 @@ var kurubeeControllers  = angular.module('kurubeeControllers', []);
 kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStore) {
     Restangular.setDefaultHeaders({'Authorization': 'Basic ' + $cookieStore.get("encoded") });
     Restangular.setDefaultRequestParams({ apiKey: $cookieStore.get("token") }) ;
-    var baseCourses = Restangular.all('career');
+    var baseCourses = Restangular.all('career/');
     // This will query /courses and return a promise.
     baseCourses.getList().then(function(courses) {
-        $scope.courses = courses;
+        $scope.courses = courses
     });
     $scope.orderProp = 'timestamp';
 });
@@ -35,7 +35,8 @@ kurubeeApp.controller('LoginCtrl', function($scope, $location, $routeParams,$coo
 });
 
 kurubeeApp.controller('AuthCtrl',function($scope, $location, $routeParams, $cookieStore, Restangular) {
-  var baseToken = Restangular.all('editor/token/');
+  var baseToken = Restangular.all('token/');
+  console.log($scope);
   // This will query /token and return a promise.
   baseToken.getList().then(function(token) {
     $cookieStore.put("token",token);
