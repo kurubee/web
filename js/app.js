@@ -32,8 +32,13 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
      RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
         var newResponse;
         if (operation === "getList") {
-            newResponse = response.objects;
-            newResponse.metadata = response.meta;
+            if(response.objects)
+            {
+                newResponse = response.objects;
+                //newResponse.metadata = response.meta;
+            }else {
+               newResponse = [response];
+            }
         }  else {
             newResponse = response;
         }
