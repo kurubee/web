@@ -1,6 +1,6 @@
 <div class="container-fluid margedTop">
   <div class="row-fluid">
-    <div class="span10">
+    <div class="span10 margedTop">
         <div ng-show="!courses">
             <img src="img/loading.gif" class="loading">
         </div>
@@ -16,7 +16,7 @@
             <tbody>
               <tr ng-repeat="course in courses | filter:query | orderBy:orderProp" >
                 <td><a href="#/courses/{{course.id}}">{{course.name}}</a></td>
-                <td>{{course.published}}</td>
+                <td>{{course.published | checkmark}}</td>
                 <td>{{course.description}}</td>
                 <td>{{course.total_downloads}}</td>
               </tr>
