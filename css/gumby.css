@@ -14,7 +14,7 @@ html { line-height: 1; }
 
 ol, ul { list-style: none; }
 
-table { border-collapse: collapse; border-spacing: 0; }
+/*table { border-collapse: collapse; border-spacing: 0; }*/
 
 caption, th, td { text-align: left; font-weight: normal; vertical-align: middle; }
 
@@ -244,7 +244,7 @@ img { -ms-interpolation-mode: bicubic; }
 .image.photo { border: 5px solid white; -webkit-box-shadow: 0 0 1px #555555; -moz-box-shadow: 0 0 1px #555555; box-shadow: 0 0 1px #555555; }
 .image.photo.polaroid { padding-bottom: 50px; background: #fff; }
 
-table { display: table; background-color: white; border-collapse: collapse; border-spacing: 0; margin-bottom: 20px; width: 100%; border: 1px solid #e5e5e5; }
+/*table { display: table; background-color: white; border-collapse: collapse; border-spacing: 0; margin-bottom: 20px; width: 100%; border: 1px solid #e5e5e5; }
 table caption { text-align: center; font-size: 30px; padding: .75em; }
 table thead th, table tbody td, table tr td { display: table-cell; padding: 10px; vertical-align: top; text-align: left; border-top: 1px solid #e5e5e5; }
 table tr td, table tbody tr td { font-size: 16px; }
@@ -257,4 +257,4 @@ table.rounded caption + thead tr:first-child th:first-child, table.rounded capti
 table.rounded caption + thead tr:first-child th:last-child, table.rounded caption + tr td:last-child, table.rounded > thead tr:first-child th:last-child, table.rounded > thead tr:first-child td:last-child, table.rounded > tr:first-child td:last-child { border-top-right-radius: 4px; }
 table.rounded thead ~ tr:last-child td:last-child, table.rounded tbody tr:last-child td:last-child { border-bottom-right-radius: 4px; }
 table.rounded thead ~ tr:last-child td:first-child, table.rounded tbody tr:last-child td:first-child { border-bottom-left-radius: 4px; }
-table.rounded thead th, table.rounded thead td, table.rounded caption + tbody tr:first-child td, table.rounded > tbody:first-child tr:first-child td { border-top: 0; }
+table.rounded thead th, table.rounded thead td, table.rounded caption + tbody tr:first-child td, table.rounded > tbody:first-child tr:first-child td { border-top: 0; }*/

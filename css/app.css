@@ -4,15 +4,7 @@ body {
     padding-top: 65px; 
 }
 
-.logotop { 
-    height: 37px;
-}
 
-/* resize images */
-.logotop img {
-    height: 37px;
-    width: auto;
-}
 
 .white {
     background-color: #ffffff;
@@ -42,7 +34,7 @@ body {
     top: 50%;
     left: 50%;
     margin-left: -125px;
-    /*margin-top: -125px;*/
+    margin-top: 100px;
 }
 
 .m-template {
@@ -100,3 +92,5 @@ body {
     margin-bottom:124px;
     margin-left:83px;
 }
+
+*/
