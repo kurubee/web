@@ -1,0 +1,11 @@
+<div class="cbp-af-header cbp-af-header-shrink" ng-controller="topbar-controller">
+<nav class="row">
+     <div id="logo" class="logotop"><a href="#"><img alt="Kurubee logo" src="img/logotop.png"></a></div>
+       <ul id="nav">
+         <li ng-show="user"><a ng-href="#/logout">Log out</a></li>         
+         <li ng-show="user"><a href="#">{{user}}</a></li>
+         <li><a href="mailto:hello@kurubee.com">Contact</a></li>
+         <li><a href="#cbp-so-scroller">About</a></li>
+     </ul>
+</nav>
+</div>

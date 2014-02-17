@@ -21,6 +21,10 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl'
       }).
+      when('/logout', {
+        templateUrl: 'partials/login.html',
+        controller: 'LogoutCtrl'
+      }).
       when('/auth', {
         templateUrl: 'partials/course-list.html',
         controller: 'AuthCtrl'
@@ -28,6 +32,7 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
       otherwise({
         redirectTo: '/courses'
       });
+
      RestangularProvider.setBaseUrl('http://0.0.0.0:8000/api/v1/editor');
      RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
         var newResponse;

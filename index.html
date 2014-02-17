@@ -21,18 +21,11 @@
   <script src="js/aux.js"></script>
 </head>
 <body >
-<div class="cbp-af-header cbp-af-header-shrink">
-<nav class="row">
-     <div id="logo" class="logotop"><a href="#"><img alt="Kurubee logo" src="img/logotop.png"></a></div>
-       <ul id="nav">
-         <li><a href="mailto:hello@kurubee.com">Contact</a></li>
-         <li><a href="#cbp-so-scroller">About</a></li>
-     </ul>
-</nav>
-</div>
-
+<div ng-controller="AppController">
+<div ng-include src="menuUrl()"></div>
 <div class="container">
   <div ng-view></div>
 </div> 
+</div>
 </body>
 </html>
