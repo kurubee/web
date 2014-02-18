@@ -4,13 +4,41 @@
         <div ng-show="!course">
             <img src="img/loading.gif" class="loading">
         </div>
-        <div class="m-template m-template-course" ng-show="course">
-            <input type="text" ng-model="course.name" class="m-title">
-            <textarea ng-model="course.description" class="m-description"></textarea>
+        <div class="row" ng-show="course" id="row">
+            <div class="six columns cbp-so-side cbp-so-side-left" >
+            <!-- Title -->
+            <h3 id="title-description">Course Title</h3>
+            <!-- Content -->
+            <p id="description-description"><b>Course description:</b> That's the place where you describe your course.</p>
+            <br>
+            <br>
+            <p ><b>Course options:</b></p>
+               Language:<select>
+                  <option value="volvo">English</option>
+                  <option value="saab">Spanish</option>
+               </select>
+                Knowledge Field:<select>
+                  <option value="volvo">Art</option>
+                  <option value="saab">Humanities</option>
+               </select>
+                Course Modality:<select>
+                  <option value="volvo">Explore</option>
+                  <option value="saab">Exam</option>
+               </select>
+               Code:<input type="text" >
+        </div>
+        <!-- Image from right -->
+        <div class="six columns cbp-so-side-right" style="margin-bottom:-60px;" >
+            <div class="m-template m-template-course">
+            <input type="text" ng-model="course.name" class="m-title" id="title-input">
+            <textarea ng-model="course.description" class="m-description" id="description-input"></textarea>
             <div class="bottom-bar">
                 <button class="btn-sencha" ng-click="save()">Save</button>
             </div>
         </div>
+        </div>
+    </div>
+        
     </div>
   </div>
 </div>
