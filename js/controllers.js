@@ -53,16 +53,16 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieSt
         jsPlumb.connect({
             source:"title-description", 
             target:"title-input",
-            anchors:[ [ 0.52,0.5, 0, 1 ],[ 0.3,0, 0, -1 ] ],
+            anchors:[ [ 0.52,0.5, 0, 0 ],[ 0.3,0, 0, 0 ] ],
             paintStyle:{ lineWidth:1, strokeStyle:"#858C91" },
-            connector:"StateMachine",
+            connector:[ "Bezier", { curviness:150 } ],
             endpoint:"Blank",
             endpointStyles:[{fillStyle:"#858C91"}, {fillStyle:"#858C91"}]
         });
         jsPlumb.connect({
             source:"description-description", 
             target:"description-input",
-            anchors:[ "RightMiddle",[ 0.3,0, 0, -1 ] ],
+            anchors:[ "RightMiddle",[ 0.3,0, 0, 0 ] ],
             paintStyle:{ lineWidth:1, strokeStyle:"#858C91" },
             connector:"Bezier",
             endpoint:"Blank",
