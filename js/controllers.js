@@ -34,7 +34,7 @@ kurubeeApp.controller('topbar-controller', function($scope,$cookieStore) {
 });
  
 kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStore) {
-    Restangular.setDefaultRequestParams({"api_key":$cookieStore.get("token"),"username":$cookieStore.get("username")});
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseCourses = Restangular.all('career');
     // This will query /courses and return a promise.
     baseCourses.getList().then(function(courses) {
@@ -44,7 +44,7 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
 });
 
 kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieStore, $routeParams) {
-    Restangular.setDefaultRequestParams({"api_key":$cookieStore.get("token"),"username":$cookieStore.get("username")});
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseCourse = Restangular.one('career', $routeParams.courseId);
     $scope.user = $cookieStore.get("username");
     jsPlumb.ready(function() {
@@ -99,7 +99,7 @@ kurubeeApp.controller('AuthCtrl',function($scope,$rootScope, $location, $routePa
   baseToken.getList().then(function(token) {
     $cookieStore.put("token",token[0].key);
     Restangular.setDefaultHeaders({}) ;
-    Restangular.setDefaultRequestParams({"api_key":token[0].key,"username":$cookieStore.get("username")});
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     $rootScope.$broadcast('userLoggedChange',"in");
     $location.path( "/courses" );
   });
