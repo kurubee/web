@@ -50,24 +50,32 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieSt
     jsPlumb.ready(function() {
         jsPlumb.Defaults.Container = $("#row");
         //jsPlumb.Defaults.Endpoints = [ [ "Dot", 7 ], [ "Dot", 7 ] ];
+        			var stateMachineConnector = {				
+				connector:"Flowchart",
+            paintStyle:{ lineWidth:1, strokeStyle:"#858C91" },
+				hoverPaintStyle:{strokeStyle:"#dbe300"},
+				endpoint:"Blank",
+				anchor:"Continuous",
+				overlays:[ ["PlainArrow", {location:1, width:15, length:12} ]]
+			};
         jsPlumb.connect({
             source:"title-description", 
-            target:"title-input",
-            anchors:[ [ 0.52,0.5, 0, 0 ],[ 0.3,0, 0, 0 ] ],
+            target:"title-input"},stateMachineConnector);
+/*            anchors:[ [ 0.52,0.5, 0, 0 ],[ 0.3,0, 0, 0 ] ],
             paintStyle:{ lineWidth:1, strokeStyle:"#858C91" },
-            connector:[ "Bezier", { curviness:150 } ],
+            connector: "StateMachine",
             endpoint:"Blank",
             endpointStyles:[{fillStyle:"#858C91"}, {fillStyle:"#858C91"}]
-        });
+        });*/
         jsPlumb.connect({
             source:"description-description", 
-            target:"description-input",
-            anchors:[ "RightMiddle",[ 0.3,0, 0, 0 ] ],
+            target:"description-input"},stateMachineConnector);
+            /*anchors:[ "RightMiddle",[ 0.3,0, 0, 0 ] ],
             paintStyle:{ lineWidth:1, strokeStyle:"#858C91" },
-            connector:"Bezier",
+            connector:"StateMachine",
             endpoint:"Blank",
             endpointStyles:[{fillStyle:"#858C91"}, {fillStyle:"#858C91"}]
-        });
+        });*/
     });
     baseCourse.get().then(function(course1){
         $scope.course = Restangular.copy(course1);
