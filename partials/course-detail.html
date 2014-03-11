@@ -4,20 +4,18 @@
         <div ng-show="!course">
             <img src="img/loading.gif" class="loading">
         </div>
-        <div class="row" ng-show="course" id="row">
+        <div class="row" ng-show="course" id="row" >
             <div class="six columns cbp-so-side cbp-so-side-left" >
             <!-- Title -->
-            <h3 id="title-description">Course Title</h3>
+            <h3 id="title-description"  style="margin-top:61px;margin-right:200px;">Course Title</h3>
             <!-- Content -->
-            <p id="description-description"><b>Course description:</b> That's the place where you describe your course.</p>
+            <p id="description-description" style="margin-top:10px;margin-right:85px;"><b>Course description:</b> 
+           <br>
+           That's the place where you describe your course.</p>
             <br>
             <br>
             <p ><b>Course options:</b></p>
-               Language: <select style="
-    width: 105px;
-">
-                  <option value="volvo">English</option>
-                  <option value="saab">Spanish</option>
+                Language: <select  ng-init="somethingHere = options[0]" ng-model="course.language_code" ng-options="c.code for c in languages" style="width: 105px;">
                </select>
                <br>
                 Knowledge Field: <select style="
@@ -34,7 +32,7 @@
                   <option value="saab">Exam</option>
                </select>
                <br>
-               Code: <input type="text" style="line-height: 1px;" >
+               Code: <input ng-model="course.code" type="text" style="line-height: 1px;" >
                <br>
                <button class="button2 fade3" style="display: inline;padding: 8px;width: 180px;margin-top: 55px;" ng-click="save()">Save Course</button>
         </div>

@@ -44,6 +44,12 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
 });
 
 kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieStore, $routeParams) {
+    $scope.languages = [
+        {name:'English', code:'en'},
+        {name:'Spanish', code:'es'},
+        {name:'French', code:'fr'},
+        {name:'Arabic', code:'ar'}
+    ];
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseCourse = Restangular.one('career', $routeParams.courseId);
     $scope.user = $cookieStore.get("username");
@@ -51,9 +57,8 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieSt
         jsPlumb.Defaults.Container = $("#row");
         //jsPlumb.Defaults.Endpoints = [ [ "Dot", 7 ], [ "Dot", 7 ] ];
         			var stateMachineConnector = {				
-				connector:"Flowchart",
-            paintStyle:{ lineWidth:1, strokeStyle:"#858C91" },
-				hoverPaintStyle:{strokeStyle:"#dbe300"},
+				connector:"Straight",
+            paintStyle:{ lineWidth:1.5, strokeStyle:"green" },
 				endpoint:"Blank",
 				anchor:"Continuous",
 				overlays:[ ["PlainArrow", {location:1, width:15, length:12} ]]
