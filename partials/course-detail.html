@@ -1,13 +1,9 @@
-<div class="container-fluid margedTop">
-  <div class="row-fluid">
-    <div class="span10">
+<div class="margedTop">
         <div ng-show="!course">
             <img src="img/loading.gif" class="loading">
         </div>
         <div class="row background-course" ng-show="course" id="row">
-            <div class="six columns cbp-so-side cbp-so-side-left" style="
-    margin-top: -5px;
-" >
+            <div class="six columns cbp-so-side cbp-so-side-left" style="margin-top: -5px;" >
             <!-- Title -->
             <h3 id="title-description"  style="margin-top:61px;padding-left:9px;">Course Title</h3>
             <!-- Content -->
@@ -16,14 +12,12 @@
            That's the place where you describe your course.</p>
             <br>
             <br>
-            <p ><b>Course options:</b>
+            <p><b>Course options:</b>
             <br>
                 Language: <select  ng-model="language" ng-options="c.name for c in languages" style="width: 105px;">
                </select>
                <br>
-                Knowledge Field: <select style="
-    width: 105px;
-">
+                Knowledge Field: <select style="width: 105px;">
                   <option value="volvo">Art</option>
                   <option value="saab">Humanities</option>
                </select>
@@ -33,9 +27,9 @@
                <br>
                Code: <input ng-model="course.code" type="text" style="line-height: 1px;" ></p>
                <br>
-               <button class="button2 fade3" style="display: inline;padding: 5px;width: 150px;margin-top: 15px;" ng-click="save()">Save Course</button>
+               <button ng-class="{'button-disabled': disable_save_button, 'button2':!disable_save_button, 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="save()" ng-disabled="disable_save_button">Save Course</button>            
+               <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
         </div>
-        <!-- Image from right -->
         <div class="six columns cbp-so-side-right" style="margin-bottom:-60px;" >
             <div class="m-template m-template-course">
             <input type="text" ng-model="course.name" class="m-title" id="title-input">
@@ -46,7 +40,5 @@
         </div>
         </div>
     </div>
-        
-    </div>
-  </div>
+
 </div>

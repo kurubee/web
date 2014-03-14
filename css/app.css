@@ -24,6 +24,30 @@ body {
     margin-left:14px;
 }
 
+.button-disabled {
+    font-family: 'latolight', sans-serif;
+    text-transform: uppercase;
+    padding:15px 20px;
+    background-color: grey;
+    font-size: 16px;
+    background-repeat: repeat-x;
+    width:100%;
+    cursor: pointer;
+    border-radius: 7px;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: white;
+}
+
+.button:hover {
+	background-color: grey;
+    color: white;
+    background-position: 0 -15px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;}
+
 .margedTop {
     margin-top:50px;
 }
@@ -35,6 +59,11 @@ body {
     left: 50%;
     margin-left: -125px;
     margin-top: 100px;
+}
+
+.loadingMini {
+    width:40px;
+    float:left;
 }
 
 .m-template {
