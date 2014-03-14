@@ -14,8 +14,9 @@
            That's the place where you describe your course.</p>
             <br>
             <br>
-            <p ><b>Course options:</b></p>
-                Language: <select  ng-init="somethingHere = options[0]" ng-model="course.language_code" ng-options="c.code for c in languages" style="width: 105px;">
+            <p ><b>Course options:</b>
+            <br>
+                Language: <select  ng-model="language" ng-options="c.name for c in languages" style="width: 105px;">
                </select>
                <br>
                 Knowledge Field: <select style="
@@ -25,14 +26,10 @@
                   <option value="saab">Humanities</option>
                </select>
                <br>
-                Course Modality: <select style="
-    width: 105px;
-">
-                  <option value="volvo">Explore</option>
-                  <option value="saab">Exam</option>
+                Course Modality: <select  ng-model="career_type" ng-options="c for c in career_types" style="width: 105px;">
                </select>
                <br>
-               Code: <input ng-model="course.code" type="text" style="line-height: 1px;" >
+               Code: <input ng-model="course.code" type="text" style="line-height: 1px;" ></p>
                <br>
                <button class="button2 fade3" style="display: inline;padding: 8px;width: 180px;margin-top: 55px;" ng-click="save()">Save Course</button>
         </div>
