@@ -55,6 +55,12 @@ body {
 
 .m-template-course{
     background-image:url('../img/m-template-course.png');
+    margin-top: -12px;
+    margin-left: 12px;
+}
+
+.background-course{
+    background-image:url('../img/background-course.png');
 }
 
 .m-title {

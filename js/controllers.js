@@ -54,23 +54,6 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieSt
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseCourse = Restangular.one('career', $routeParams.courseId);
     $scope.user = $cookieStore.get("username");
-    jsPlumb.ready(function() {
-        jsPlumb.Defaults.Container = $("#row");
-			var stateMachineConnector = {				
-				connector:"Flowchart",
-                paintStyle:{ lineWidth:1.5, strokeStyle:"green" },
-				endpoint:"Blank",
-				anchor:"Continuous",
-				overlays:[ ["PlainArrow", {location:1, width:15, length:12} ]]
-			};
-        jsPlumb.connect({
-            source:"title-description", 
-            target:"title-input"},stateMachineConnector);
-
-        jsPlumb.connect({
-            source:"description-description", 
-            target:"description-input"},stateMachineConnector);
-    });
     baseCourse.get().then(function(course1){
         $scope.course = Restangular.copy(course1);
         console.log($scope.course);
