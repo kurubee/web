@@ -3,9 +3,6 @@
 body { 
     padding-top: 65px; 
 }
-
-
-
 .white {
     background-color: #ffffff;
 }
@@ -63,19 +60,23 @@ body {
 
 .loadingMini {
     width:40px;
-    float:left;
+    float:none;
+    display:inline-block;
+    vertical-align:top;
+    margin-left:5px;
 }
 
 .m-template {
     width:308px;
     height:548px;
+    margin-top: -12px;
+    margin-left:100px;
     padding-top:110px;
     padding-left:45px;
     padding-right:45px;
     padding-bottom:100px;
     top: 50%;
     left: 50%;
-    /*margin-top: -250px;*/
 }
 
 .m-template-level{
@@ -84,15 +85,22 @@ body {
 
 .m-template-course{
     background-image:url('../img/m-template-course.png');
-    margin-top: -12px;
-    margin-left: 12px;
 }
 
 .background-course{
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
     background-image:url('../img/background-course.png');
+    width:800px;
+    height:600px;
+    overflow:hidden;
+    
 }
 
 .m-title {
+    height: 42px;
+    width:221px;
     border: 0px solid;
     background-color:transparent;
     line-height: 2.1em;
@@ -104,7 +112,7 @@ body {
 }
 
 .m-description {
-    width:100%;
+    width:221px;
     height:100px;
     border: 0px solid;
     background-color:transparent;
@@ -114,14 +122,62 @@ body {
     resize: none;
 }
 
-.btn-sencha {
-
-
-}
-
 .bottom-bar {
     margin-top:147px;
     margin-bottom:124px;
     margin-left:83px;
 }
 
+.column-left {
+    position:relative;
+    float:left;
+    width:50%;
+    margin-top:42px;
+}
+
+.column-right {
+    position:relative;
+    float:left;
+    margin-bottom:-60px;
+    width:50%;
+}
+
+.title-description-cls {
+    margin-top:61px;
+}
+
+.description-description-cls {
+    margin-top: 3px;
+}
+
+.select-options {
+    width: 105px;
+}
+
+.input-code-cls {
+    line-height: 1px;
+}
+
+.save-course-btn-cls {
+    display: inline-block;
+    padding: 5px;
+    width: 150px;
+    margin-top: 33px;
+    vertical-align:top;
+}
+
+.saved-text-cls{
+    float:none;
+    display:inline-block;
+    vertical-align:top;
+    margin-left:5px;
+    margin-top:18px;
+}
+.fade-out {
+    opacity: 1; 
+    transition: all 2s;
+}
+
+.vanish {
+    opacity: 0
+}

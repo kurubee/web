@@ -2,35 +2,50 @@
         <div ng-show="!course">
             <img src="img/loading.gif" class="loading">
         </div>
-        <div class="row background-course" ng-show="course" id="row">
-            <div class="six columns cbp-so-side cbp-so-side-left" style="margin-top: -5px;" >
-            <!-- Title -->
-            <h3 id="title-description"  style="margin-top:61px;padding-left:9px;">Course Title</h3>
-            <!-- Content -->
-            <p id="description-description" style="margin-top: 3px;padding-left: 8px;"><b>Course description:</b> 
-           <br>
-           That's the place where you describe your course.</p>
-            <br>
-            <br>
-            <p><b>Course options:</b>
-            <br>
-                Language: <select  ng-model="language" ng-options="c.name for c in languages" style="width: 105px;">
-               </select>
-               <br>
-                Knowledge Field: <select style="width: 105px;">
-                  <option value="volvo">Art</option>
-                  <option value="saab">Humanities</option>
-               </select>
-               <br>
-                Course Modality: <select  ng-model="career_type" ng-options="c for c in career_types" style="width: 105px;">
-               </select>
-               <br>
-               Code: <input ng-model="course.code" type="text" style="line-height: 1px;" ></p>
-               <br>
-               <button ng-class="{'button-disabled': disable_save_button, 'button2':!disable_save_button, 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="save()" ng-disabled="disable_save_button">Save Course</button>            
-               <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
+        <div class="background-course" ng-show="course" >
+            <div class="column-left">
+                <!-- Title -->
+                <div class="title-description-cls">
+                    <h3 id="title-description">Course Title</h3>
+                </div>
+                <!-- Content -->
+                <div class="description-description-cls">
+                    <p id="description-description">
+                        <b>Course description:</b> 
+                        <br>
+                        That's the place where you describe your course.
+                    </p>
+                </div>
+                <br>
+                <br>
+                <div>
+                    <p>
+                        <b>Course options:</b>
+                        <br>
+                        Language: 
+                        <select  ng-model="language" ng-options="c.name for c in languages" class="select-options">
+                        </select>
+                        <br>
+                        Knowledge Field: 
+                        <select class="select-options">
+                          <option value="volvo">Art</option>
+                          <option value="saab">Humanities</option>
+                        </select>
+                        <br>
+                        Course Modality: 
+                        <select  ng-model="career_type" ng-options="c for c in career_types" class="select-options">
+                        </select>
+                        <br>
+                        Code: 
+                        <input ng-model="course.code" type="text" class="input-code-cls">
+                    </p>
+                    <br>
+                </div>
+                   <button ng-class="{'button-disabled': disable_save_button, 'button2':!disable_save_button, 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="save()" ng-disabled="disable_save_button">Save Course</button>            
+                   <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
+                   <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
         </div>
-        <div class="six columns cbp-so-side-right" style="margin-bottom:-60px;" >
+        <div class="column-right">
             <div class="m-template m-template-course">
             <input type="text" ng-model="course.name" class="m-title" id="title-input">
             <textarea ng-model="course.description" class="m-description" id="description-input"></textarea>
@@ -40,5 +55,4 @@
         </div>
         </div>
     </div>
-
 </div>

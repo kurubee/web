@@ -45,6 +45,7 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
 
 kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
+    $scope.saved = false;
     $scope.languages = [
         {name:'English', code:'en'},
         {name:'Spanish', code:'es'},
@@ -78,6 +79,7 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieSt
 
     $scope.save = function() {
         $scope.disable_save_button = true;
+        $scope.saved = false;
         for (var i in $scope.languages)
         {
             console.log($scope.language);
@@ -90,8 +92,11 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieSt
         console.log($scope.career_type);
         $scope.course.career_type = $scope.career_type;
         $scope.course.put().then(function() {
-        $scope.disable_save_button = false;
+            $scope.disable_save_button = false;
+            $scope.saved = true;
+
             console.log("Object saved OK");
+            setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
         }, function() {
             console.log("There was an error saving");
         });
