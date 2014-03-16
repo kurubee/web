@@ -181,3 +181,8 @@ body {
 .vanish {
     opacity: 0
 }
+
+.carousel-card {
+    text-align: center;
+}
+

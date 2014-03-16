@@ -1,10 +1,12 @@
 var kurubeeApp = angular.module('kurubeeApp', [
   'ngRoute',
   'ngCookies',
+  'ngTouch',
   'kurubeeControllers',
   'kurubeeFilters',
   'kurubeeServices',
-  'restangular'
+  'restangular',
+  'angular-carousel'
 ]);
 
 kurubeeApp.config(function($routeProvider,RestangularProvider) {
