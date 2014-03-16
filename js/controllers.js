@@ -109,11 +109,15 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
 
 
 kurubeeApp.controller('LevelDetailCtrl', function($scope, Restangular,$cookieStore, $routeParams) {
-    $scope.disable_save_button = false;
-    $scope.saved = false;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseCourse = Restangular.one('career', $routeParams.courseId);
     $scope.user = $cookieStore.get("username");
+    console.log($routeParams.levelId);
+
+    baseCourse.get().then(function(course1){
+        $scope.course = Restangular.copy(course1);
+        $scope.course.levelId = $routeParams.levelId;
+    });
 
 });
 

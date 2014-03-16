@@ -1,9 +1,12 @@
 <div class="margedTop">
-        <div class="background-level" >
+        <div ng-show="!course">
+            <img src="img/loading.gif" class="loading">
+        </div>
+        <div class="background-level" ng-show="course" >
             <div class="column-left">
                 <!-- Title -->
                 <div class="title-description-cls">
-                    <h3 id="title-description"></h3>
+                    <h3 id="title-description">You are editing Level 1.</h3>
                 </div>
                 <!-- Content -->
                 <div class="activities-description-cls">
@@ -27,7 +30,14 @@
                 <ul>
                     <li>
                         <div class="carousel-card">
-                            <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 200px;margin-top: 13px;vertical-align:top" ng-click="create-level()" >Create New Activity</button>            
+                            Create New Activity:
+                            <select class="select-options" style="display: inline-block;padding: 5px;width: 200px;margin-top: 13px;vertical-align:top">
+                              <option value="quiz">Quiz</option>
+                              <option value="saab">Visual</option>
+                              <option value="saab">Geospatial</option>
+                              <option value="saab">Relational</option>
+                              <option value="saab">Temporal</option>
+                            </select>
                         </div>
                     </li>
                 </ul>
