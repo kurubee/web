@@ -108,7 +108,7 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
 });
 
 
-kurubeeApp.controller('LevelDetailCtrl', function($scope, Restangular,$cookieStore, $routeParams) {
+kurubeeApp.controller('LevelDetailCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseCourse = Restangular.one('career', $routeParams.courseId);
     $scope.user = $cookieStore.get("username");
@@ -119,6 +119,9 @@ kurubeeApp.controller('LevelDetailCtrl', function($scope, Restangular,$cookieSto
         $scope.course.levelId = $routeParams.levelId;
     });
 
+    $scope.createActivity = function() {
+       $location.path( "/courses/"+$routeParams.courseId+"/activities/1" );
+    };
 });
 
 

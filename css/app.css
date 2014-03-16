@@ -107,6 +107,16 @@ body {
     overflow:hidden;    
 }
 
+.background-quiz-activity{
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+    background-image:url('../img/background-course.png');
+    width:800px;
+    height:600px;
+    overflow:hidden;    
+}
+
 .m-title {
     height: 42px;
     width:221px;
