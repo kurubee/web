@@ -94,8 +94,17 @@ body {
     background-image:url('../img/background-course.png');
     width:800px;
     height:600px;
-    overflow:hidden;
-    
+    overflow:hidden;    
+}
+
+.background-level{
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+    background-image:url('../img/background-level.png');
+    width:800px;
+    height:600px;
+    overflow:hidden;    
 }
 
 .m-title {
@@ -148,6 +157,10 @@ body {
 
 .description-description-cls {
     margin-top: 3px;
+}
+
+.activities-description-cls {
+    margin-top: 48px;
 }
 
 .select-options {

@@ -43,7 +43,7 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
     $scope.orderProp = 'timestamp';
 });
 
-kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieStore, $routeParams) {
+kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
     $scope.saved = false;
     $scope.languages = [
@@ -98,10 +98,26 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, Restangular,$cookieSt
             console.log("Object saved OK");
             setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
         }, function() {
-            console.log("There was an error saving");
+            console.log("There was an error while saving");
         });
     };
+    
+    $scope.createLevel = function() {
+       $location.path( "/courses/"+$routeParams.courseId+"/levels/1" );
+    };
 });
+
+
+kurubeeApp.controller('LevelDetailCtrl', function($scope, Restangular,$cookieStore, $routeParams) {
+    $scope.disable_save_button = false;
+    $scope.saved = false;
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
+    var baseCourse = Restangular.one('career', $routeParams.courseId);
+    $scope.user = $cookieStore.get("username");
+
+});
+
+
 
 kurubeeApp.controller('LoginCtrl', function($scope, $location, $routeParams,$cookieStore, Restangular) {
     $scope.login = function(username, password)
