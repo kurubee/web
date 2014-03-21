@@ -52,7 +52,7 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
         {name:'French', code:'fr'},
         {name:'Arabic', code:'ar'}
     ];
-    $scope.career_types = ["explore","exam"];
+    $scope.career_types = ["Explore","Exam"];
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     
     var baseKnowledges = Restangular.one('knowledge');
