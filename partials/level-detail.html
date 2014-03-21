@@ -19,31 +19,33 @@
                 <br>
                 <br>
 
-                   <button ng-class="{'button-disabled': disable_save_button, 'button2':!disable_save_button, 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="save()" ng-disabled="disable_save_button">Save Course</button>            
+                   <button ng-class="{'button-disabled': disable_save_button, 'button2':!disable_save_button, 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="save()" ng-disabled="disable_save_button">Save</button>            
                    <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
                    <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
         </div>
         <div class="column-right">
             <div class="m-template m-template-course">
             <input type="text" ng-model="course.name" class="m-title" id="title-input">
-            <div id="carousel" style="width: 221px;height:140px;">
-                <ul>
-                    <li>
-                        <div class="carousel-card">
-                            <select class="select-options" style="display: inline-block;padding: 5px;width: 200px;margin-top: 13px;vertical-align:top">
-                              <option value="quiz">Quiz</option>
-                              <option value="saab">Visual</option>
-                              <option value="saab">Geospatial</option>
-                              <option value="saab">Relational</option>
-                              <option value="saab">Temporal</option>
-                            </select>
-                            <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 200px;margin-top: 13px;vertical-align:top" ng-click="createActivity()" >Create New Activity</button>      
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <div class="m-content">
+                <div id="carousel" style="width: 221px;height:140px;">
+                    <ul>
+                        <li>
+                            <div class="carousel-card">
+                                <select class="select-options" style="display: inline-block;padding: 5px;width: 200px;margin-top: 13px;vertical-align:top">
+                                  <option value="quiz">Quiz</option>
+                                  <option value="saab">Visual</option>
+                                  <option value="saab">Geospatial</option>
+                                  <option value="saab">Relational</option>
+                                  <option value="saab">Temporal</option>
+                                </select>
+                                <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 200px;margin-top: 13px;vertical-align:top" ng-click="createActivity()" >Create New Activity</button>      
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>    
             <div class="bottom-bar">
-
+                <a ng-click="back()" class="pointer"><img src="img/back_button.png"></a>
             </div>
         </div>
         </div>
