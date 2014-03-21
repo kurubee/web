@@ -43,7 +43,7 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
         redirectTo: '/courses'
       });
 
-     RestangularProvider.setBaseUrl('http://0.0.0.0:8000/api/v1/editor');
+     RestangularProvider.setBaseUrl('http://0.0.0.0:8000/api/v1/');
      RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
         var newResponse;
         if (operation === "getList") {

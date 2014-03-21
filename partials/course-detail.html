@@ -1,8 +1,8 @@
 <div class="margedTop">
-        <div ng-show="!course">
+        <div ng-show="!course && !knowledges">
             <img src="img/loading.gif" class="loading">
         </div>
-        <div class="background-course" ng-show="course" >
+        <div class="background-course" ng-show="course && knowledges" >
             <div class="column-left">
                 <!-- Title -->
                 <div class="title-description-cls">
@@ -27,9 +27,7 @@
                         </select>
                         <br>
                         Knowledge Field: 
-                        <select class="select-options">
-                          <option value="volvo">Art</option>
-                          <option value="saab">Humanities</option>
+                        <select  ng-model="knowledge" ng-options="c.name for c in knowledges" class="select-options">
                         </select>
                         <br>
                         Course Modality: 
