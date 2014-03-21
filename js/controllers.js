@@ -49,12 +49,12 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
 kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
     $scope.saved = false;
-    $scope.languages = {
-        'en':'English',
-        'es':'Spanish',
-        'fr':'French',
-        'ar':'Arabic'
-    };
+    $scope.languages = [
+        {name:'English', code:'en'},
+        {name:'Spanish', code:'es'},
+        {name:'French', code:'fr'},
+        {name:'Arabic', code:'ar'}
+    ];
     $scope.career_types = ["Explore","Exam"];
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     
@@ -68,10 +68,14 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
     baseCourse.get().then(function(course1){
         $scope.course = Restangular.copy(course1);
         console.log($scope.course);
-        var temp = $scope.course.language_code;
-        $scope.language = $scope.languages.temp;
-        console.log($scope.languages[$scope.course.language_code]);
-        console.log($scope.course.language_code);
+        for (var i in $scope.languages)
+        {
+            if($scope.languages[i].code == $scope.course.language_code)
+            {
+                $scope.language = $scope.languages[i];
+                console.log($scope.language);
+            }
+        }
         for (var j in $scope.career_types)
         {
             if($scope.career_types[j] == $scope.course.career_type)
@@ -95,7 +99,7 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
             }
         }
         console.log($scope.career_type);
-        $scope.course.career_type = $scope.career_type;
+        $scope.course.career_type = $scope.career_type.toLowerCase();
         $scope.course.put().then(function() {
             $scope.disable_save_button = false;
             $scope.saved = true;

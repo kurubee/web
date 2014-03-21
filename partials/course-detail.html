@@ -1,5 +1,5 @@
 <div class="margedTop">
-        <div ng-show="!course && !knowledges">
+        <div ng-hide="course && knowledges">
             <img src="img/loading.gif" class="loading">
         </div>
         <div class="background-course" ng-show="course && knowledges" >
@@ -23,7 +23,7 @@
                         <b>Course options:</b>
                         <br>
                         Language: 
-                        <select  ng-model="language"  ng-options="code as name for (code, name) in languages" class="select-options">
+                        <select  ng-model="language"  ng-options="c.name for c in languages" class="select-options">
                         </select>
                         <br>
                         Knowledge Field: 
