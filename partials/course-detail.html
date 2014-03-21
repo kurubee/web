@@ -23,7 +23,7 @@
                         <b>Course options:</b>
                         <br>
                         Language: 
-                        <select  ng-model="language" ng-options="c.name for c in languages" class="select-options">
+                        <select  ng-model="language"  ng-options="code as name for (code, name) in languages" class="select-options">
                         </select>
                         <br>
                         Knowledge Field: 
@@ -58,7 +58,7 @@
                 </ul>
             </div>
             <div class="bottom-bar">
-
+                <a ng-click="back()" class="pointer"><img src="img/back_button.png"></a>
             </div>
         </div>
         </div>

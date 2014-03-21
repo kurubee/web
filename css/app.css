@@ -142,9 +142,9 @@ body {
 }
 
 .bottom-bar {
-    margin-top:147px;
+    margin-top:6px;
     margin-bottom:124px;
-    margin-left:83px;
+    margin-left:3px;
 }
 
 .column-left {
@@ -207,5 +207,9 @@ body {
 
 .carousel-card {
     text-align: center;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
