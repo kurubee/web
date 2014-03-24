@@ -45,7 +45,7 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
     $scope.orderProp = 'timestamp';
 });
 
-kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular,$cookieStore, $routeParams) {
+kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
     $scope.saved = false;
     $scope.languages = {
@@ -72,6 +72,7 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
             $scope.language = $scope.course.language_code;
             $scope.career_type = $scope.course.career_type;
             $scope.knowledge = $scope.course.knowledges[0];
+            Aux.setCourseName($scope.course.name);
         });
 
         $scope.save = function() {
@@ -95,15 +96,16 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
         };
     });   
-});
+}]);
 
 
-kurubeeApp.controller('LevelDetailCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
+kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location, Restangular,$cookieStore, $routeParams) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/activity/?level_type=' + $routeParams.levelId + '&career=' + $routeParams.courseId);
     $scope.level = $routeParams.levelId;
     baseActivities.getList().then(function(activities){
         $scope.loaded = true;
+        $scope.courseName = Aux.getCourseName();
         $scope.activities = [];
         for (var j=0;j<activities.length;j++)
         {
@@ -115,7 +117,7 @@ kurubeeApp.controller('LevelDetailCtrl', function($scope, $location, Restangular
     $scope.createActivity = function() {
        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/newQuizActivity" );
     };
-});
+}]);
 
 kurubeeApp.controller('NewQuizActivityCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});

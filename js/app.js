@@ -9,6 +9,20 @@ var kurubeeApp = angular.module('kurubeeApp', [
   'angular-carousel'
 ]);
 
+
+kurubeeApp.service('Aux', function() {
+  var courseName = "Error";
+
+  this.setCourseName = function (name) {
+        courseName = name;
+  }
+
+  this.getCourseName = function () {
+        return courseName;
+  }
+});
+
+
 kurubeeApp.config(function($routeProvider,RestangularProvider) {
     $routeProvider.
       when('/courses', {
