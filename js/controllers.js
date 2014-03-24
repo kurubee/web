@@ -169,21 +169,29 @@ kurubeeApp.controller('LevelDetailCtrl', function($scope, $location, Restangular
     };
 });
 
-kurubeeApp.controller('ActivityDetailCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
+kurubeeApp.controller('NewQuizActivityCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
-    var baseActivities = Restangular.all('editor/activity/?level_type=' + $routeParams.levelId + '&career=' + $routeParams.courseId);
-    console.log($routeParams.levelId);
-    baseActivities.getList().then(function(activities){
-        $scope.activities = [];
-        for (var j=0;j<activities.length;j++)
-        {
-            console.log(j);
-            $scope.activities[j] = activities[j];
-        }    
-    });
-    
-    $scope.createActivity = function() {
-       $location.path( "/courses/"+$routeParams.courseId+"/activities/1" );
+    var baseActivities = Restangular.all('editor/activity');
+    $scope.name = "Type here Activity Name";
+    $scope.query = "Type here Quiz Activity Query";
+    console.log($routeParams.levelId);    
+    $scope.saveActivity = function() {
+       var baseActivity = {
+            name : $scope.name,
+            query : $scope.query,
+            career : "/api/v1/editor/career/" + $routeParams.courseId + "/",
+            language_code : "en",
+            level_type : $routeParams.levelId,
+            level_order : 0,
+            level_required : true,
+            reward : "wena!",
+            penalty : "mala!",
+            activity_type : 'quiz'
+       };
+       baseActivities.post(baseActivity).then(function ()
+       {
+            console.log('salvado!');
+       });
     };
 });
 
