@@ -165,7 +165,7 @@ kurubeeApp.controller('LevelDetailCtrl', function($scope, $location, Restangular
     });
     
     $scope.createActivity = function() {
-       $location.path( "/courses/"+$routeParams.courseId+"/levels/" + "newQuizActivity" );
+       $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/newQuizActivity" );
     };
 });
 
