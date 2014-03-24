@@ -59,10 +59,10 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
         exam : "Exam"
     };
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
-    var baseKnowledges = Restangular.one('knowledge');
+    var baseKnowledges = Restangular.one('editor/knowledge');
     baseKnowledges.getList().then(function(knowledges){
         $scope.knowledges = {};
-        $scope.knowledges[knowledges[0].name] = knowledges[0].name;
+        $scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
         console.log($scope.knowledges);
         var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
         $scope.user = $cookieStore.get("username");
