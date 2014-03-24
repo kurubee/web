@@ -1,7 +1,6 @@
 var kurubeeControllers  = angular.module('kurubeeControllers', []);
 
 kurubeeApp.controller('AppController', function($scope, $cookieStore) {
-    console.log($cookieStore.get("username"));
     if ($cookieStore.get("username"))
     {        
         $scope.menuUrl = function() {
@@ -55,62 +54,38 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
         fr : "French",
         ar : "Arabic"
     };
-    $scope.career_types = ["Explore","Exam"];
+    $scope.career_types = {
+        explore : "Explore",
+        exam : "Exam"
+    };
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseKnowledges = Restangular.one('knowledge');
     baseKnowledges.getList().then(function(knowledges){
-        $scope.knowledges = [];
-        for (var j=0;j<knowledges.length;j++)
-        {
-            console.log(j);
-            $scope.knowledges[j] = knowledges[j].name;
-        }
+        $scope.knowledges = {};
+        $scope.knowledges[knowledges[0].name] = knowledges[0].name;
+        console.log($scope.knowledges);
         var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
         $scope.user = $cookieStore.get("username");
         baseCourse.get().then(function(course1){
             $scope.course = Restangular.copy(course1);
             $scope.course.levels.push("new");
-            console.log($scope.course);
             $scope.language = $scope.course.language_code;
-            for (var j in $scope.career_types)
-            {
-                if($scope.career_types[j].toLowerCase() == $scope.course.career_type)
-                {
-                    $scope.career_type = $scope.career_types[j];
-                    console.log($scope.career_type);
-                }
-            }
-            for (var j=0;j<$scope.knowledges.length;j++)
-            {
-                console.log($scope.knowledges[j]);
-                if($scope.course.knowledges[0])
-                {
-                    if($scope.knowledges[j] == $scope.course.knowledges[0].name)
-                    {
-                        
-                        $scope.knowledge = $scope.knowledges[j];
-                        console.log($scope.knowledge);
-                    }
-                 }
-            }
-            console.log($scope.knowledges);
+            $scope.career_type = $scope.course.career_type;
+            $scope.knowledge = $scope.course.knowledges[0];
         });
 
         $scope.save = function() {
             $scope.disable_save_button = true;
             $scope.saved = false;
             $scope.course.language_code = $scope.language;
-            console.log($scope.career_type);
-            $scope.course.career_type = $scope.career_type.toLowerCase();
-            console.log($scope);
-            $scope.course.put().then(function() {
+            $scope.course.career_type = $scope.career_type;
+            $scope.course.knowledges = [$scope.knowledge];
+            $scope.course.put().then(function() 
+            {
                 $scope.disable_save_button = false;
                 $scope.saved = true;
-
-                console.log("Object saved OK");
                 setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
             }, function() {
-                console.log("There was an error while saving");
                 setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
             });
         };
@@ -119,8 +94,7 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
            console.log(index);
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
         };
-    });
-    
+    });   
 });
 
 
