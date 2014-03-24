@@ -27,7 +27,7 @@
                         </select>
                         <br>
                         Knowledge Field: 
-                        <select  ng-model="knowledge" ng-options="c.name for c in knowledges" class="select-options">
+                        <select  ng-model="knowledge" ng-options="c for c in knowledges" class="select-options">
                         </select>
                         <br>
                         Course Modality: 
@@ -51,9 +51,9 @@
                     
                     <div id="carousel" style="width: 221px;height:140px;">
                         <ul rn-carousel>
-                            <li>
+                            <li ng-repeat="level in course.levels">
                                 <div class="carousel-card">
-                                    <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 170px;margin-top: 13px;vertical-align:top" ng-click="createLevel()" >Create New Level</button>            
+                                    <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 170px;margin-top: 13px;vertical-align:top" ng-click="toLevel($index)" >{{level}}</button>            
                                 </div>
                             </li>
                         </ul>
