@@ -23,15 +23,15 @@
                         <b>Course options:</b>
                         <br>
                         Language: 
-                        <select  ng-model="language"  ng-options="c.name for c in languages" class="select-options">
+                        <select ng-model="language"  ng-options="code as name for (code , name) in languages" class="select-options">
                         </select>
                         <br>
                         Knowledge Field: 
-                        <select  ng-model="knowledge" ng-options="c for c in knowledges" class="select-options">
+                        <select ng-model="knowledge" ng-options="c for c in knowledges" class="select-options">
                         </select>
                         <br>
                         Course Modality: 
-                        <select  ng-model="career_type" ng-options="c for c in career_types" class="select-options">
+                        <select ng-model="career_type" ng-options="c for c in career_types" class="select-options">
                         </select>
                         <br>
                         Code: 

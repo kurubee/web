@@ -49,15 +49,14 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
 kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
     $scope.saved = false;
-    $scope.languages = [
-        {name:'English', code:'en'},
-        {name:'Spanish', code:'es'},
-        {name:'French', code:'fr'},
-        {name:'Arabic', code:'ar'}
-    ];
+    $scope.languages = {
+        en : "English",
+        es : "Spanish",
+        fr : "French",
+        ar : "Arabic"
+    };
     $scope.career_types = ["Explore","Exam"];
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
-    
     var baseKnowledges = Restangular.one('knowledge');
     baseKnowledges.getList().then(function(knowledges){
         $scope.knowledges = [];
@@ -72,14 +71,7 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
             $scope.course = Restangular.copy(course1);
             $scope.course.levels.push("new");
             console.log($scope.course);
-            for (var i in $scope.languages)
-            {
-                if($scope.languages[i].code == $scope.course.language_code)
-                {
-                    $scope.language = $scope.languages[i];
-                    console.log($scope.language);
-                }
-            }
+            $scope.language = $scope.course.language_code;
             for (var j in $scope.career_types)
             {
                 if($scope.career_types[j].toLowerCase() == $scope.course.career_type)
@@ -107,25 +99,7 @@ kurubeeApp.controller('CourseDetailCtrl', function($scope, $location,Restangular
         $scope.save = function() {
             $scope.disable_save_button = true;
             $scope.saved = false;
-            for (var i in $scope.languages)
-            {
-                console.log($scope.language);
-                if($scope.languages[i].name == $scope.language.name)
-                {
-                    $scope.course.language_code = $scope.languages[i].code;
-                    console.log($scope.course.language_code);
-                }
-            }
-            for (var i in $scope.course.activities)
-            {
-                //$scope.course.activities[i][ "activity_url" ] = $scope.course.activities[i][ "full_activity_url" ];
-                console.log($scope.course.activities[i].resource_uri);
-                $scope.course.activities[i].resource_uri.replace("activityupdate","editor/activity");
-                console.log($scope.course.activities[i].resource_uri);
-                $scope.course.activities = [];
-                $scope.course.knowledges = [];
-                
-            }
+            $scope.course.language_code = $scope.language;
             console.log($scope.career_type);
             $scope.course.career_type = $scope.career_type.toLowerCase();
             console.log($scope);
@@ -179,7 +153,7 @@ kurubeeApp.controller('NewQuizActivityCtrl', function($scope, $location, Restang
        var baseActivity = {
             name : $scope.name,
             query : $scope.query,
-            career : "/api/v1/editor/career/" + $routeParams.courseId + "/",
+            career : "/api/v1/editor/career/" + $routeParams.courseId ,
             language_code : "en",
             level_type : $routeParams.levelId,
             level_order : 0,
