@@ -37,7 +37,7 @@ kurubeeApp.controller('topbar-controller', function($scope,$cookieStore) {
  
 kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStore) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
-    var baseCourses = Restangular.all('career');
+    var baseCourses = Restangular.all('editor/career');
     // This will query /courses and return a promise.
     baseCourses.getList().then(function(courses) {
         $scope.courses = courses
@@ -122,23 +122,30 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$scope', '$location', 'Restang
 kurubeeApp.controller('NewQuizActivityCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/activity');
+    $scope.activity = {
+       name : "Activity Name",
+       query : "Activity Query",
+       answers : ["asd"],
+       career : "/api/v1/editor/career/" + $routeParams.courseId ,
+       language_code : "en",
+       level_type : $routeParams.levelId,
+       level_order : 0,
+       level_required : true,
+       reward : "wena!",
+       penalty : "mala!",
+       activity_type : 'quiz'
+    };
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
-    console.log($routeParams.levelId);    
+    console.log($routeParams.levelId); 
+    $scope.addAnswer = function() {   
+        $scope.activity.answers.push("nueva respuesta");
+        console.log($scope.activity);;
+        
+    };
     $scope.saveActivity = function() {
-       var baseActivity = {
-            name : $scope.name,
-            query : $scope.query,
-            career : "/api/v1/editor/career/" + $routeParams.courseId ,
-            language_code : "en",
-            level_type : $routeParams.levelId,
-            level_order : 0,
-            level_required : true,
-            reward : "wena!",
-            penalty : "mala!",
-            activity_type : 'quiz'
-       };
-       baseActivities.post(baseActivity).then(function ()
+      
+       baseActivities.post($scope.activity).then(function ()
        {
             console.log('salvado!');
        });
