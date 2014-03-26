@@ -63,7 +63,6 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
     baseKnowledges.getList().then(function(knowledges){
         $scope.knowledges = {};
         $scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
-        console.log($scope.knowledges);
         var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
         $scope.user = $cookieStore.get("username");
         baseCourse.get().then(function(course1){
@@ -113,42 +112,77 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$scope', '$location', 'Restang
             $scope.activities[j] = activities[j];
         }    
     });
+    $scope.accessActivity = function(activity) {
+       $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity/" + activity.id);
+    };
     
     $scope.createActivity = function() {
-       $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/newQuizActivity" );
+       $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity" );
     };
 }]);
 
-kurubeeApp.controller('NewQuizActivityCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
+kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/activity');
-    $scope.activity = {
-       name : "Activity Name",
-       query : "Activity Query",
-       answers : ["asd"],
-       career : "/api/v1/editor/career/" + $routeParams.courseId ,
-       language_code : "en",
-       level_type : $routeParams.levelId,
-       level_order : 0,
-       level_required : true,
-       reward : "wena!",
-       penalty : "mala!",
-       activity_type : 'quiz'
-    };
+    console.log($routeParams.activityId);
+    if(!$routeParams.activityId)
+    {
+        $scope.activity = {
+           name : "Activity Name",
+           query : "Activity Query",
+           answers : [],
+           career : "/api/v1/editor/career/" + $routeParams.courseId ,
+           language_code : "en",
+           level_type : $routeParams.levelId,
+           level_order : 0,
+           level_required : true,
+           reward : "wena!",
+           penalty : "mala!",
+           activity_type : 'quiz'
+        };
+    }else
+    {
+        var baseActivity = Restangular.one('editor/activity', $routeParams.activityId);
+        baseActivity.get().then(function(activity1){
+            $scope.activity = Restangular.copy(activity1);
+        });
+    
+    }
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
     console.log($routeParams.levelId); 
     $scope.addAnswer = function() {   
-        $scope.activity.answers.push("nueva respuesta");
-        console.log($scope.activity);;
+        if(!$scope.activity.answers)
+        {
+            $scope.activity.answers = [];
+        }
+        $scope.activity.answers.push(("nueva respuesta").toString());
+        console.log($scope.activity);
         
     };
     $scope.saveActivity = function() {
-      
-       baseActivities.post($scope.activity).then(function ()
+       $scope.disable_save_button = true;
+       $scope.saved = false;
+       $scope.activity
+       if(!$routeParams.activityId)
        {
-            console.log('salvado!');
-       });
+           baseActivities.post($scope.activity).then(function ()
+           {
+                $scope.disable_save_button = false;
+                $scope.saved = true;
+                setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                console.log('salvado!');
+           });
+       }else
+       {
+           $scope.activity.put().then(function ()
+           {
+                $scope.disable_save_button = false;
+                $scope.saved = true;
+                setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                console.log('salvado!');
+           });
+       }
     };
 });
 

@@ -1,8 +1,8 @@
 <div class="margedTop">
-    <!--<div ng-show="!activity">
+    <div ng-show="!activity">
         <img src="img/loading.gif" class="loading">
-    </div>-->
-    <div class="background-quiz-activity">
+    </div>
+    <div class="background-quiz-activity" ng-show="activity">
         <div class="column-left">
                 <!-- Title -->
                 <div class="title-description-cls">
@@ -27,17 +27,16 @@
             <input type="text" ng-model="activity.name" class="m-title" id="title-input">
             <div class="m-content">
                 <textarea class="m-description" id="description-input" ng-model="activity.query"></textarea>
-                
                 <div id="carousel" style="width: 221px;height:140px;">
                     <ul ng-repeat="answer in activity.answers">
                         <li>
                             <div class="carousel-card">
-                                       {{answer}}    
+                               {{answer}}    
                             </div>
                         </li>
                     </ul>
-                    <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 170px;margin-top: 13px;vertical-align:top" ng-click="addAnswer()" >Add Answer</button> 
                 </div>
+                <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 5px;margin-left:90px;vertical-align:top" ng-click="addAnswer()">Add Answer</button> 
             </div>
             <div class="bottom-bar">
                 <a ng-click="back()" class="pointer"><img src="img/back_button.png"></a>
