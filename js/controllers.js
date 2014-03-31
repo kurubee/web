@@ -130,6 +130,7 @@ kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangula
         $scope.activity = {
            name : "Activity Name",
            query : "Activity Query",
+           real_answers : [],
            answers : [],
            career : "/api/v1/editor/career/" + $routeParams.courseId ,
            language_code : "en",
@@ -145,6 +146,17 @@ kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangula
         var baseActivity = Restangular.one('editor/activity', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
             $scope.activity = Restangular.copy(activity1);
+            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
+           if(!$scope.activity.answers)
+           {
+               $scope.activity.answers = [];
+           }
+           for(var i=0;i<$scope.activity.answers.length;i++)
+           {
+                var temp = $scope.activity.answers[i];
+                $scope.activity.answers[i] = {"value":""}
+                $scope.activity.answers[i].value = temp;
+           }
         });
     
     }
@@ -156,14 +168,22 @@ kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangula
         {
             $scope.activity.answers = [];
         }
-        $scope.activity.answers.push(("nueva respuesta").toString());
+        $scope.activity.answers.push({"value":"respuestano"+($scope.activity.answers.length+1)});
         console.log($scope.activity);
         
     };
     $scope.saveActivity = function() {
        $scope.disable_save_button = true;
        $scope.saved = false;
-       $scope.activity
+       if(!$scope.activity.answers)
+       {
+           $scope.activity.answers = [];
+       }
+       for(var i=0;i<$scope.activity.answers.length;i++)
+       {
+            $scope.activity.answers[i] = $scope.activity.answers[i].value;
+       }
+       $scope.activity.answers = JSON.stringify($scope.activity.answers);
        if(!$routeParams.activityId)
        {
            baseActivities.post($scope.activity).then(function ()
