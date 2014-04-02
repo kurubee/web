@@ -123,15 +123,14 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$scope', '$location', 'Restang
 
 kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
-    var baseActivities = Restangular.all('editor/activity');
-    console.log($routeParams.activityId);
+    var baseActivities = Restangular.all('editor/quiz');
     if(!$routeParams.activityId)
     {
         $scope.activity = {
            name : "Activity Name",
            query : "Activity Query",
-           real_answers : [],
            answers : [],
+           real_answers : [],
            career : "/api/v1/editor/career/" + $routeParams.courseId ,
            language_code : "en",
            level_type : $routeParams.levelId,
@@ -143,32 +142,34 @@ kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangula
         };
     }else
     {
-        var baseActivity = Restangular.one('editor/activity', $routeParams.activityId);
+        var baseActivity = Restangular.one('editor/quiz', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
-            $scope.activity = Restangular.copy(activity1);
-            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
+           $scope.activity = Restangular.copy(activity1);
+           $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
            if(!$scope.activity.answers)
            {
                $scope.activity.answers = [];
            }
+           $scope.activity.real_answers = [];
            for(var i=0;i<$scope.activity.answers.length;i++)
            {
-                var temp = $scope.activity.answers[i];
-                $scope.activity.answers[i] = {"value":""}
-                $scope.activity.answers[i].value = temp;
+               $scope.activity.real_answers[i] = {"value": $scope.activity.answers[i]};
            }
+           console.log($scope.activity.answers);
         });
-    
     }
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
-    console.log($routeParams.levelId); 
     $scope.addAnswer = function() {   
         if(!$scope.activity.answers)
         {
             $scope.activity.answers = [];
         }
-        $scope.activity.answers.push({"value":"respuestano"+($scope.activity.answers.length+1)});
+        if(!$scope.activity.real_answers)
+        {
+            $scope.activity.real_answers = [];
+        }
+        $scope.activity.real_answers.push({"value":"respuestano"+($scope.activity.answers.length+1)});
         console.log($scope.activity);
         
     };
@@ -179,11 +180,10 @@ kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangula
        {
            $scope.activity.answers = [];
        }
-       for(var i=0;i<$scope.activity.answers.length;i++)
+       for(var i=0;i<$scope.activity.real_answers.length;i++)
        {
-            $scope.activity.answers[i] = $scope.activity.answers[i].value;
+           $scope.activity.answers[i] = $scope.activity.real_answers[i].value;
        }
-       $scope.activity.answers = JSON.stringify($scope.activity.answers);
        if(!$routeParams.activityId)
        {
            baseActivities.post($scope.activity).then(function ()
