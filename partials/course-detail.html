@@ -51,12 +51,11 @@
                 <input type="text" ng-model="course.name" class="m-title" id="title-input">
                 <div class="m-content">
                     <textarea ng-model="course.description" class="m-description" id="description-input"></textarea>
-                    
-                    <div id="carousel" style="width: 221px;height:120px;">
-                        <ul rn-carousel  rn-carousel-indicator style="width: 221px;height:120px;">
-                            <li ng-repeat="level in course.levels" style="width: 221px;height:120px;">
+                    <div id="carousel" style="width: 221px;height:115px;">
+                        <ul rn-carousel  rn-carousel-indicator  rn-carousel-control style="width: 221px;height:115px;">
+                            <li ng-repeat="level in course.levels" style="width: 221px;height:115px;">
                                 <div class="carousel-card" ng-click="toLevel($index)">
-                                    <div id="centro" align="middle"><p class="levelTitle">Level {{level}}</p><div><img ng-src="img/level_icons/{{level}}.png" align="bottom"></div></div>
+                                    <div id="centro" align="middle"><p class="levelTitle">Level {{level}}</p><div><img style="-webkit-user-drag: none;" ng-src="img/level_icons/{{level}}.png" align="bottom"></div></div>
                                 </div>
                             </li>
                         </ul>

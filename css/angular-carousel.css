@@ -29,8 +29,6 @@
   width: 100%;
   text-align: center;
   height: 20px;
-  background-color: black;
-  background-color: rgba(0, 0, 0, 0.6);
   position: relative;
   bottom: 0;
   cursor: pointer; }
@@ -38,11 +36,11 @@
     -webkit-transition: color .2s ease-out;
     transition: color .2s ease-out;
     padding: 0 5px;
-    color: #333; }
+    color: gray; }
     .rn-carousel-indicator span:before {
       content: "\25cf"; }
   .rn-carousel-indicator .active {
-    color: white; }
+    color: black; }
 
 /* controls */
 .rn-carousel-control {
