@@ -216,3 +216,12 @@ body {
     cursor: pointer;
 }
 
+.list-item-label {
+min-height: 2.6em;
+padding: 0.65em 0.8em;
+}
+
+.list-item {
+position: relative;
+color: black;
+}

@@ -30,9 +30,7 @@
                 <div id="carousel" style="width: 221px;height:140px;">
                     <ul>
                         <li ng-repeat="activity in activities">
-                                <div class="carousel-card">
-                                    <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 170px;margin-top: 13px;vertical-align:top" ng-click="accessActivity({{activity}})" >{{activity.name}}</button>            
-                                </div>
+                            <div ng-click="accessActivity({{activity}})" class="list-item-label"><div class="list-item"><div><b>{{activity.name}}</b></div><font size="3" color="grey">{{activity.query}}</font></div></div>
                         </li>
                         <li>
                             <div class="carousel-card">
