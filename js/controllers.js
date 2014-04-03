@@ -117,7 +117,15 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$scope', '$location', 'Restang
     };
     
     $scope.createActivity = function() {
-       $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity" );
+       console.log($scope.activityType);
+       if($scope.activityType == "temporal")
+       {
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/TemporalActivity" );       
+       }
+       else
+       {
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity" );
+       }
     };
 }]);
 
@@ -218,6 +226,63 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
     };
 }]);
 
+
+kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.courseName = Aux.getCourseName();
+    $scope.level = $routeParams.levelId;
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
+    var baseActivities = Restangular.all('editor/temporal');
+    if(!$routeParams.activityId)
+    {
+        $scope.activity = {
+           name : "Activity Name",
+           query : "Activity Query",
+           career : "/api/v1/editor/career/" + $routeParams.courseId ,
+           language_code : "en",
+           level_type : $routeParams.levelId,
+           level_order : 0,
+           level_required : true,
+           reward : "wena!",
+           penalty : "mala!",
+           activity_type : 'temporal'
+        };
+    }else
+    {
+        var baseActivity = Restangular.one('editor/temporal', $routeParams.activityId);
+        baseActivity.get().then(function(activity1){
+           $scope.activity = Restangular.copy(activity1);
+           $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
+
+           console.log($scope);
+        });
+    }
+    $scope.name = "Type here Activity Name";
+    $scope.query = "Type here Quiz Activity Query";
+
+    $scope.saveActivity = function() {
+       $scope.disable_save_button = true;
+       $scope.saved = false;
+       if(!$routeParams.activityId)
+       {
+           baseActivities.post($scope.activity).then(function ()
+           {
+                $scope.disable_save_button = false;
+                $scope.saved = true;
+                setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                console.log('salvado!');
+           });
+       }else
+       {
+           $scope.activity.put().then(function ()
+           {
+                $scope.disable_save_button = false;
+                $scope.saved = true;
+                setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                console.log('salvado!');
+           });
+       }
+    };
+}]);
 
 
 kurubeeApp.controller('LoginCtrl', function($scope, $location, $routeParams,$cookieStore, Restangular) {

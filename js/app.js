@@ -45,6 +45,14 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
         templateUrl: 'partials/quiz-activity-detail.html',
         controller: 'QuizActivityCtrl'
       }).
+      when('/courses/:courseId/levels/:levelId/TemporalActivity/:activityId', {
+        templateUrl: 'partials/temporal-activity-detail.html',
+        controller: 'TemporalActivityCtrl'
+      }).
+      when('/courses/:courseId/levels/:levelId/TemporalActivity', {
+        templateUrl: 'partials/temporal-activity-detail.html',
+        controller: 'TemporalActivityCtrl'
+      }).
       when('/login', {
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl'

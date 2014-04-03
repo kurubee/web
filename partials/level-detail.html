@@ -34,14 +34,14 @@
                         </li>
                         <li>
                             <div class="carousel-card">
-                                <select class="select-options" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top">
+                                <select ng-model="activityType" class="select-options" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top">
                                   <option value="quiz">Quiz</option>
-                                  <option value="saab">Visual</option>
-                                  <option value="saab">Geospatial</option>
-                                  <option value="saab">Relational</option>
-                                  <option value="saab">Temporal</option>
+                                  <option value="quiz">Visual</option>
+                                  <option value="quiz">Geospatial</option>
+                                  <option value="quiz">Relational</option>
+                                  <option value="temporal">Temporal</option>
                                 </select>
-                                <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="createActivity()" >New Activity</button>      
+                                <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;margin-bottom: 13px;vertical-align:top" ng-click="createActivity()">New Activity</button>      
                             </div>
                         </li>
                     </ul>
