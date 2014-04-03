@@ -131,6 +131,7 @@ kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangula
            query : "Activity Query",
            answers : [],
            real_answers : [],
+           correct_answer : "",
            career : "/api/v1/editor/career/" + $routeParams.courseId ,
            language_code : "en",
            level_type : $routeParams.levelId,
@@ -153,9 +154,17 @@ kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangula
            $scope.activity.real_answers = [];
            for(var i=0;i<$scope.activity.answers.length;i++)
            {
+
+
                $scope.activity.real_answers[i] = {"value": $scope.activity.answers[i]};
+               if($scope.activity.answers[i] == $scope.activity.correct_answer)
+               {
+                   console.log($scope.activity.answers[i]);
+                   $scope.correct_answer =  $scope.activity.real_answers[i];               
+               }
            }
-           console.log($scope.activity.answers);
+
+           console.log($scope);
         });
     }
     $scope.name = "Type here Activity Name";
@@ -184,6 +193,7 @@ kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangula
        {
            $scope.activity.answers[i] = $scope.activity.real_answers[i].value;
        }
+       $scope.activity.correct_answer = $scope.correct_answer.value;
        if(!$routeParams.activityId)
        {
            baseActivities.post($scope.activity).then(function ()

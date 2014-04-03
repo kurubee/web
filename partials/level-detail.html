@@ -27,11 +27,7 @@
             <div class="m-template m-template-course">
             <div class="m-title">{{courseName}}</div>
             <div class="m-content">
-                <div id="carousel" style="width: 221px;
--webkit-box-flex: 1;
-background-image: url(img/level_icons/{{level}}B.png);
-background-position: 50% 50%;
-background-repeat: no-repeat no-repeat;">
+                <div class="activity-list" style="background-image: url(img/level_icons/{{level}}B.png);">
                     <ul>
                         <li ng-repeat="activity in activities">
                             <div ng-click="accessActivity({{activity}})" class="list-item-label"><div class="list-item"><div><b>{{activity.name}}</b></div><font size="3" color="grey">{{activity.query}}</font></div></div>
