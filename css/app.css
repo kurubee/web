@@ -132,6 +132,8 @@ body {
 
 .m-content {
     height:240px;
+    overflow:hidden;
+    overflow-y: auto;
 }
 .m-description {
     width:221px;

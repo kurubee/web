@@ -2,6 +2,9 @@
     <div ng-show="!activity">
         <img src="img/loading.gif" class="loading">
     </div>
+    <div ng-show="courseName">
+    You are editing course {{courseName}}, level {{level}}
+    </div>
     <div class="background-quiz-activity" ng-show="activity">
         <div class="column-left">
                 <!-- Title -->
@@ -38,11 +41,13 @@
                             </div>
                         </li>
                     </ul>
+
                 </div>
-                <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 5px;margin-left:90px;vertical-align:top" ng-click="addAnswer()">Add Answer</button> 
+
             </div>
             <div class="bottom-bar">
                 <a ng-click="back()" class="pointer"><img src="img/back_button.png"></a>
+                <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 5px;margin-left:90px;vertical-align:top" ng-click="addAnswer()">Add Answer</button> 
             </div>
         </div>
         </div>

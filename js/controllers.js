@@ -121,7 +121,9 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$scope', '$location', 'Restang
     };
 }]);
 
-kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangular,$cookieStore, $routeParams) {
+kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.courseName = Aux.getCourseName();
+    $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/quiz');
     if(!$routeParams.activityId)
@@ -214,7 +216,7 @@ kurubeeApp.controller('QuizActivityCtrl', function($scope, $location, Restangula
            });
        }
     };
-});
+}]);
 
 
 
