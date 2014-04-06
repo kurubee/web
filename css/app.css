@@ -150,6 +150,7 @@ body {
     margin-top:6px;
     margin-bottom:124px;
     margin-left:3px;
+    width:100%;
 }
 
 .column-left {
@@ -194,7 +195,7 @@ body {
     margin-top: 33px;
     vertical-align:top;
 }
-
+    
 .saved-text-cls{
     float:none;
     display:inline-block;
@@ -227,11 +228,23 @@ body {
 }
 
 .list-item-label {
-min-height: 2.6em;
-padding: 0.65em 0.8em;
+    min-height: 2.6em;  
+    padding: 0.65em 0.8em;
 }
 
 .list-item {
-position: relative;
-color: black;
+    position: relative;
+    color: black;
+}
+
+.bottom-left {
+    float:left;
+}
+
+.bottom-right {
+    float:right;
+}
+
+.button-sencha {
+    background-color: #11598c;
 }

@@ -3,7 +3,7 @@
         <img src="img/loading.gif" class="loading">
     </div>
     <div ng-show="courseName">
-    You are editing course {{courseName}}, level {{level}}:
+    You are editing {{courseName}}, level {{level}}:
     </div>
     <div class="background-quiz-activity" ng-show="activity">
         <div class="column-left">
@@ -46,8 +46,12 @@
 
             </div>
             <div class="bottom-bar">
-                <a ng-click="back()" class="pointer"><img src="img/back_button.png"></a>
-                <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 5px;margin-left:90px;vertical-align:top" ng-click="addAnswer()">Add Answer</button> 
+                <div class="bottom-left">
+                    <a ng-click="back()" class="pointer"><img src="img/back_button.png"></a>
+                </div>
+                <div class="bottom-right">
+                    <button ng-class="{ 'button2':true}" style="background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 120px;margin-right:6px;vertical-align:top" ng-click="addAnswer()">Add Answer</button> 
+                </div>
             </div>
         </div>
         </div>
