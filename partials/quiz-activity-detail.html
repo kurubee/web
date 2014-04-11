@@ -2,8 +2,8 @@
     <div ng-show="!activity">
         <img src="img/loading.gif" class="loading">
     </div>
-    <div ng-show="courseName">
-    You are editing {{courseName}}, level {{level}}:
+    <div ng-show="courseName" class="breadcumb">
+    {{courseName}} <i>level {{level}}</i>:
     </div>
     <div class="background-quiz-activity" ng-show="activity">
         <div class="column-left">
