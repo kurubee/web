@@ -32,7 +32,7 @@
             <div class="m-template m-template-course">
             <input type="text" ng-model="activity.name" class="m-title" id="title-input">
             <div class="m-content">
-                <textarea class="m-description" id="description-input" ng-model="activity.query"></textarea>
+                <textarea class="m-description" id="description-input" ng-model="activity.query" maxlength="255"></textarea>
                 <div id="carousel" style="width: 100%;">
                     <ul ng-repeat="answer in activity.real_answers">
                         <li>
