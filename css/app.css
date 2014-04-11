@@ -132,12 +132,13 @@ body {
 
 .m-content {
     height:239px;
+    width:221px;
     overflow:hidden;
     overflow-y: auto;
 }
 .m-description {
     width:221px;
-    height:100px;
+
     border: 0px solid;
     background-color:transparent;
     line-height: 1.5;

@@ -32,8 +32,18 @@
             <div class="m-template m-template-course">
             <input type="text" ng-model="activity.name" class="m-title" id="title-input">
             <div class="m-content">
-                <textarea class="m-description" id="description-input" ng-model="activity.query" maxlength="255"></textarea>
-                <div id="carousel" style="width: 100%;">
+                <textarea class="m-description" id="description-input" ng-model="activity.query" maxlength="255" style="background-image: linear-gradient(#ffffff,#f2f2f2 2%,#cecece);
+border-color: #616161;
+border: 0px;
+border-bottom: 1px solid;
+height: 35px;
+font-family: 'Helvetica Neue', HelveticaNeue, 'Helvetica-Neue', Helvetica, 'BBAlpha Sans', sans-serif;
+line-height: 2.1em;
+font-size: 0.92em;
+text-align: center;
+font-weight: bold;
+}"></textarea>
+                <div id="carousel" style="width: 100%;margin-top: 10px;">
                     <ul ng-repeat="answer in activity.real_answers">
                         <li>
                             <div class="carousel-card" style="padding-bottom: 5px;">
