@@ -127,6 +127,16 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$scope', '$location', 'Restang
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity" );
        }
     };
+    
+    $scope.removeActivity = function(activity) {
+       console.log(activity);
+        $scope.loaded = false;
+       var baseActivity = Restangular.one('editor/activity', activity.id);
+       baseActivity.remove().then(function(){
+           $scope.loaded = true;
+           console.log('listo!');
+       });    
+    };
 }]);
 
 kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
