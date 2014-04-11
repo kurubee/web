@@ -37,7 +37,10 @@
                     <ul ng-repeat="answer in activity.real_answers">
                         <li>
                             <div class="carousel-card">
-                               <input type="text" ng-model="answer.value" >
+                               <input type="text" ng-model="answer.value" ngMouseover="{{index}}">
+                                <button type="button" style="margin-top: -7px;" class="btn btn-xs btn-danger" ng-click="removeAnswer({{$index}})">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
                             </div>
                         </li>
                     </ul>

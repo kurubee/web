@@ -188,10 +188,15 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
         {
             $scope.activity.real_answers = [];
         }
-        $scope.activity.real_answers.push({"value":"respuestano"+($scope.activity.answers.length+1)});
+        $scope.activity.real_answers.push({"value":"respuestano"+($scope.activity.real_answers.length+1)});
         console.log($scope.activity);
         
     };
+    
+    $scope.removeAnswer = function(index) {   
+        $scope.activity.real_answers.splice(index, 1);
+    };
+    
     $scope.saveActivity = function() {
        $scope.disable_save_button = true;
        $scope.saved = false;
