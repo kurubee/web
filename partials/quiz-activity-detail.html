@@ -36,9 +36,21 @@
                 <div id="carousel" style="width: 221px;height:140px;">
                     <ul ng-repeat="answer in activity.real_answers">
                         <li>
-                            <div class="carousel-card">
-                               <input type="text" ng-model="answer.value" ngMouseover="{{index}}">
-                                <button type="button" style="margin-top: -7px;" class="btn btn-xs btn-danger" ng-click="removeAnswer({{$index}})">
+                            <div class="carousel-card" style="padding-bottom: 5px;">
+                               <input type="text" ng-model="answer.value" ngMouseover="{{index}}" style="-webkit-box-flex: 1;
+                                -webkit-box-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                text-align: center;
+                                font-weight: bold;
+                                line-height: 1.2em;
+                                background-color: #ccc;
+                                overflow: hidden;
+                                font-weight: normal;
+                                -webkit-border-radius: 0.4em;
+                                border-radius: 0.4em;
+                                background-image: linear-gradient(#ffffff,#dedede 2%,#bababa);">
+                                <button type="button" style="margin-top: -5px;" class="btn btn-xs btn-danger" ng-click="removeAnswer({{$index}})">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
                             </div>
