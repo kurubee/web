@@ -20,11 +20,11 @@
                     </p>
                 </div>
                 <br>
-                Image Date & Time: 
-                <input type="text" class="input-code-cls">
-                <br>
-                Query Date & Time: 
-                <input type="text" class="input-code-cls">
+                Correct Answer:                 
+                <select ng-model="correct_answer" class="select-options">
+                  <option value="before">Before</option>
+                  <option value="after">After</option>
+                </select>
                 <br>
                 <button ng-class="{'button-disabled': disable_save_button, 'button2':!disable_save_button, 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
                 <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
@@ -36,7 +36,8 @@
             <div class="m-content">
                 <textarea class="m-description" id="description-input" ng-model="activity.query"></textarea>
                 <div id="carousel" style="width: 221px;height:140px;">
-        <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 5px;margin-left:45px;vertical-align:top" >Add Image</button> 
+         <input type="file" id="file" name="file"/>
+         <button ng-click="addImage()" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 5px;margin-left:45px;vertical-align:top" >Add Image</button>
                 </div>
 
             </div>

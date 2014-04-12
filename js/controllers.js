@@ -113,7 +113,15 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
         }    
     });
     $scope.accessActivity = function(activity) {
-       $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity/" + activity.id);
+       console.log(activity);
+       if(activity.activity_type=="quiz")
+       {
+        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity/" + activity.id);
+       }
+       if(activity.activity_type=="temporal")
+       {
+        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/TemporalActivity/" + activity.id);
+       }
     };
     
     $scope.createActivity = function() {
@@ -259,7 +267,10 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
            level_required : true,
            reward : "wena!",
            penalty : "mala!",
-           activity_type : 'temporal'
+           activity_type : 'temporal',
+           image: "",
+           image_datetime: "",
+           query_datetime: ""
         };
     }else
     {
@@ -275,6 +286,17 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     $scope.query = "Type here Quiz Activity Query";
 
     $scope.saveActivity = function() {
+       console.log($scope.correct_answer);
+       if($scope.correct_answer == "before")
+       {
+            $scope.activity.image_datetime = "0001-01-01 00:00";
+            $scope.activity.query_datetime = "0001-01-01 00:01";
+       }
+       else
+       {
+            $scope.activity.image_datetime = "0001-01-01 00:01";
+            $scope.activity.query_datetime = "0001-01-01 00:00";       
+       }
        $scope.disable_save_button = true;
        $scope.saved = false;
        if(!$routeParams.activityId)
@@ -296,6 +318,17 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
                 console.log('salvado!');
            });
        }
+    };
+    
+    $scope.addImage = function() {
+        console.log("asdasd");
+        var f = document.getElementById('file').files[0],
+        r = new FileReader();
+        r.onloadend = function(e){
+           $scope.activity.image = e.target.result;
+           console.log($scope.activity.image);
+        }
+        r.readAsBinaryString(f);
     };
 }]);
 
