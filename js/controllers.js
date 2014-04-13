@@ -149,6 +149,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
 }]);
 
 kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.disable_save_button = false;
     $scope.courseName = Aux.getCourseName();
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
@@ -217,36 +218,45 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
     };
     
     $scope.saveActivity = function() {
-       $scope.disable_save_button = true;
-       $scope.saved = false;
-       if(!$scope.activity.answers)
+       if($scope.activity.answers && $scope.correct_answer)
        {
-           $scope.activity.answers = [];
-       }
-       for(var i=0;i<$scope.activity.real_answers.length;i++)
-       {
-           $scope.activity.answers[i] = $scope.activity.real_answers[i].value;
-       }
-       $scope.activity.correct_answer = $scope.correct_answer.value;
-       if(!$routeParams.activityId)
-       {
-           baseActivities.post($scope.activity).then(function ()
+           $scope.disable_save_button = true;
+           $scope.saved = false;
+           if(!$scope.activity.answers)
            {
-                $scope.disable_save_button = false;
-                $scope.saved = true;
-                setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                console.log('salvado!');
-           });
-       }else
-       {
-           $scope.activity.put().then(function ()
+               $scope.activity.answers = [];
+           }
+           for(var i=0;i<$scope.activity.real_answers.length;i++)
            {
-                $scope.disable_save_button = false;
-                $scope.saved = true;
-                setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                console.log('salvado!');
-           });
+               $scope.activity.answers[i] = $scope.activity.real_answers[i].value;
+           }
+           $scope.activity.correct_answer = $scope.correct_answer.value;
+           if(!$routeParams.activityId)
+           {
+               baseActivities.post($scope.activity).then(function ()
+               {
+                    $scope.disable_save_button = false;
+                    $scope.saved = true;
+                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    console.log('salvado!');
+               });
+           }else
+           {
+               $scope.activity.put().then(function ()
+               {
+                    $scope.disable_save_button = false;
+                    $scope.saved = true;
+                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    console.log('salvado!');
+               });
+           }
        }
+    };
+    $scope.getCond = function() {   
+        console.log($scope.disable_save_button);
+        console.log($scope.activity.real_answers);
+        console.log($scope.correct_answer);
+        return !$scope.disable_save_button && $scope.activity.real_answers && $scope.correct_answer;
     };
 }]);
 
@@ -333,6 +343,12 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
            img.src = e.target.result;
         }
         r.readAsDataURL(f);
+    };
+    
+    $scope.getCond = function() {   
+        console.log($scope.disable_save_button);
+        console.log($scope.correct_answer);
+        return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer;
     };
 }]);
 
