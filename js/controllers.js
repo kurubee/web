@@ -62,7 +62,8 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
     var baseKnowledges = Restangular.one('editor/knowledge');
     baseKnowledges.getList().then(function(knowledges){
         $scope.knowledges = {};
-        $scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
+        $scope.knowledges["prog"] = "programacion";
+        //$scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
         var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
         $scope.user = $cookieStore.get("username");
         baseCourse.get().then(function(course1){
@@ -278,7 +279,8 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
         baseActivity.get().then(function(activity1){
            $scope.activity = Restangular.copy(activity1);
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
-
+           var img = document.getElementById("image");
+           img.src = $scope.activity.image_base64;
            console.log($scope);
         });
     }
@@ -326,9 +328,11 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
         r = new FileReader();
         r.onloadend = function(e){
            $scope.activity.image = e.target.result;
-           console.log($scope.activity.image);
+           console.log($scope.activity);
+           var img = document.getElementById("image");
+           img.src = e.target.result;
         }
-        r.readAsBinaryString(f);
+        r.readAsDataURL(f);
     };
 }]);
 
