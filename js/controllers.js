@@ -123,6 +123,10 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        {
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/TemporalActivity/" + activity.id);
        }
+      if(activity.activity_type=="visual")
+       {
+        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/VisualActivity/" + activity.id);
+       }
     };
     
     $scope.createActivity = function() {
@@ -131,9 +135,13 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        {
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/TemporalActivity" );       
        }
-       else
+       if($scope.activityType == "quiz")
        {
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity" );
+       }
+       if($scope.activityType == "visual")
+       {
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/VisualActivity" );
        }
     };
     
@@ -352,6 +360,120 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     };
 }]);
 
+kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.courseName = Aux.getCourseName();
+    $scope.inAnswers = false;
+    $scope.showButton = true;
+    $scope.level = $routeParams.levelId;
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
+    var baseActivities = Restangular.all('editor/visual');
+    if(!$routeParams.activityId)
+    {
+        $scope.activity = {
+           name : "Activity Name",
+           query : "Activity Query",
+           career : "/api/v1/editor/career/" + $routeParams.courseId ,
+           language_code : "en",
+           level_type : $routeParams.levelId,
+           level_order : 0,
+           level_required : true,
+           reward : "wena!",
+           penalty : "mala!",
+           activity_type : 'temporal',
+           image: "",
+           answers : [],
+           real_answers : [],
+           correct_answer : ""
+        };
+    }else
+    {
+        var baseActivity = Restangular.one('editor/visual', $routeParams.activityId);
+        baseActivity.get().then(function(activity1){
+           $scope.activity = Restangular.copy(activity1);
+           $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
+           var img = document.getElementById("image");
+           img.src = $scope.activity.image_base64;
+           console.log($scope);
+        });
+    }
+    $scope.name = "Type here Activity Name";
+    $scope.query = "Type here Quiz Activity Query";
+
+    $scope.saveActivity = function() {
+      if($scope.activity.answers && $scope.correct_answer)
+       {
+           $scope.disable_save_button = true;
+           $scope.saved = false;
+           if(!$scope.activity.answers)
+           {
+               $scope.activity.answers = [];
+           }
+           for(var i=0;i<$scope.activity.real_answers.length;i++)
+           {
+               $scope.activity.answers[i] = $scope.activity.real_answers[i].value;
+           }
+           $scope.activity.correct_answer = $scope.correct_answer.value;
+           if(!$routeParams.activityId)
+           {
+               baseActivities.post($scope.activity).then(function ()
+               {
+                    $scope.disable_save_button = false;
+                    $scope.saved = true;
+                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    console.log('salvado!');
+               });
+           }else
+           {
+               $scope.activity.put().then(function ()
+               {
+                    $scope.disable_save_button = false;
+                    $scope.saved = true;
+                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    console.log('salvado!');
+               });
+           }
+       }
+    };
+    
+    $scope.addAnswer = function() {   
+        if(!$scope.activity.answers)
+        {
+            $scope.activity.answers = [];
+        }
+        if(!$scope.activity.real_answers)
+        {
+            $scope.activity.real_answers = [];
+        }
+        $scope.activity.real_answers.push({"value":"respuestano"+($scope.activity.real_answers.length+1)});
+        console.log($scope.activity);
+        
+    };
+    
+    $scope.removeAnswer = function(index) {   
+        $scope.activity.real_answers.splice(index, 1);
+    };
+    
+    
+    $scope.addImage = function() {
+        console.log("asdasd");
+        $scope.showButton=false;
+        var f = document.getElementById('file').files[0],
+        r = new FileReader();
+        r.onloadend = function(e){
+           $scope.activity.image = e.target.result;
+           console.log($scope.activity);
+           var img = document.getElementById("image");
+           img.src = e.target.result;
+        }
+        r.readAsDataURL(f);
+    };
+    
+    $scope.getCond = function() {   
+        console.log($scope.disable_save_button);
+        console.log($scope.correct_answer);
+        return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.activity.real_answers;
+    };
+}]);
 
 kurubeeApp.controller('LoginCtrl', function($scope, $location, $routeParams,$cookieStore, Restangular) {
     $scope.login = function(username, password)
