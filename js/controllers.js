@@ -603,6 +603,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            radious: 100,
            area : [],
         };
+        
     }else
     {
         var baseActivity = Restangular.one('editor/geospatial', $routeParams.activityId);
@@ -612,6 +613,21 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            console.log($scope);
         });
     }
+    var mapOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          panControl: false,
+          zoomControl: false,
+          mapTypeControl: false,
+          scaleControl: false,
+          streetViewControl: false,
+          overviewMapControl: false
+
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
 
