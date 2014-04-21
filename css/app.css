@@ -117,6 +117,16 @@ body {
     overflow:hidden;    
 }
 
+.background-visual-activity{
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+    background-image:url('../img/background-visual.png');
+    width:800px;
+    height:600px;
+    overflow:hidden;    
+}
+
 .m-title {
     height: 42px;
     width:221px;
@@ -252,4 +262,12 @@ body {
 
 .breadcumb {
     margin-left: 102px;
+}
+
+.element1-description-cls {
+    margin-top:30px;
+}
+
+.element2-description-cls {
+    margin-top:30px;
 }

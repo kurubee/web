@@ -5,7 +5,7 @@
     <div ng-show="courseName">
     You are editing course {{courseName}}, level {{level}}:
     </div>
-    <div class="background-quiz-activity" ng-show="activity">
+    <div class="background-visual-activity" ng-show="activity">
         <div class="column-left">
                 <!-- Title -->
                 <div class="title-description-cls">
@@ -19,11 +19,21 @@
                         That's the place where you write the query for a Visual Activity.
                     </p>
                 </div>
+                <div class="element1-description-cls">                
+                    Correct Answer:                 
+                    <select ng-model="correct_answer"  ng-options="a.value for a in activity.real_answers" class="select-options">
+                    </select>
+                </div>
+                <div class="element2-description-cls">  
+                    <p id="description-description">              
+                        <b>Time Countdown:</b> 
+                        <br>
+                        That's the place where you type number of seconds that theuser canwatch the image.
+                    </p>
+                </div>
+
                 <br>
-                Correct Answer:                 
-                <select ng-model="correct_answer"  ng-options="a.value for a in activity.real_answers" class="select-options">
-                </select>
-                <br>
+                
                 <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
                 <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
                 <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>

@@ -1,0 +1,50 @@
+<div class="margedTop">
+    <div ng-show="!activity">
+        <img src="img/loading.gif" class="loading">
+    </div>
+    <div ng-show="courseName">
+    You are editing course {{courseName}}, level {{level}}:
+    </div>
+    <div class="background-quiz-activity" ng-show="activity">
+        <div class="column-left">
+                <!-- Title -->
+                <div class="title-description-cls">
+                    <h3 id="title-description" >Activity Name</h3>
+                </div>
+                <!-- Content -->
+                <div class="description-description-cls">
+                    <p id="description-description">
+                        <b>Activity Query:</b> 
+                        <br>
+                        That's the place where you write the query for a Temporal Activity.
+                    </p>
+                </div>
+                <br>
+                Correct Answer:                 
+                <select ng-model="correct_answer" class="select-options">
+                  <option value="before">Before</option>
+                  <option value="after">After</option>
+                </select>
+                <br>
+                <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
+                <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
+                <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
+        </div>
+        <div class="column-right">
+            <div class="m-template m-template-course">
+            <input type="text" ng-model="activity.name" class="m-title" id="title-input">
+            <div class="m-content">
+                <textarea class="m-description" id="description-input" ng-model="activity.query"></textarea>
+                <div id="carousel" style="width: 221px;height:140px;">
+                    <img id="image" alt="Temporal Activity Image" ngSrc="data:image/png;base64,{{activity.image}}" />
+                    <input type="file" id="file" name="file"/>
+                    <button ng-click="addImage()" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 5px;margin-left:45px;vertical-align:top" >Add Image</button>
+                </div>
+            </div>
+            <div class="bottom-bar">
+                <a ng-click="back()" class="pointer"><img src="img/back_button.png"></a>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

@@ -123,10 +123,15 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        {
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/TemporalActivity/" + activity.id);
        }
-      if(activity.activity_type=="visual")
+       if(activity.activity_type=="visual")
        {
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/VisualActivity/" + activity.id);
        }
+       if(activity.activity_type=="linguistic")
+       {
+        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/LinguisticActivity/" + activity.id);
+       }
+
     };
     
     $scope.createActivity = function() {
@@ -142,6 +147,10 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        if($scope.activityType == "visual")
        {
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/VisualActivity" );
+       }
+       if($scope.activityType == "linguistic")
+       {
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/LinguisticActivity" );
        }
     };
     
@@ -379,7 +388,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
            level_required : true,
            reward : "wena!",
            penalty : "mala!",
-           activity_type : 'temporal',
+           activity_type : 'visual',
            image: "",
            answers : [],
            real_answers : [],
@@ -454,6 +463,92 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
     };
     
     
+    $scope.addImage = function() {
+        console.log("asdasd");
+        $scope.showButton=false;
+        var f = document.getElementById('file').files[0],
+        r = new FileReader();
+        r.onloadend = function(e){
+           $scope.activity.image = e.target.result;
+           console.log($scope.activity);
+           var img = document.getElementById("image");
+           img.src = e.target.result;
+        }
+        r.readAsDataURL(f);
+    };
+    
+    $scope.getCond = function() {   
+        console.log($scope.disable_save_button);
+        console.log($scope.correct_answer);
+        return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.activity.real_answers;
+    };
+}]);
+
+
+kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.courseName = Aux.getCourseName();
+    $scope.showButton = true;
+    $scope.level = $routeParams.levelId;
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
+    var baseActivities = Restangular.all('editor/linguistic');
+    if(!$routeParams.activityId)
+    {
+        $scope.activity = {
+           name : "Activity Name",
+           query : "Activity Query",
+           career : "/api/v1/editor/career/" + $routeParams.courseId ,
+           language_code : "en",
+           level_type : $routeParams.levelId,
+           level_order : 0,
+           level_required : true,
+           reward : "wena!",
+           penalty : "mala!",
+           activity_type : 'linguistic',
+           locked_text : '',
+           image: '',
+           answer : [],
+        };
+    }else
+    {
+        var baseActivity = Restangular.one('editor/linguistic', $routeParams.activityId);
+        baseActivity.get().then(function(activity1){
+           $scope.activity = Restangular.copy(activity1);
+           $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
+           var img = document.getElementById("image");
+           img.src = $scope.activity.image_base64;
+           console.log($scope);
+        });
+    }
+    $scope.name = "Type here Activity Name";
+    $scope.query = "Type here Quiz Activity Query";
+
+    $scope.saveActivity = function() {
+      if($scope.activity.answer && $scope.activity.image)
+       {
+           $scope.disable_save_button = true;
+           $scope.saved = false;
+           if(!$routeParams.activityId)
+           {
+               baseActivities.post($scope.activity).then(function ()
+               {
+                    $scope.disable_save_button = false;
+                    $scope.saved = true;
+                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    console.log('salvado!');
+               });
+           }else
+           {
+               $scope.activity.put().then(function ()
+               {
+                    $scope.disable_save_button = false;
+                    $scope.saved = true;
+                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    console.log('salvado!');
+               });
+           }
+       }
+    };
+        
     $scope.addImage = function() {
         console.log("asdasd");
         $scope.showButton=false;
