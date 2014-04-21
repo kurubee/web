@@ -127,6 +127,16 @@ body {
     overflow:hidden;    
 }
 
+.background-geospatial-activity{
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+    background-image:url('../img/background-geospatial.png');
+    width:800px;
+    height:600px;
+    overflow:hidden;    
+}
+
 .m-title {
     height: 42px;
     width:221px;

@@ -69,6 +69,14 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
         templateUrl: 'partials/linguistic-activity-detail.html',
         controller: 'LinguisticActivityCtrl'
       }).
+      when('/courses/:courseId/levels/:levelId/GeospatialActivity/:activityId', {
+        templateUrl: 'partials/geospatial-activity-detail.html',
+        controller: 'GeospatialActivityCtrl'
+      }).
+      when('/courses/:courseId/levels/:levelId/GeospatialActivity', {
+        templateUrl: 'partials/geospatial-activity-detail.html',
+        controller: 'GeospatialActivityCtrl'
+      }).
       when('/login', {
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl'

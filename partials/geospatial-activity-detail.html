@@ -5,7 +5,7 @@
     <div ng-show="courseName"  class="breadcumb">
     You are editing course {{courseName}}, level {{level}}:
     </div>
-    <div class="background-visual-activity" ng-show="activity">
+    <div class="background-geospatial-activity" ng-show="activity">
         <div class="column-left">
                 <!-- Title -->
                 <div class="title-description-cls">
@@ -16,18 +16,17 @@
                     <p id="description-description">
                         <b>Activity Query:</b> 
                         <br>
-                        That's the place where you write the query for a Linguistic Activity.
+                        That's the place where you write the query for a Geospatial Activity.
                     </p>
                 </div>
                  <div class="element1-description-cls">                
-                    Correct Answer:                 
-                    <input ng-model="activity.answer" type="text" class="input-code-cls">
+
                 </div>
                 <div class="element2-description-cls">  
                     <p id="description-description">              
-                        <b>Locked Text:</b> 
+                        <b>Click the answer:</b> 
                         <br>
-                        That's the place where you type the hint what will be locked.
+                        Click on the map to place the hidden point! The area that is shown when you save the activity will be the area that will be shown to the players!
                     </p>
                 </div>
                 <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
@@ -39,14 +38,6 @@
             <input type="text" ng-model="activity.name" class="m-title" id="title-input">
             <div class="m-content">
                 <textarea class="m-description" id="description-input" ng-model="activity.query"></textarea>
-                <div id="carousel" style="width: 221px;height:140px;">
-                    <img id="image" alt="Temporal Activity Image" ngSrc="data:image/png;base64,{{activity.image}}" />
-                    <input type="file" id="file" name="file"/>
-                    <button ng-click="addImage()" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 5px;margin-left:45px;vertical-align:top" >Add Image</button>
-                </div>
-                <div style="text-align:center;">
-                    <input ng-model="activity.locked_text" type="text" class="input-code-cls" size="20">   
-                </div>
             </div>
             <div class="bottom-bar">
                 <a ng-click="back()" class="pointer"><img src="img/back_button.png"></a>
