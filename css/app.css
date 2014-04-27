@@ -323,3 +323,12 @@ overflow: auto;
 text-overflow: ellipsis;
 text-wrap:normal;
 }
+
+.backButton {
+    background-image: url(../img/back_button.png);
+    width:62px;
+    height:35px;
+    color: white;
+padding-top: 3px;
+padding-left: 18px;
+}
