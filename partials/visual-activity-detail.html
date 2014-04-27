@@ -2,11 +2,11 @@
     <div ng-show="!activity">
         <img src="img/loading.gif" class="loading">
     </div>
-    <div ng-show="courseName" class="breadcumb">
-    {{courseName}}, level {{level}}:
-    </div>
     <div class="background-visual-activity" ng-show="activity">
         <div class="column-left">
+                <div ng-show="courseName" class="breadcumb">
+                    {{courseName}} <font style="font-style: italic; ">level {{level}}:</font>
+                </div>        
                 <!-- Title -->
                 <div class="title-description-cls">
                     <p id="title-description" ><b>Activity Name:</b></p>
@@ -19,31 +19,34 @@
                         That's the place where you write the query for a Visual Activity.
                     </p>
                 </div>
-                <div class="element1-description-cls">                
-                    Correct Answer:                 
-                    <select ng-model="correct_answer"  ng-options="a.value for a in activity.real_answers" class="select-options">
-                    </select>
+                <div class="description-description-cls">
+                    <p id="description-description">
+                        <b>Image:</b> 
+                        <br>
+                        Upload an image to accompanying the question. When a image is loaded, Click to reupload a new one!                    
+                    </p>
                 </div>
-                <div class="element2-description-cls">  
+                <div class="description-description-cls">  
                     <p id="description-description">              
                         <b>Time Countdown:</b> 
                         <br>
                         That's the place where you type number of seconds that theuser canwatch the image.
                     </p>
                 </div>
-
+                <div class="description-description-cls">                
+                    Correct Answer:                 
+                    <select ng-model="correct_answer"  ng-options="a.value for a in activity.real_answers" class="select-options">
+                    </select>
+                </div>
                 <br>
-                
-                <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
-                <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
-                <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
+
         </div>
         <div class="column-right">
             <div class="m-template m-template-course">
             <input type="text" ng-model="activity.name" class="m-title" id="title-input">
+            <textarea class="m-description activity-query" id="description-input" ng-model="activity.query"></textarea>
             <div class="m-content">
-                <textarea class="m-description activity-query" id="description-input" ng-model="activity.query"></textarea>
-                <div id="carousel" style="width: 221px;height:140px;">
+               <div id="carousel" style="width: 221px;height:140px;">
                     <div ng-show="inAnswers">
                         <ul ng-repeat="answer in activity.real_answers" >
                             <li>
@@ -71,10 +74,13 @@
                     </div>
                     <div ng-show="!inAnswers">
                         <div style="height:175px">
-                            <img id="image" alt="Temporal Activity Image" ngSrc="data:image/png;base64,{{activity.image}}" style="max-height:95%;width:auto;    display:block;
-    margin:auto;" ng-show="!showButton" />
-                            <input type="file" id="file" name="file" ng-show="showButton" style="margin-left:24px" />
-                            <button ng-click="addImage()" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 5px;margin-left:45px;vertical-align:top" ng-show="showButton">Add Image</button>
+                            <label for="file" >
+                        <img id="image" alt="Temporal Activity Image" ngSrc="data:image/png;base64,{{activity.image}}" ng-show="activity.image"/>
+                        <div id="image" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 45%;margin-left:45px;vertical-align:top;text-align:center;" ng-hide="activity.image">
+                           Add Image
+                        </div>
+                    </label>
+                    <input ng-change="addImage();" ng-model="activity.image" type="file" id="file" name="file" style="display:none;" multiple />
                         </div>
                         <div>
                             Countdown: 
@@ -94,7 +100,13 @@
                     <button ng-class="{ 'button2':true}" style="background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 125px;margin-right:6px;vertical-align:top" ng-click="inAnswers=false;" ng-show="inAnswers">Edit Image</button> 
                 </div>
             </div>
+      
             
+        </div>
+        <div class="saveButton">
+            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;vertical-align: top;" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
+            <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
+            <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
         </div>
         </div>
     </div>

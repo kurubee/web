@@ -151,10 +151,10 @@ body {
 }
 
 .m-content {
-    height:239px;
+    height:203px;
     width:221px;
     overflow:hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 .m-description {
     width:221px;
@@ -189,7 +189,7 @@ body {
 }
 
 .title-description-cls {
-    margin-top:65px;
+    margin-top:20px;
 
 }
 
@@ -276,12 +276,11 @@ body {
 }
 
 .breadcumb {
-    margin-left: 102px;
     color: #303333;
 font: 30px 'latolight', sans-serif;
 text-transform: uppercase;
 padding-bottom: 10px;
-font-style: italic;
+
 }
 
 .element1-description-cls {
@@ -331,4 +330,13 @@ text-wrap:normal;
     color: white;
 padding-top: 3px;
 padding-left: 18px;
+}
+
+.uploadedImage {
+display: inline-block;padding: 3px;width: 120px;margin-top: 45%;margin-left:45px;vertical-align:top;text-align:center;
+}
+
+.saveButton {
+ margin-top: -105px;
+margin-left: -50px;
 }

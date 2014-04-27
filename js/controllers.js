@@ -185,7 +185,7 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
            name : "Activity Name",
            query : "Activity Query",
            answers : [],
-           real_answers : [],
+           real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
            correct_answer : "",
            career : "/api/v1/editor/career/" + $routeParams.courseId ,
            language_code : "en",
@@ -358,7 +358,7 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     };
     
     $scope.addImage = function() {
-        console.log("asdasd");
+        console.log("re");
         var f = document.getElementById('file').files[0],
         r = new FileReader();
         r.onloadend = function(e){
@@ -371,8 +371,6 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     };
     
     $scope.getCond = function() {   
-        console.log($scope.disable_save_button);
-        console.log($scope.correct_answer);
         return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer;
     };
 }]);

@@ -2,11 +2,11 @@
     <div ng-show="!activity">
         <img src="img/loading.gif" class="loading">
     </div>
-    <div ng-show="courseName"  class="breadcumb">
-    {{courseName}}, level {{level}}:
-    </div>
     <div class="background-geospatial-activity" ng-show="activity">
         <div class="column-left">
+                <div ng-show="courseName" class="breadcumb">
+                    {{courseName}} <font style="font-style: italic; ">level {{level}}:</font>
+                </div>
                 <!-- Title -->
                 <div class="title-description-cls">
                     <p id="title-description" ><b>Activity Name:</b></p>
@@ -26,9 +26,6 @@
                         Click on the map to place the hidden point! The area that is shown when you save the activity will be the area that will be shown to the players!
                     </p>
                 </div>
-                <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;vertical-align:top" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
-                <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
-                <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
         </div>
         <div class="column-right">
             <div class="m-template m-template-course">
@@ -43,6 +40,12 @@
                     </div>
             </div>
         </div>
+        <div class="saveButton">
+            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;vertical-align: top;" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
+            <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
+            <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
+        </div>
+
         </div>
     </div>
 </div>
