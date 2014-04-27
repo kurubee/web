@@ -2,14 +2,14 @@
     <div ng-show="!activity">
         <img src="img/loading.gif" class="loading">
     </div>
-    <div ng-show="courseName">
+    <div ng-show="courseName" class="breadcumb">
     {{courseName}} level {{level}}:
     </div>
     <div class="background-quiz-activity" ng-show="activity">
         <div class="column-left">
                 <!-- Title -->
                 <div class="title-description-cls">
-                    <h3 id="title-description" >Activity Name</h3>
+                   <p id="title-description" ><b>Activity Name:</b></p>
                 </div>
                 <!-- Content -->
                 <div class="description-description-cls">
@@ -34,7 +34,7 @@
             <div class="m-template m-template-course">
             <input type="text" ng-model="activity.name" class="m-title" id="title-input">
             <div class="m-content">
-                <textarea class="m-description" id="description-input" ng-model="activity.query"></textarea>
+                <textarea class="m-description activity-query" id="description-input" ng-model="activity.query"></textarea>
                 <div id="carousel" style="width: 221px;height:140px;">
                     <img id="image" alt="Temporal Activity Image" ngSrc="data:image/png;base64,{{activity.image}}" />
                     <input type="file" id="file" name="file"/>

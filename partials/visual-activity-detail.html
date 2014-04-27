@@ -2,14 +2,14 @@
     <div ng-show="!activity">
         <img src="img/loading.gif" class="loading">
     </div>
-    <div ng-show="courseName">
-    You are editing course {{courseName}}, level {{level}}:
+    <div ng-show="courseName" class="breadcumb">
+    {{courseName}}, level {{level}}:
     </div>
     <div class="background-visual-activity" ng-show="activity">
         <div class="column-left">
                 <!-- Title -->
                 <div class="title-description-cls">
-                    <h3 id="title-description" >Activity Name</h3>
+                    <p id="title-description" ><b>Activity Name:</b></p>
                 </div>
                 <!-- Content -->
                 <div class="description-description-cls">
@@ -42,7 +42,7 @@
             <div class="m-template m-template-course">
             <input type="text" ng-model="activity.name" class="m-title" id="title-input">
             <div class="m-content">
-                <textarea class="m-description" id="description-input" ng-model="activity.query"></textarea>
+                <textarea class="m-description activity-query" id="description-input" ng-model="activity.query"></textarea>
                 <div id="carousel" style="width: 221px;height:140px;">
                     <div ng-show="inAnswers">
                         <ul ng-repeat="answer in activity.real_answers" >
@@ -70,7 +70,7 @@
                         <button ng-class="{ 'button2':true}" style="background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 120px;margin-right:6px;vertical-align:top" ng-click="addAnswer()">Add Answer</button>
                     </div>
                     <div ng-show="!inAnswers">
-                        <div style="height:150px">
+                        <div style="height:175px">
                             <img id="image" alt="Temporal Activity Image" ngSrc="data:image/png;base64,{{activity.image}}" style="max-height:95%;width:auto;    display:block;
     margin:auto;" ng-show="!showButton" />
                             <input type="file" id="file" name="file" ng-show="showButton" style="margin-left:24px" />

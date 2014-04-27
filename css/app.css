@@ -189,7 +189,8 @@ body {
 }
 
 .title-description-cls {
-    margin-top:61px;
+    margin-top:65px;
+    margin-bottom:10px;
 }
 
 .description-description-cls {
@@ -272,6 +273,11 @@ body {
 
 .breadcumb {
     margin-left: 102px;
+    color: #303333;
+font: 30px 'latolight', sans-serif;
+text-transform: uppercase;
+padding-bottom: 10px;
+font-style: italic;
 }
 
 .element1-description-cls {
@@ -280,4 +286,17 @@ body {
 
 .element2-description-cls {
     margin-top:30px;
+}
+
+.activity-query {
+background-image: linear-gradient(#ffffff,#f2f2f2 2%,#cecece);
+border-color: #616161;
+border: 0px;
+border-bottom: 1px solid;
+height: 35px;
+font-family: 'Helvetica Neue', HelveticaNeue, 'Helvetica-Neue', Helvetica, 'BBAlpha Sans', sans-serif;
+line-height: 2.1em;
+font-size: 0.92em;
+text-align: center;
+font-weight: bold;
 }
