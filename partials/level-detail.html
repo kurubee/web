@@ -31,9 +31,18 @@ background-position: center; ">
                 <div class="activity-list" >
                     <ul>
                         <li ng-repeat="activity in activities">
-                            <div ng-click="accessActivity({{activity}})" class="list-item-label"><div class="list-item"><div><b>{{activity.name}}</b></div><font size="3" color="grey">{{activity.query}}</font></div></div>
+                            <div ng-click="accessActivity({{activity}})" class="list-item-label">
+                                <div class="list-item">
+                                    <div >
+                                        <b>{{activity.name}}</b>
+                                    </div>
+                                    <font size="3" color="grey">
+                                        {{activity.query}}
+                                    </font>
+                                </div>
+                            </div>
                             <div  style="color: #009bdb;
-font-size: 14px;margin-top:-15px;margin-left:12px;" ><div ng-click="removeActivity({{activity}})" style="float:left;">Remove</div><div style="margin-left:60px;"ng-click="accessActivity({{activity}})">Edit</div></div>
+font-size: 14px;margin-top:-15px;margin-left:12px;" ><div ng-click="removeActivity({{activity}})" style="float:left;cursor: pointer;">Remove</div><div style="margin-left:60px;cursor: pointer;"ng-click="accessActivity({{activity}})">Edit</div></div>
                         </li>
                         <li>
                             <div class="carousel-card">
