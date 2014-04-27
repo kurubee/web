@@ -52,19 +52,21 @@
                             <li>
                                 <div class="carousel-card" style="padding-bottom: 5px;">
                                    <input type="text" ng-model="answer.value" ngMouseover="{{index}}" style="-webkit-box-flex: 1;
-                                    -webkit-box-align: center;
-                                    white-space: nowrap;
-                                    text-overflow: ellipsis;
-                                    text-align: center;
-                                    font-weight: bold;
-                                    line-height: 1.2em;
-                                    background-color: #ccc;
-                                    overflow: hidden;
-                                    font-weight: normal;
-                                    -webkit-border-radius: 0.4em;
-                                    border-radius: 0.4em;
-                                    background-image: linear-gradient(#ffffff,#dedede 2%,#bababa);">
-                                    <button type="button" style="margin-top: -5px;" class="btn btn-xs btn-danger" ng-click="removeAnswer({{$index}})">
+                                    -webkit-box-flex: 1;
+                               width: 80%;
+                                -webkit-box-align: center;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                text-align: center;
+                                font-weight: bold;
+                                line-height: 1.2em;
+                                background-color: #ccc;
+                                overflow: hidden;
+                                font-weight: normal;
+                                -webkit-border-radius: 0.4em;
+                                border-radius: 0.0em;
+                                background-image: linear-gradient(#ffffff,#dedede 2%,#bababa);">
+                                    <button type="button" style="margin-top: -5px;" class="btn btn-xs" ng-click="removeAnswer({{$index}})">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>
                                 </div>
@@ -73,7 +75,7 @@
                         <button ng-class="{ 'button2':true}" style="background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 120px;margin-right:6px;vertical-align:top" ng-click="addAnswer()">Add Answer</button>
                     </div>
                     <div ng-show="!inAnswers">
-                        <div style="height:175px">
+                        <div style="height:175px;overflow-y: hidden;">
                             <label for="file" >
                         <img id="image" alt="Temporal Activity Image" ngSrc="data:image/png;base64,{{activity.image}}" ng-show="activity.image"/>
                         <div id="image" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 45%;margin-left:45px;vertical-align:top;text-align:center;" ng-hide="activity.image">
@@ -82,9 +84,9 @@
                     </label>
                     <input ng-change="addImage();" ng-model="activity.image" type="file" id="file" name="file" style="display:none;" multiple />
                         </div>
-                        <div>
+                        <div class="countdown">
                             Countdown: 
-                            <input ng-model="course.code" type="text" class="input-code-cls" size="3">   
+                            <input ng-model="activity.time" type="text" class="input-code-cls" size="1" dir="rtl"> secs 
                         </div>
                     </div>
                 </div>

@@ -151,7 +151,7 @@ body {
 }
 
 .m-content {
-    height:203px;
+    height:204px;
     width:221px;
     overflow:hidden;
     overflow-y: hidden;
@@ -339,4 +339,14 @@ display: inline-block;padding: 3px;width: 120px;margin-top: 45%;margin-left:45px
 .saveButton {
  margin-top: -105px;
 margin-left: -50px;
+}
+
+.countdown {
+color: white;
+font: bold Helvetica, Sans-Serif;
+letter-spacing: -1px;
+background: rgb(0, 0, 0);
+background: rgba(0, 0, 0, 0.7);
+padding: 3px;
+
 }

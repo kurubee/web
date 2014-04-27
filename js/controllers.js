@@ -397,8 +397,9 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
            activity_type : 'visual',
            image: "",
            answers : [],
-           real_answers : [],
-           correct_answer : ""
+           real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
+           correct_answer : "",
+           time:5
         };
     }else
     {
@@ -412,7 +413,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
         });
     }
     $scope.name = "Type here Activity Name";
-    $scope.query = "Type here Quiz Activity Query";
+    $scope.query = "Type here Visual Activity Query";
 
     $scope.saveActivity = function() {
       if($scope.activity.answers && $scope.correct_answer)
@@ -486,7 +487,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
     $scope.getCond = function() {   
         console.log($scope.disable_save_button);
         console.log($scope.correct_answer);
-        return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.activity.real_answers;
+        return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.activity.real_answers && $scope.activity.real_answers;
     };
 }]);
 
@@ -531,7 +532,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.saveActivity = function() {
       if($scope.activity.answer && $scope.activity.image)
        {
-           $scope.activity.image ="";
            $scope.disable_save_button = true;
            $scope.saved = false;
            if(!$routeParams.activityId)
@@ -573,7 +573,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.getCond = function() {   
         console.log($scope.disable_save_button);
         console.log($scope.correct_answer);
-        return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.activity.real_answers;
+        return !$scope.disable_save_button && $scope.activity.image && $scope.activity.answer && $scope.activity.locked_text;
     };
 }]);
 
