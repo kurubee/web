@@ -111,7 +111,7 @@ body {
     position: absolute;
     left: 50%;
     margin-left: -400px;
-    background-image:url('../img/background-course.png');
+    background-image:url('../img/background-quiz.png');
     width:800px;
     height:600px;
     overflow:hidden;    
