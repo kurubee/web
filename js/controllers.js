@@ -326,13 +326,13 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
        console.log($scope.correct_answer);
        if($scope.correct_answer == "before")
        {
-            $scope.activity.image_datetime = "0001-01-01 00:00";
-            $scope.activity.query_datetime = "0001-01-01 00:01";
+            $scope.activity.image_datetime = "1970-01-01 00:00";
+            $scope.activity.query_datetime = "1970-01-01 00:01";
        }
        else
        {
-            $scope.activity.image_datetime = "0001-01-01 00:01";
-            $scope.activity.query_datetime = "0001-01-01 00:00";       
+            $scope.activity.image_datetime = "1970-01-01 00:01";
+            $scope.activity.query_datetime = "1970-01-01 00:00";       
        }
        $scope.disable_save_button = true;
        $scope.saved = false;
