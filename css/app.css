@@ -127,6 +127,16 @@ body {
     overflow:hidden;    
 }
 
+.background-linguistic-activity{
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+    background-image:url('../img/background-linguistic.png');
+    width:800px;
+    height:600px;
+    overflow:hidden;    
+}
+
 .background-geospatial-activity{
     position: absolute;
     left: 50%;
@@ -156,6 +166,14 @@ body {
     overflow:hidden;
     overflow-y: hidden;
 }
+
+.m-content-level {
+    height:241px;
+    width:221px;
+    overflow:hidden;
+    overflow-y: hidden;
+}
+
 .m-description {
     width:221px;
     height:60px;

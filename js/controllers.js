@@ -571,8 +571,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     };
     
     $scope.getCond = function() {   
-        console.log($scope.disable_save_button);
-        console.log($scope.correct_answer);
         return !$scope.disable_save_button && $scope.activity.image && $scope.activity.answer && $scope.activity.locked_text;
     };
 }]);

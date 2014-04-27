@@ -2,7 +2,7 @@
     <div ng-show="!activity">
         <img src="img/loading.gif" class="loading">
     </div>
-    <div class="background-visual-activity" ng-show="activity">
+    <div class="background-linguistic-activity" ng-show="activity">
         <div class="column-left">
                 <div ng-show="courseName" class="breadcumb">
                     {{courseName}} <font style="font-style: italic; ">level {{level}}:</font>
@@ -19,18 +19,24 @@
                         That's the place where you write the query for a Linguistic Activity.
                     </p>
                 </div>
-                 <div class="element1-description-cls">                
-                    Correct Answer:                 
-                    <input ng-model="activity.answer" type="text" class="input-code-cls">
+                <div class="description-description-cls">
+                    <p id="description-description">
+                        <b>Image:</b> 
+                        <br>
+                        That would be the image that will appear with the question. When a image is loaded, Click to reupload a new one!                    
+                    </p>
                 </div>
-                <div class="element2-description-cls">  
+                <div class="description-description-cls">  
                     <p id="description-description countdown">              
                         <b>Locked Text:</b> 
                         <br>
                         That's the place where you type the hint what will be locked. Can be the same as the answer.
                     </p>
                 </div>
-              
+                 <div class="element1-description-cls">                
+                    Correct Answer:                 
+                    <input ng-model="activity.answer" type="text" class="input-code-cls">
+                </div>
         </div>
         <div class="column-right">
             <div class="m-template m-template-course">
