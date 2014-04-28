@@ -92,7 +92,6 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
         };
         
         $scope.toLevel = function(index) {
-           console.log(index);
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
         };
     });   
@@ -109,12 +108,10 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
         $scope.activities = [];
         for (var j=0;j<activities.length;j++)
         {
-            console.log(j);
             $scope.activities[j] = activities[j];
         }    
     });
     $scope.accessActivity = function(activity) {
-       console.log(activity);
        if(activity.activity_type=="quiz")
        {
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity/" + activity.id);
@@ -139,7 +136,6 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
     };
     
     $scope.createActivity = function() {
-       console.log($scope.activityType);
        if($scope.activityType == "temporal")
        {
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/TemporalActivity" );       
@@ -163,7 +159,6 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
     };
     
     $scope.removeActivity = function(activity) {
-       console.log(activity);
         $scope.loaded = false;
        var baseActivity = Restangular.one('editor/activity', activity.id);
        baseActivity.remove().then(function(){
@@ -214,12 +209,9 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
                $scope.activity.real_answers[i] = {"value": $scope.activity.answers[i]};
                if($scope.activity.answers[i] == $scope.activity.correct_answer)
                {
-                   console.log($scope.activity.answers[i]);
                    $scope.correct_answer =  $scope.activity.real_answers[i];               
                }
            }
-
-           console.log($scope);
         });
     }
     $scope.name = "Type here Activity Name";
@@ -234,8 +226,6 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
             $scope.activity.real_answers = [];
         }
         $scope.activity.real_answers.push({"value":"respuestano"+($scope.activity.real_answers.length+1)});
-        console.log($scope.activity);
-        
     };
     
     $scope.removeAnswer = function(index) {   
@@ -263,7 +253,6 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                    console.log('salvado!');
                });
            }else
            {
@@ -272,15 +261,11 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                    console.log('salvado!');
                });
            }
        }
     };
     $scope.getCond = function() {   
-        console.log($scope.disable_save_button);
-        console.log($scope.activity.real_answers);
-        console.log($scope.correct_answer);
         return !$scope.disable_save_button && $scope.activity.real_answers && $scope.correct_answer;
     };
 }]);
@@ -316,14 +301,12 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
            var img = document.getElementById("image");
            img.src = $scope.activity.image_base64;
-           console.log($scope);
         });
     }
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
 
     $scope.saveActivity = function() {
-       console.log($scope.correct_answer);
        if($scope.correct_answer == "before")
        {
             $scope.activity.image_datetime = "1970-01-01 00:00";
@@ -343,7 +326,6 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
                 $scope.disable_save_button = false;
                 $scope.saved = true;
                 setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                console.log('salvado!');
            });
        }else
        {
@@ -352,18 +334,15 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
                 $scope.disable_save_button = false;
                 $scope.saved = true;
                 setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                console.log('salvado!');
            });
        }
     };
     
     $scope.addImage = function() {
-        console.log("re");
         var f = document.getElementById('file').files[0],
         r = new FileReader();
         r.onloadend = function(e){
            $scope.activity.image = e.target.result;
-           console.log($scope.activity);
            var img = document.getElementById("image");
            img.src = e.target.result;
         }
@@ -409,7 +388,6 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
            var img = document.getElementById("image");
            img.src = $scope.activity.image_base64;
-           console.log($scope);
         });
     }
     $scope.name = "Type here Activity Name";
@@ -436,7 +414,6 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                    console.log('salvado!');
                });
            }else
            {
@@ -445,7 +422,6 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                    console.log('salvado!');
                });
            }
        }
@@ -461,8 +437,6 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
             $scope.activity.real_answers = [];
         }
         $scope.activity.real_answers.push({"value":"respuestano"+($scope.activity.real_answers.length+1)});
-        console.log($scope.activity);
-        
     };
     
     $scope.removeAnswer = function(index) {   
@@ -471,13 +445,11 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
     
     
     $scope.addImage = function() {
-        console.log("asdasd");
         $scope.showButton=false;
         var f = document.getElementById('file').files[0],
         r = new FileReader();
         r.onloadend = function(e){
            $scope.activity.image = e.target.result;
-           console.log($scope.activity);
            var img = document.getElementById("image");
            img.src = e.target.result;
         }
@@ -485,8 +457,6 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
     };
     
     $scope.getCond = function() {   
-        console.log($scope.disable_save_button);
-        console.log($scope.correct_answer);
         return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.activity.real_answers && $scope.activity.real_answers;
     };
 }]);
@@ -523,7 +493,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
            var img = document.getElementById("image");
            img.src = $scope.activity.image_base64;
-           console.log($scope);
         });
     }
     $scope.name = "Type here Activity Name";
@@ -541,7 +510,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                    console.log('salvado!');
                });
            }else
            {
@@ -550,20 +518,17 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                    console.log('salvado!');
                });
            }
        }
     };
         
     $scope.addImage = function() {
-        console.log("asdasd");
         $scope.showButton=false;
         var f = document.getElementById('file').files[0],
         r = new FileReader();
         r.onloadend = function(e){
            $scope.activity.image = e.target.result;
-           console.log($scope.activity);
            var img = document.getElementById("image");
            img.src = e.target.result;
         }
@@ -595,7 +560,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            reward : "wena!",
            penalty : "mala!",
            activity_type : 'geospatial',
-           points : [],
+           points : [{x:"-25.363882",y:"131.044922"}],
            radious: 100,
            area : [],
         };
@@ -606,9 +571,9 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         baseActivity.get().then(function(activity1){
            $scope.activity = Restangular.copy(activity1);
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
-           console.log($scope);
         });
     }
+    /* Creando y configurando mapa */
     var mapOptions = {
           center: new google.maps.LatLng(-34.397, 150.644),
           zoom: 8,
@@ -623,7 +588,48 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
+    
 
+    //Getting first of target points as the only one valid
+    var target = new google.maps.LatLng($scope.activity.points[0].x, $scope.activity.points[0].y);    
+    
+    var markerIcon = new google.maps.MarkerImage('img/marker.png');
+    $scope.marker = new google.maps.Marker({
+        map: map,
+        position: target,
+        flat: true,
+        clickable: false,
+        icon: markerIcon
+    });
+    $scope.mouseFlag = false;
+    //Creating eventlisteners to set mark when click
+    google.maps.event.addListener(map, "mouseup", function (e)
+    {
+        //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
+        if ($scope.mouseFlag === true) 
+        {
+            if ($scope.marker) {
+                $scope.marker.setMap(null);
+            }
+            var markerIcon = new google.maps.MarkerImage('img/marker.png');
+            $scope.marker = new google.maps.Marker({
+                map: map,
+                position: e.latLng,
+                flat: true,
+                clickable: false,
+                icon: markerIcon
+            });
+        }
+    });
+    google.maps.event.addListener(map, "mousemove", function (e)
+    {
+        $scope.mouseFlag = false;
+    });
+    google.maps.event.addListener(map, "mousedown", function (e)
+    {
+        $scope.mouseFlag = true;
+    });
+    
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
 
@@ -640,7 +646,6 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                    console.log('salvado!');
                });
            }else
            {
@@ -649,15 +654,14 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                    console.log('salvado!');
                });
            }
        }
     };
+    
+    
         
     $scope.getCond = function() {   
-        console.log($scope.disable_save_button);
-        console.log($scope.correct_answer);
         return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.activity.real_answers;
     };
 }]);
