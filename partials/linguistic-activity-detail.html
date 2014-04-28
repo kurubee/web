@@ -40,8 +40,8 @@
         </div>
         <div class="column-right">
             <div class="m-template m-template-course">
-            <input type="text" ng-model="activity.name" class="m-title" id="title-input">
-            <textarea class="m-description activity-query" id="description-input" ng-model="activity.query"></textarea>
+            <input type="text" ng-model="activity.name" class="m-title" id="title-input"  maxlength="255" >
+            <input class="m-description activity-query" id="description-input" ng-model="activity.query" maxlength="255" >
             <div class="m-content">
                 <div id="carousel" style="width: 221px;height:175px;">
                     <label for="file" >

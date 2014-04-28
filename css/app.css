@@ -121,7 +121,7 @@ body {
     position: absolute;
     left: 50%;
     margin-left: -400px;
-    background-image:url('../img/background-visual.png');
+    background-image:url('../img/background-linguistic.png');
     width:800px;
     height:600px;
     overflow:hidden;    
@@ -158,6 +158,8 @@ body {
     font-weight: bold;
     color: white;
     text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+    padding:5px;
+    text-overflow: ellipsis;
 }
 
 .m-content {
@@ -323,6 +325,7 @@ font-weight: bold;
 overflow: hidden;
 text-overflow: ellipsis;
 text-wrap:none;
+padding:5px;
 }
 
 .activity-query:focus {
@@ -342,12 +345,14 @@ text-wrap:normal;
 }
 
 .backButton {
+
     background-image: url(../img/back_button.png);
     width:62px;
     height:35px;
     color: white;
-padding-top: 3px;
-padding-left: 18px;
+padding-top: 5px;
+padding-left: 14px;
+font-family: 'latolight', sans-serif;text-transform: uppercase;
 }
 
 .uploadedImage {
