@@ -670,10 +670,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
             });
         });
     }
-    /* Creando y configurando mapa */
-
-    
-    
+   
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
 
