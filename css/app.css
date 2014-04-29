@@ -173,7 +173,7 @@ body {
     height:241px;
     width:221px;
     overflow:hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .m-description {

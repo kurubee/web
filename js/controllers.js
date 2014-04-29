@@ -547,6 +547,20 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/geospatial');
+    
+    var mapOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          panControl: false,
+          zoomControl: false,
+          mapTypeControl: false,
+          scaleControl: false,
+          streetViewControl: false,
+          overviewMapControl: false
+
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
     if(!$routeParams.activityId)
     {
         $scope.activity = {
@@ -564,6 +578,48 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            radious: 100,
            area : [],
         };
+
+        //Getting first of target points as the only one valid
+        var target = new google.maps.LatLng($scope.activity.points[0].x, $scope.activity.points[0].y);    
+        
+        var markerIcon = new google.maps.MarkerImage('img/marker.png');
+        $scope.marker = new google.maps.Marker({
+            map: map,
+            position: target,
+            flat: true,
+            clickable: false,
+            icon: markerIcon
+        });
+        $scope.mouseFlag = false;
+        //Creating eventlisteners to set mark when click
+        google.maps.event.addListener(map, "mouseup", function (e)
+        {
+            //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
+            if ($scope.mouseFlag === true) 
+            {
+                if ($scope.marker) {
+                    $scope.marker.setMap(null);
+                }
+                var markerIcon = new google.maps.MarkerImage('img/marker.png');
+                $scope.activity.points[0].x = e.latLng.x;
+                $scope.activity.points[0].y = e.latLng.y;
+                $scope.marker = new google.maps.Marker({
+                    map: map,
+                    position: e.latLng,
+                    flat: true,
+                    clickable: false,
+                    icon: markerIcon
+                });
+            }
+        });
+        google.maps.event.addListener(map, "mousemove", function (e)
+        {
+            $scope.mouseFlag = false;
+        });
+        google.maps.event.addListener(map, "mousedown", function (e)
+        {
+            $scope.mouseFlag = true;
+        });
         
     }else
     {
@@ -571,70 +627,58 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         baseActivity.get().then(function(activity1){
            $scope.activity = Restangular.copy(activity1);
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
-        });
-    }
-    /* Creando y configurando mapa */
-    var mapOptions = {
-          center: new google.maps.LatLng(-34.397, 150.644),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          panControl: false,
-          zoomControl: false,
-          mapTypeControl: false,
-          scaleControl: false,
-          streetViewControl: false,
-          overviewMapControl: false
-
-    };
-    var map = new google.maps.Map(document.getElementById("map_canvas"),
-            mapOptions);
-    
-
-    //Getting first of target points as the only one valid
-    var target = new google.maps.LatLng($scope.activity.points[0].x, $scope.activity.points[0].y);    
-    
-    var markerIcon = new google.maps.MarkerImage('img/marker.png');
-    $scope.marker = new google.maps.Marker({
-        map: map,
-        position: target,
-        flat: true,
-        clickable: false,
-        icon: markerIcon
-    });
-    $scope.mouseFlag = false;
-    //Creating eventlisteners to set mark when click
-    google.maps.event.addListener(map, "mouseup", function (e)
-    {
-        //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
-        if ($scope.mouseFlag === true) 
-        {
-            if ($scope.marker) {
-                $scope.marker.setMap(null);
-            }
+            //Getting first of target points as the only one valid
+            var target = new google.maps.LatLng($scope.activity.points[0].x, $scope.activity.points[0].y);    
+            
             var markerIcon = new google.maps.MarkerImage('img/marker.png');
             $scope.marker = new google.maps.Marker({
                 map: map,
-                position: e.latLng,
+                position: target,
                 flat: true,
                 clickable: false,
                 icon: markerIcon
             });
-        }
-    });
-    google.maps.event.addListener(map, "mousemove", function (e)
-    {
-        $scope.mouseFlag = false;
-    });
-    google.maps.event.addListener(map, "mousedown", function (e)
-    {
-        $scope.mouseFlag = true;
-    });
+            $scope.mouseFlag = false;
+            //Creating eventlisteners to set mark when click
+            google.maps.event.addListener(map, "mouseup", function (e)
+            {
+                //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
+                if ($scope.mouseFlag === true) 
+                {
+                    if ($scope.marker) {
+                        $scope.marker.setMap(null);
+                    }
+                    var markerIcon = new google.maps.MarkerImage('img/marker.png');
+                    $scope.activity.points[0].x = e.latLng.x;
+                    $scope.activity.points[0].y = e.latLng.y;
+                    $scope.marker = new google.maps.Marker({
+                        map: map,
+                        position: e.latLng,
+                        flat: true,
+                        clickable: false,
+                        icon: markerIcon
+                    });
+                }
+            });
+            google.maps.event.addListener(map, "mousemove", function (e)
+            {
+                $scope.mouseFlag = false;
+            });
+            google.maps.event.addListener(map, "mousedown", function (e)
+            {
+                $scope.mouseFlag = true;
+            });
+        });
+    }
+    /* Creando y configurando mapa */
+
+    
     
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
 
     $scope.saveActivity = function() {
-      if($scope.activity.point)
+      if($scope.activity.points)
        {
            $scope.activity.image ="";
            $scope.disable_save_button = true;
@@ -662,7 +706,14 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
     
         
     $scope.getCond = function() {   
-        return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.activity.real_answers;
+        if($scope.activity)
+        {
+            return !$scope.disable_save_button && $scope.activity.points;
+        }
+        else
+        {
+            return false;
+        }
     };
 }]);
 

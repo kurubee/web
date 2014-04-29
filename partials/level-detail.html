@@ -26,7 +26,7 @@
         <div class="column-right">
             <div class="m-template m-template-course">
             <div class="m-title">{{courseName}}</div>
-            <div class="m-content" style="background-image: url(img/level_icons/{{level}}B.png); background-repeat: no-repeat;
+            <div class="m-content-level" style="background-image: url(img/level_icons/{{level}}B.png); background-repeat: no-repeat;
 background-position: center; ">
                 <div class="activity-list" >
                     <ul>
@@ -60,9 +60,15 @@ font-size: 14px;margin-top:-15px;margin-left:12px;" ><div ng-click="removeActivi
                     </ul>
                 </div>
             </div>    
-            <div class="bottom-bar">
-                <a ng-click="back()" class="pointer"><img src="img/back_button.png"></a>
-            </div>
+             <div class="bottom-bar">
+                <div class="bottom-left">
+                    <div ng-click="back()" class="backButton pointer">
+                        Back
+                    </div>
+                </div>
+                <div class="bottom-right">
+                </div>
+             </div>
         </div>
         </div>
     </div>
