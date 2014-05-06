@@ -72,7 +72,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <button ng-class="{ 'button2':true}" style="background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 120px;margin-right:6px;vertical-align:top" ng-click="addAnswer()">Add Answer</button>
+                        
                     </div>
                     <div ng-show="!inAnswers">
                         <div style="height:175px;overflow-y: hidden;">
@@ -93,13 +93,16 @@
             </div>
             <div class="bottom-bar">
                 <div class="bottom-left">
-                    <div ng-click="back()" class="backButton pointer">
+                    <div ng-show="!inAnswers" ng-click="back()" class="backButton pointer">
+                        Back
+                    </div>
+                    <div ng-show="inAnswers" ng-click="inAnswers=false" class="backButton pointer">
                         Back
                     </div>
                 </div>
                 <div class="bottom-right">
                     <button ng-class="{ 'button2':true}" style="background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 125px;margin-right:6px;vertical-align:top" ng-click="inAnswers=true;" ng-show="!inAnswers">Edit Answers</button> 
-                    <button ng-class="{ 'button2':true}" style="background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 125px;margin-right:6px;vertical-align:top" ng-click="inAnswers=false;" ng-show="inAnswers">Edit Image</button> 
+                    <button ng-class="{ 'button2':true}" style="background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 120px;margin-right:6px;vertical-align:top" ng-click="addAnswer()" ng-show="inAnswers">Add Answer</button>
                 </div>
             </div>
       
