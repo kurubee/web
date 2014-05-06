@@ -70,7 +70,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
             $scope.language = $scope.course.language_code;
             $scope.career_type = $scope.course.career_type;
             $scope.knowledge = $scope.course.knowledges[0];
-            Aux.setCourseName($scope.course.name);
+            $cookieStore.courseName = $scope.course.name;
         });
 
         $scope.save = function() {
@@ -105,7 +105,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
     $scope.level = $routeParams.levelId;
     baseActivities.getList().then(function(activities){
         $scope.loaded = true;
-        $scope.courseName = Aux.getCourseName();
+        $scope.courseName =  $cookieStore.courseName;
         $scope.activities = [];
         for (var j=0;j<activities.length;j++)
         {
@@ -176,7 +176,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
 
 kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
-    $scope.courseName = Aux.getCourseName();
+    $scope.courseName = $cookieStore.courseName;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/quiz');
@@ -283,7 +283,7 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
 
 kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.baseURL = 'http://0.0.0.0:8000';
-    $scope.courseName = Aux.getCourseName();
+    $scope.courseName =  $cookieStore.courseName;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/temporal');
@@ -378,7 +378,7 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
 
 kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.baseURL = 'http://0.0.0.0:8000';
-    $scope.courseName = Aux.getCourseName();
+    $scope.courseName =  $cookieStore.courseName;
     $scope.inAnswers = false;
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
@@ -497,7 +497,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
 
 
 kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
-    $scope.courseName = Aux.getCourseName();
+    $scope.courseName =  $cookieStore.courseName;
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
@@ -579,7 +579,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
 
 
 kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
-    $scope.courseName = Aux.getCourseName();
+    $scope.courseName =  $cookieStore.courseName;
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
