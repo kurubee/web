@@ -44,7 +44,7 @@
                 <div id="carousel" style="width: 221px;height:140px;">
 
                    <label for="file" >
-                        <img id="image" alt="Temporal Activity Image" ngSrc="data:image/png;base64,{{activity.image}}" ng-show="activity.image"/>
+                        <img id="image" alt="Temporal Activity Image" ng-src="{{baseURL}}{{activity.image}}" ng-show="activity.image"/>
                         <div id="image" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 45%;margin-left:45px;vertical-align:top;text-align:center;" ng-hide="activity.image">
                            Add Image
                         </div>
