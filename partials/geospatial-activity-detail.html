@@ -26,13 +26,20 @@
                         Click on the map to place the hidden point! The area that is shown when you save the activity will be the area that will be shown to the players!
                     </p>
                 </div>
+                <div class="description-description-cls">  
+                    <p id="description-description">              
+                        <b>Radius:</b> 
+                        <br>
+                        <input ng-model="activity.radius" type="text" class="input-code-cls">
+                    </p>
+                </div>
         </div>
         <div class="column-right">
             <div class="m-template m-template-course">
             <input type="text" ng-model="activity.name" class="m-title" id="title-input"  maxlength="255" >
             <input class="m-description activity-query" id="description-input" ng-model="activity.query"  maxlength="255" >
             <div class="m-content">
-                <div id="map_canvas" style="width:100%; height:204px"></div>
+                <div id="map_canvas" style="221px; height:204px"></div>
             </div>
             <div class="bottom-bar">
                     <div ng-click="back()" class="backButton pointer">
