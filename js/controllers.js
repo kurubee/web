@@ -26,9 +26,6 @@ kurubeeApp.controller('AppController', function($scope, $cookieStore) {
              };         
          }
      });
-    $scope.back = function() { 
-       window.history.back();
-    };
 });
   
 kurubeeApp.controller('topbar-controller', function($scope,$cookieStore) {
@@ -43,6 +40,7 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
         $scope.courses = courses
     });
     $scope.orderProp = 'timestamp';
+    
 });
 
 kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
@@ -93,6 +91,9 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
         
         $scope.toLevel = function(index) {
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
+        };
+        $scope.back = function() { 
+            $location.path( "/courses/");   
         };
     });   
 }]);
@@ -167,6 +168,10 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
            $route.reload();
        });    
     };
+    $scope.back = function() { 
+        $location.path( "/courses/" + $routeParams.courseId);   
+    };
+    
 }]);
 
 kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
@@ -269,6 +274,10 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
     $scope.getCond = function() {   
         return !$scope.disable_save_button && $scope.activity.real_answers && $scope.correct_answer;
     };
+    $scope.back = function() { 
+        $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
+    };
+    
 }]);
 
 
@@ -361,6 +370,9 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     
     $scope.getCond = function() {   
         return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer;
+    };
+    $scope.back = function() { 
+        $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
     };
 }]);
 
@@ -478,6 +490,9 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
             return false;
         }
     };
+    $scope.back = function() { 
+        $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
+    };
 }]);
 
 
@@ -556,6 +571,9 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     
     $scope.getCond = function() {   
         return !$scope.disable_save_button && $scope.activity.image && $scope.activity.answer && $scope.activity.locked_text;
+    };
+    $scope.back = function() { 
+        $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
     };
 }]);
 
@@ -730,6 +748,9 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         {
             return false;
         }
+    };
+    $scope.back = function() { 
+        $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
     };
 }]);
 
