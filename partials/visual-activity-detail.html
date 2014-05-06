@@ -45,8 +45,8 @@
             <div class="m-template m-template-course">
             <input type="text" ng-model="activity.name" class="m-title" id="title-input"  maxlength="255" >
             <input class="m-description activity-query" id="description-input" ng-model="activity.query"  maxlength="255" >
-            <div class="m-content">
-               <div id="carousel" style="width: 221px;height:140px;">
+            <div class="m-content" style="overflow-y:auto">
+               <div id="carousel" style="width: 100%;margin-top: 10px; ">
                     <div ng-show="inAnswers">
                         <ul ng-repeat="answer in activity.real_answers" >
                             <li>
@@ -75,7 +75,7 @@
                         
                     </div>
                     <div ng-show="!inAnswers">
-                        <div style="height:175px;overflow-y: hidden;">
+                        <div style="height:162px;overflow-y: hidden;">
                             <label for="file" >
                                 <img id="image" alt="Temporal Activity Image" ng-src="{{baseURL}}{{activity.image}}" ng-show="activity.image"/>
                                 <div id="image" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 45%;margin-left:45px;vertical-align:top;text-align:center;" ng-hide="activity.image">
