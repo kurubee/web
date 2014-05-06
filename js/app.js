@@ -37,43 +37,43 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
         templateUrl: 'partials/level-detail.html',
         controller: 'LevelDetailCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/QuizActivity/:activityId', {
+      when('/courses/:courseId/levels/:levelId/Quiz/:activityId', {
         templateUrl: 'partials/quiz-activity-detail.html',
         controller: 'QuizActivityCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/QuizActivity', {
+      when('/courses/:courseId/levels/:levelId/Quiz', {
         templateUrl: 'partials/quiz-activity-detail.html',
         controller: 'QuizActivityCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/TemporalActivity/:activityId', {
+      when('/courses/:courseId/levels/:levelId/Temporal/:activityId', {
         templateUrl: 'partials/temporal-activity-detail.html',
         controller: 'TemporalActivityCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/TemporalActivity', {
+      when('/courses/:courseId/levels/:levelId/Temporal', {
         templateUrl: 'partials/temporal-activity-detail.html',
         controller: 'TemporalActivityCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/VisualActivity/:activityId', {
+      when('/courses/:courseId/levels/:levelId/Visual/:activityId', {
         templateUrl: 'partials/visual-activity-detail.html',
         controller: 'VisualActivityCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/VisualActivity', {
+      when('/courses/:courseId/levels/:levelId/Visual', {
         templateUrl: 'partials/visual-activity-detail.html',
         controller: 'VisualActivityCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/LinguisticActivity/:activityId', {
+      when('/courses/:courseId/levels/:levelId/Linguistic/:activityId', {
         templateUrl: 'partials/linguistic-activity-detail.html',
         controller: 'LinguisticActivityCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/LinguisticActivity', {
+      when('/courses/:courseId/levels/:levelId/Linguistic', {
         templateUrl: 'partials/linguistic-activity-detail.html',
         controller: 'LinguisticActivityCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/GeospatialActivity/:activityId', {
+      when('/courses/:courseId/levels/:levelId/Geospatial/:activityId', {
         templateUrl: 'partials/geospatial-activity-detail.html',
         controller: 'GeospatialActivityCtrl'
       }).
-      when('/courses/:courseId/levels/:levelId/GeospatialActivity', {
+      when('/courses/:courseId/levels/:levelId/Geospatial', {
         templateUrl: 'partials/geospatial-activity-detail.html',
         controller: 'GeospatialActivityCtrl'
       }).

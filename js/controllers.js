@@ -115,24 +115,24 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
     $scope.accessActivity = function(activity) {
        if(activity.activity_type=="quiz")
        {
-        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity/" + activity.id);
+        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Quiz/" + activity.id);
        }
        if(activity.activity_type=="temporal")
        {
-        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/TemporalActivity/" + activity.id);
+        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Temporal/" + activity.id);
        }
        if(activity.activity_type=="visual")
        {
-        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/VisualActivity/" + activity.id);
+        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Visual/" + activity.id);
        }
        if(activity.activity_type=="linguistic")
        {
-        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/LinguisticActivity/" + activity.id);
+        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Linguistic/" + activity.id);
        }
        console.log(activity);
        if(activity.activity_type=="geospatial")
        {
-        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/GeospatialActivity/" + activity.id);
+        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Geospatial/" + activity.id);
        }
 
     };
@@ -140,23 +140,23 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
     $scope.createActivity = function() {
        if($scope.activityType == "temporal")
        {
-           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/TemporalActivity" );       
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Temporal" );       
        }
        if($scope.activityType == "quiz")
        {
-           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/QuizActivity" );
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Quiz" );
        }
        if($scope.activityType == "visual")
        {
-           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/VisualActivity" );
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Visual" );
        }
        if($scope.activityType == "linguistic")
        {
-           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/LinguisticActivity" );
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Linguistic" );
        }
        if($scope.activityType == "geospatial")
        {
-           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/GeospatialActivity" );
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Geospatial" );
        }
     };
     
