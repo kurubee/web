@@ -533,8 +533,9 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.query = "Type here Quiz Activity Query";
 
     $scope.saveActivity = function() {
-      if($scope.activity.answer && $scope.activity.image)
+      if($scope.activity.locked_text && $scope.activity.image)
        {
+           $scope.activity.answer = $scope.activity.locked_text;
            $scope.disable_save_button = true;
            $scope.saved = false;
            if(!$routeParams.activityId)
@@ -570,7 +571,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     };
     
     $scope.getCond = function() {   
-        return !$scope.disable_save_button && $scope.activity.image && $scope.activity.answer && $scope.activity.locked_text;
+        return !$scope.disable_save_button && $scope.activity.image && $scope.activity.locked_text;
     };
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
@@ -611,13 +612,13 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            reward : "wena!",
            penalty : "mala!",
            activity_type : 'geospatial',
-           points : [{x:"-25.363882",y:"131.044922"}],
+           points : {x:"-25.363882",y:"131.044922"},
            radious: 100,
            area : [],
         };
 
         //Getting first of target points as the only one valid
-        var target = new google.maps.LatLng($scope.activity.points[0].x, $scope.activity.points[0].y);    
+        var target = new google.maps.LatLng($scope.activity.points.x, $scope.activity.points.y);    
         
         var markerIcon = new google.maps.MarkerImage('img/marker.png');
         $scope.marker = new google.maps.Marker({
@@ -638,8 +639,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                     $scope.marker.setMap(null);
                 }
                 var markerIcon = new google.maps.MarkerImage('img/marker.png');
-                $scope.activity.points[0].x = e.latLng.x;
-                $scope.activity.points[0].y = e.latLng.y;
+                $scope.activity.points.x = e.latLng.x;
+                $scope.activity.points.y = e.latLng.y;
                 $scope.marker = new google.maps.Marker({
                     map: map,
                     position: e.latLng,
@@ -665,7 +666,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            $scope.activity = Restangular.copy(activity1);
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
             //Getting first of target points as the only one valid
-            var target = new google.maps.LatLng($scope.activity.points[0].x, $scope.activity.points[0].y);    
+            var target = new google.maps.LatLng($scope.activity.points.x, $scope.activity.points.y);    
             
             var markerIcon = new google.maps.MarkerImage('img/marker.png');
             $scope.marker = new google.maps.Marker({
@@ -686,8 +687,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                         $scope.marker.setMap(null);
                     }
                     var markerIcon = new google.maps.MarkerImage('img/marker.png');
-                    $scope.activity.points[0].x = e.latLng.x;
-                    $scope.activity.points[0].y = e.latLng.y;
+                    $scope.activity.points.x = e.latLng.x;
+                    $scope.activity.points.y = e.latLng.y;
                     $scope.marker = new google.maps.Marker({
                         map: map,
                         position: e.latLng,
