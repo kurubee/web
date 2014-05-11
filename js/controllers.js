@@ -129,7 +129,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        {
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Linguistic/" + activity.id);
        }
-       console.log(activity);
+
        if(activity.activity_type=="geospatial")
        {
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/Geospatial/" + activity.id);
@@ -176,12 +176,14 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
 
 kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
-    $scope.courseName = $cookieStore.courseName;
+
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/quiz');
     if(!$routeParams.activityId)
     {
+        console.log($cookieStore.courseName);
+        $scope.courseName = $cookieStore.courseName;
         $scope.activity = {
            name : "Activity Name",
            query : "Activity Query",
@@ -202,7 +204,9 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
         var baseActivity = Restangular.one('editor/quiz', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
            $scope.activity = Restangular.copy(activity1);
+           $scope.courseName = $scope.activity.career;
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
+
            if(!$scope.activity.answers)
            {
                $scope.activity.answers = [];
@@ -272,7 +276,7 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
        }
     };
     $scope.getCond = function() {   
-        return !$scope.disable_save_button && $scope.activity.real_answers && $scope.correct_answer;
+        return !$scope.disable_save_button && $scope.correct_answer;
     };
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
@@ -309,6 +313,7 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
         var baseActivity = Restangular.one('editor/temporal', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
            $scope.activity = Restangular.copy(activity1);
+           $scope.courseName = $scope.activity.career;
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
            var img = document.getElementById("image");
            img.src = $scope.activity.image_base64;
@@ -408,6 +413,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
         var baseActivity = Restangular.one('editor/visual', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
            $scope.activity = Restangular.copy(activity1);
+           $scope.courseName = $scope.activity.career;
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
            var img = document.getElementById("image");
            img.src = $scope.activity.image_base64;
@@ -524,6 +530,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
         var baseActivity = Restangular.one('editor/linguistic', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
            $scope.activity = Restangular.copy(activity1);
+           $scope.courseName = $scope.activity.career;
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
            var img = document.getElementById("image");
            img.src = $scope.activity.image_base64;
@@ -598,11 +605,11 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            reward : "wena!",
            penalty : "mala!",
            activity_type : 'geospatial',
-           points : "{ \"type\": \"MultiPoint\", \"coordinates\": [ [-25.363882,131.044922 ] ] }",
+           points : { type: "MultiPoint", coordinates: [ [0,0 ] ] },
            radius: 100,
            area : "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -20.363882, 135.044922 ], [-20.363882, 145.044922], [ -30.363882, 135.044922 ], [ -20.363882, 135.044922 ] ] ] }",
         };
-            var mapOptions = {
+             var mapOptions = {
               mapTypeId: google.maps.MapTypeId.ROADMAP,
               panControl: false,
               zoomControl: false,
@@ -613,76 +620,70 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
             };
             $scope.map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
             //Getting first of target points as the only one valid
-            //$scope.activity.points = JSON.parse( $scope.activity.points );
-            var googleOptions = {
-                    strokeColor: "#00FFFF",
-                    strokeWeight: 0,
-                    strokeOpacity: 0.5,
-                    fillOpacity: 0.2,
-                    fillColor: "#6699ff",
-                    clickable: false
-            };
-            //var geoPoints = new GeoJSON($scope.activity.points, googleOptions);
-            //var target = new google.maps.LatLng(geoPoints[0].position.lat(), geoPoints[0].position.lng());
-            //console.log($scope.activity.area);
-            var jsonfromserver = JSON.parse($scope.activity.area);
-            var googleVector = new GeoJSON(jsonfromserver, googleOptions);
-            googleVector.color = "#FFOOOO";
-            var puntosPoligono = googleVector.getPath();
-            var bounds = new google.maps.LatLngBounds();
-            console.log(puntosPoligono);
-            for (var i = 0; i < puntosPoligono.j.length; i++) {
-                bounds.extend(puntosPoligono.j[i]);
-            }
-            $scope.map.fitBounds(bounds);
-            
-            var markerIcon = new google.maps.MarkerImage('img/marker.png');
-            /*$scope.marker = new google.maps.Marker({
-                map: $scope.map,
-                position: target,
-                flat: true,
-                clickable: false,
-                icon: markerIcon
-            });*/
-            $scope.mouseFlag = false;
-            //Creating eventlisteners to set mark when click
-            google.maps.event.addListener($scope.map, "mouseup", function (e)
-            {
-                //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
-                if ($scope.mouseFlag === true) 
-                {
-                    if ($scope.marker) {
-                        $scope.marker.setMap(null);
-                    }
-                    var markerIcon = new google.maps.MarkerImage('img/marker.png');
-                    console.log($scope.activity.points);
-                    $scope.activity.points.coordinates[0][0] = e.latLng.A;
-                    console.log(e);
-                    $scope.activity.points.coordinates[0][1] = e.latLng.k;
-                    console.log(e);
-                    $scope.marker = new google.maps.Marker({
-                        map: $scope.map,
-                        position: e.latLng,
-                        flat: true,
-                        clickable: false,
-                        icon: markerIcon
-                    });
+            google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+                var googleOptions = {
+                        strokeColor: "#00FFFF",
+                        strokeWeight: 0,
+                        strokeOpacity: 0.5,
+                        fillOpacity: 0.2,
+                        fillColor: "#6699ff",
+                        clickable: false
+                };
+                console.log($scope.activity.area);
+                var jsonfromserver = JSON.parse($scope.activity.area);
+                var googleVector = new GeoJSON(jsonfromserver, googleOptions);
+                googleVector.color = "#FFOOOO";
+                var puntosPoligono = googleVector.getPath();
+                var bounds = new google.maps.LatLngBounds();
+                console.log(puntosPoligono);
+                for (var i = 0; i < puntosPoligono.j.length; i++) {
+                    bounds.extend(puntosPoligono.j[i]);
                 }
-            });
-            google.maps.event.addListener($scope.map, "mousemove", function (e)
-            {
+                $scope.map.fitBounds(bounds);
+
                 $scope.mouseFlag = false;
+                //Creating eventlisteners to set mark when click
+                google.maps.event.addListener($scope.map, "mouseup", function (e)
+                {
+                    //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
+                    if ($scope.mouseFlag === true) 
+                    {
+                        if ($scope.marker) {
+                            $scope.marker.setMap(null);
+                        }
+                        var markerIcon = new google.maps.MarkerImage('img/marker.png');
+                        console.log($scope.activity.points);
+                        $scope.activity.points.coordinates[0][0] = e.latLng.A;
+                        console.log(e);
+                        $scope.activity.points.coordinates[0][1] = e.latLng.k;
+                        console.log(e);
+                        $scope.marker = new google.maps.Marker({
+                            map: $scope.map,
+                            position: e.latLng,
+                            flat: true,
+                            clickable: false,
+                            icon: markerIcon
+                        });
+                    }
+                });
+                google.maps.event.addListener($scope.map, "mousemove", function (e)
+                {
+                    $scope.mouseFlag = false;
+                });
+                google.maps.event.addListener($scope.map, "mousedown", function (e)
+                {
+                    $scope.mouseFlag = true;
+                });
             });
-            google.maps.event.addListener($scope.map, "mousedown", function (e)
-            {
-                $scope.mouseFlag = true;
-            });
+            
+
 
     }else
     {
         var baseActivity = Restangular.one('editor/geospatial', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
             $scope.activity = Restangular.copy(activity1);
+           $scope.courseName = $scope.activity.career;
             $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
             var mapOptions = {
               mapTypeId: google.maps.MapTypeId.ROADMAP,
