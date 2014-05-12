@@ -521,6 +521,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
 
 
 kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.baseURL = 'http://0.0.0.0:8000';
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
@@ -540,7 +541,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
            penalty : "mala!",
            activity_type : 'linguistic',
            locked_text : '',
-           image: '',
+           image: false,
            answer : '',
         };
     }else
@@ -590,13 +591,20 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
         r.onloadend = function(e){
            $scope.activity.image = e.target.result;
            var img = document.getElementById("image");
+           $scope.baseURL ="";
            img.src = e.target.result;
         }
         r.readAsDataURL(f);
     };
     
-    $scope.getCond = function() {   
-        return !$scope.disable_save_button && $scope.activity.image && $scope.activity.locked_text;
+    $scope.getCond = function() { 
+        if( $scope.activity )
+        {  
+            return !$scope.disable_save_button && $scope.activity.image && $scope.activity.locked_text;
+        }else
+        {
+            return false;
+        }
     };
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   

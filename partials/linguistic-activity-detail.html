@@ -41,12 +41,12 @@
             <div class="m-content">
                 <div id="carousel" style="width: 221px;height:175px;">
                     <label for="file" >
-                        <img id="image" alt="Temporal Activity Image" ngSrc="data:image/png;base64,{{activity.image}}" ng-show="activity.image"/>
+                        <img id="image" ng-src="{{baseURL}}{{activity.image}}" />
                         <div id="image" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 45%;margin-left:45px;vertical-align:top;text-align:center;" ng-hide="activity.image">
                            Add Image
                         </div>
                     </label>
-                    <input ng-change="addImage();" ng-model="activity.image" type="file" id="file" name="file" style="display:none;" multiple />
+                    <input onchange="angular.element(this).scope().addImage();" type="file" id="file" name="file" style="display:none;" multiple />
                 </div>
                 <div style="text-align:center;">
                     <input ng-model="activity.locked_text" type="text" class="input-code-cls" size="20">   
