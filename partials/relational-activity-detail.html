@@ -1,0 +1,57 @@
+<div class="margedTop">
+    <div ng-show="!activity">
+        <img src="img/loading.gif" class="loading">
+    </div>
+
+    <div class="background-quiz-activity" ng-show="activity">
+        <div class="column-left">
+                <div class="breadcumb">
+                    {{courseName}} <font style="font-style: italic; ">level {{level}}:</font>
+                </div>
+                <!-- Title -->
+                <div class="title-description-cls">
+                   <p id="title-description" ><b>Activity Name:</b></p>
+                </div>
+                <!-- Content -->
+                <div class="description-description-cls">
+                    <p id="description-description">
+                        <b>Activity Query:</b> 
+                        <br>
+                        That's the place where you write the query for a relational activity.
+                    </p>
+                </div>
+                <div class="description-description-cls">
+                    <p id="description-description">
+                        <b>Graph:</b> 
+                        <br>
+                        That would be the graph in which the player should find the path!
+                    </p>
+                </div>
+                <br>
+
+               
+        </div>
+        <div class="column-right">
+            <div class="m-template m-template-course">
+            <input type="text" ng-model="activity.name" class="m-title" id="title-input" maxlength="255" >
+            <input class="m-description activity-query" id="description-input" ng-model="activity.query" maxlength="255" >
+            <div class="m-content">
+                <div id="carousel" style="width: 221px;height:140px;">
+
+
+                </div>
+            </div>
+            <div class="bottom-bar">
+                    <div ng-click="back()" class="backButton pointer">
+                        Back
+                    </div>
+            </div>
+        </div>
+        <div class="saveButton">
+            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;vertical-align: top;" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
+            <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
+            <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
+        </div>
+        </div>
+    </div>
+</div>
