@@ -30,7 +30,7 @@
                     <p id="description-description countdown">              
                         <b>Answer:</b> 
                         <br>
-                        That's the place where you type the correct answer. This answer will appear initially locked.
+                        <input ng-change="refreshLockedText()" ng-model="activity.locked_text" type="text" class="input-code-cls">
                     </p>
                 </div>
         </div>
@@ -41,7 +41,34 @@
             <div class="m-content">
                 <div id="carousel" style="width: 221px;height:175px;">
                     <label for="file" >
-                        <img id="image" ng-src="{{baseURL}}{{activity.image}}" />
+                        <div class="squares" id="squares">
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                            <div class="square"></div>
+                        </div class="squares">
+                        <img id="image" ng-src="{{baseURL}}{{activity.image}}" style="max-height:172px"/>
                         <div id="image" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 45%;margin-left:45px;vertical-align:top;text-align:center;" ng-hide="activity.image">
                            Add Image
                         </div>
@@ -49,7 +76,14 @@
                     <input onchange="angular.element(this).scope().addImage();" type="file" id="file" name="file" style="display:none;" multiple />
                 </div>
                 <div style="text-align:center;">
-                    <input ng-model="activity.locked_text" type="text" class="input-code-cls" size="20">   
+                    <div style="-webkit-box-align: stretch; -webkit-box-pack: center;">
+                        <div>
+                            <div class="x-innerhtml " id="ext-element-740">
+                                Answer: <span id="hideText" >  </span>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="bottom-bar">

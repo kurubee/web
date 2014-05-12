@@ -561,10 +561,25 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
            var img = document.getElementById("image");
            img.src = $scope.activity.image_base64;
+
+           img.onload = function () {
+               console.log(img.clientHeight);
+               document.getElementById("squares").style.height = img.clientHeight+"px";
+           };
+           $scope.refreshLockedText();
         });
     }
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
+
+    $scope.refreshLockedText = function() {
+        console.log("ola");
+        var textHide = " ";
+        for (cont in $scope.activity.locked_text) {
+            textHide += "_  ";
+        }
+        document.getElementById('hideText').innerHTML=textHide;
+    };
 
     $scope.saveActivity = function() {
       if($scope.activity.locked_text && $scope.activity.image)
