@@ -287,12 +287,12 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
 
 kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.baseURL = 'http://0.0.0.0:8000';
-    $scope.courseName =  $cookieStore.courseName;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/temporal');
     if(!$routeParams.activityId)
     {
+        $scope.courseName = $cookieStore.courseName;
         $scope.activity = {
            name : "Activity Name",
            query : "Activity Query",
@@ -383,7 +383,6 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
 
 kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.baseURL = 'http://0.0.0.0:8000';
-    $scope.courseName =  $cookieStore.courseName;
     $scope.inAnswers = false;
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
@@ -391,6 +390,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
     var baseActivities = Restangular.all('editor/visual');
     if(!$routeParams.activityId)
     {
+        $scope.courseName = $cookieStore.courseName;
         $scope.activity = {
            name : "Activity Name",
            query : "Activity Query",
@@ -402,7 +402,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
            reward : "wena!",
            penalty : "mala!",
            activity_type : 'visual',
-           image: "",
+           image: false,
            answers : [],
            real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
            correct_answer : "",
@@ -412,11 +412,27 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
     {
         var baseActivity = Restangular.one('editor/visual', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
+           
            $scope.activity = Restangular.copy(activity1);
            $scope.courseName = $scope.activity.career;
            $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
+           if(!$scope.activity.answers)
+           {
+               $scope.activity.answers = [];
+           }
+           $scope.activity.real_answers = [];
+           for(var i=0;i<$scope.activity.answers.length;i++)
+           {
+
+
+               $scope.activity.real_answers[i] = {"value": $scope.activity.answers[i]};
+               if($scope.activity.answers[i] == $scope.activity.correct_answer)
+               {
+                   $scope.correct_answer =  $scope.activity.real_answers[i];               
+               }
+           }
            var img = document.getElementById("image");
-           img.src = $scope.activity.image_base64;
+           img.src = $scope.activity.image;
         });
     }
     $scope.name = "Type here Activity Name";
@@ -433,7 +449,6 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
            }
            for(var i=0;i<$scope.activity.real_answers.length;i++)
            {
-               console.log($scope.activity.real_answers[i].value);
                $scope.activity.answers[i] = $scope.activity.real_answers[i].value;
            }
            $scope.activity.correct_answer = $scope.correct_answer.value;
@@ -481,6 +496,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
         r.onloadend = function(e){
            $scope.activity.image = e.target.result;
            var img = document.getElementById("image");
+           $scope.baseURL ="";
            img.src = e.target.result;
         }
         r.readAsDataURL(f);
@@ -489,7 +505,9 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
     $scope.getCond = function() {  
         if( $scope.activity )
         {
-            return !$scope.disable_save_button && $scope.activity.image && $scope.activity.time && $scope.correct_answer && $scope.activity.real_answers && $scope.activity.real_answers;
+            var img = document.getElementById("image");
+            img.src = $scope.baseURL+$scope.activity.image;
+            return !$scope.disable_save_button && $scope.activity.time && $scope.correct_answer && $scope.activity.real_answers && $scope.activity.real_answers;
         }
         else
         {
@@ -503,13 +521,13 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
 
 
 kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
-    $scope.courseName =  $cookieStore.courseName;
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/linguistic');
     if(!$routeParams.activityId)
     {
+        $scope.courseName = $cookieStore.courseName;
         $scope.activity = {
            name : "Activity Name",
            query : "Activity Query",
@@ -587,13 +605,13 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
 
 
 kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
-    $scope.courseName =  $cookieStore.courseName;
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/geospatial');
     if(!$routeParams.activityId)
     {
+        $scope.courseName = $cookieStore.courseName;
         $scope.activity = {
            name : "Activity Name",
            query : "Activity Query",
