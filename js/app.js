@@ -6,7 +6,7 @@ var kurubeeApp = angular.module('kurubeeApp', [
   'kurubeeFilters',
   'kurubeeServices',
   'restangular',
-  'angular-carousel'
+  'angular-carousel',
 ]);
 
 

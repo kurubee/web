@@ -656,20 +656,24 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            activity_type : 'geospatial',
            points : { type: "MultiPoint", coordinates: [ [0,0 ] ] },
            radius: 100,
-           area : "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -20.363882, 135.044922 ], [-20.363882, 145.044922], [ -30.363882, 135.044922 ], [ -20.363882, 135.044922 ] ] ] }",
-        };
-             var mapOptions = {
-              mapTypeId: google.maps.MapTypeId.ROADMAP,
-              panControl: false,
-              zoomControl: false,
-              mapTypeControl: false,
-              scaleControl: false,
-              streetViewControl: false,
-              overviewMapControl: false,
-            };
-            $scope.map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
-            //Getting first of target points as the only one valid
-            google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+           area : "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -36.8697625630798, -33.67212899453614 ], [ -36.8697625630798, -33.672128994436136 ], [ 40.8255499369202, 33.77651858923237 ], [ -36.8697625630798, -33.67212899453614 ] ] ] }"
+           
+        };  
+
+            //$scope.activity.area = activity1.area;
+            window.setTimeout(function(){
+                var mapOptions = {
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  panControl: false,
+                  zoomControl: false,
+                  mapTypeControl: false,
+                  scaleControl: false,
+                  streetViewControl: false,
+                  overviewMapControl: false,
+                  maxZoom: null
+                };
+                $scope.map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+                //Getting first of target points as the only one valid
                 var googleOptions = {
                         strokeColor: "#00FFFF",
                         strokeWeight: 0,
@@ -678,18 +682,25 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                         fillColor: "#6699ff",
                         clickable: false
                 };
-                console.log($scope.activity.area);
+                var geoPoints = new GeoJSON($scope.activity.points, googleOptions);
+                var target = new google.maps.LatLng(geoPoints[0].position.lat(), geoPoints[0].position.lng());
                 var jsonfromserver = JSON.parse($scope.activity.area);
                 var googleVector = new GeoJSON(jsonfromserver, googleOptions);
                 googleVector.color = "#FFOOOO";
                 var puntosPoligono = googleVector.getPath();
                 var bounds = new google.maps.LatLngBounds();
-                console.log(puntosPoligono);
                 for (var i = 0; i < puntosPoligono.j.length; i++) {
                     bounds.extend(puntosPoligono.j[i]);
                 }
                 $scope.map.fitBounds(bounds);
-
+                var markerIcon = new google.maps.MarkerImage('img/marker.png');
+                $scope.marker = new google.maps.Marker({
+                    map: $scope.map,
+                    position: target,
+                    flat: true,
+                    clickable: false,
+                    icon: markerIcon
+                });
                 $scope.mouseFlag = false;
                 //Creating eventlisteners to set mark when click
                 google.maps.event.addListener($scope.map, "mouseup", function (e)
@@ -701,11 +712,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                             $scope.marker.setMap(null);
                         }
                         var markerIcon = new google.maps.MarkerImage('img/marker.png');
-                        console.log($scope.activity.points);
                         $scope.activity.points.coordinates[0][0] = e.latLng.A;
-                        console.log(e);
                         $scope.activity.points.coordinates[0][1] = e.latLng.k;
-                        console.log(e);
                         $scope.marker = new google.maps.Marker({
                             map: $scope.map,
                             position: e.latLng,
@@ -723,8 +731,11 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                 {
                     $scope.mouseFlag = true;
                 });
-            });
             
+            }, 100);
+            
+
+
 
 
     }else
@@ -732,83 +743,82 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         var baseActivity = Restangular.one('editor/geospatial', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
             $scope.activity = Restangular.copy(activity1);
-           $scope.courseName = $scope.activity.career;
+            $scope.courseName = $scope.activity.career;
             $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
-            var mapOptions = {
-              mapTypeId: google.maps.MapTypeId.ROADMAP,
-              panControl: false,
-              zoomControl: false,
-              mapTypeControl: false,
-              scaleControl: false,
-              streetViewControl: false,
-              overviewMapControl: false,
-            };
-            $scope.map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
-            //Getting first of target points as the only one valid
-            $scope.activity.points = JSON.parse( $scope.activity.points );
-            var googleOptions = {
-                    strokeColor: "#00FFFF",
-                    strokeWeight: 0,
-                    strokeOpacity: 0.5,
-                    fillOpacity: 0.2,
-                    fillColor: "#6699ff",
-                    clickable: false
-            };
-            var geoPoints = new GeoJSON($scope.activity.points, googleOptions);
-            var target = new google.maps.LatLng(geoPoints[0].position.lat(), geoPoints[0].position.lng());
-            console.log($scope.activity.area);
-            var jsonfromserver = JSON.parse($scope.activity.area);
-            var googleVector = new GeoJSON(jsonfromserver, googleOptions);
-            googleVector.color = "#FFOOOO";
-            var puntosPoligono = googleVector.getPath();
-            var bounds = new google.maps.LatLngBounds();
-            console.log(puntosPoligono);
-            for (var i = 0; i < puntosPoligono.j.length; i++) {
-                bounds.extend(puntosPoligono.j[i]);
-            }
-            $scope.map.fitBounds(bounds);
-            
-            var markerIcon = new google.maps.MarkerImage('img/marker.png');
-            $scope.marker = new google.maps.Marker({
-                map: $scope.map,
-                position: target,
-                flat: true,
-                clickable: false,
-                icon: markerIcon
-            });
-            $scope.mouseFlag = false;
-            //Creating eventlisteners to set mark when click
-            google.maps.event.addListener($scope.map, "mouseup", function (e)
-            {
-                //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
-                if ($scope.mouseFlag === true) 
-                {
-                    if ($scope.marker) {
-                        $scope.marker.setMap(null);
-                    }
-                    var markerIcon = new google.maps.MarkerImage('img/marker.png');
-                    console.log($scope.activity.points);
-                    $scope.activity.points.coordinates[0][0] = e.latLng.A;
-                    console.log(e);
-                    $scope.activity.points.coordinates[0][1] = e.latLng.k;
-                    console.log(e);
-                    $scope.marker = new google.maps.Marker({
-                        map: $scope.map,
-                        position: e.latLng,
-                        flat: true,
-                        clickable: false,
-                        icon: markerIcon
-                    });
+            window.setTimeout(function(){
+                var mapOptions = {
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  panControl: false,
+                  zoomControl: false,
+                  mapTypeControl: false,
+                  scaleControl: false,
+                  streetViewControl: false,
+                  overviewMapControl: false,
+                  maxZoom: null
+                };
+                $scope.map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+                //Getting first of target points as the only one valid
+                $scope.activity.points = JSON.parse( $scope.activity.points );
+                var googleOptions = {
+                        strokeColor: "#00FFFF",
+                        strokeWeight: 0,
+                        strokeOpacity: 0.5,
+                        fillOpacity: 0.2,
+                        fillColor: "#6699ff",
+                        clickable: false
+                };
+                var geoPoints = new GeoJSON($scope.activity.points, googleOptions);
+                var target = new google.maps.LatLng(geoPoints[0].position.lat(), geoPoints[0].position.lng());
+                var jsonfromserver = JSON.parse($scope.activity.area);
+                var googleVector = new GeoJSON(jsonfromserver, googleOptions);
+                googleVector.color = "#FFOOOO";
+                var puntosPoligono = googleVector.getPath();
+                var bounds = new google.maps.LatLngBounds();
+                for (var i = 0; i < puntosPoligono.j.length; i++) {
+                    bounds.extend(puntosPoligono.j[i]);
                 }
-            });
-            google.maps.event.addListener($scope.map, "mousemove", function (e)
-            {
+                $scope.map.fitBounds(bounds);
+                var markerIcon = new google.maps.MarkerImage('img/marker.png');
+                $scope.marker = new google.maps.Marker({
+                    map: $scope.map,
+                    position: target,
+                    flat: true,
+                    clickable: false,
+                    icon: markerIcon
+                });
                 $scope.mouseFlag = false;
-            });
-            google.maps.event.addListener($scope.map, "mousedown", function (e)
-            {
-                $scope.mouseFlag = true;
-            });
+                //Creating eventlisteners to set mark when click
+                google.maps.event.addListener($scope.map, "mouseup", function (e)
+                {
+                    //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
+                    if ($scope.mouseFlag === true) 
+                    {
+                        if ($scope.marker) {
+                            $scope.marker.setMap(null);
+                        }
+                        var markerIcon = new google.maps.MarkerImage('img/marker.png');
+                        $scope.activity.points.coordinates[0][0] = e.latLng.A;
+                        $scope.activity.points.coordinates[0][1] = e.latLng.k;
+                        $scope.marker = new google.maps.Marker({
+                            map: $scope.map,
+                            position: e.latLng,
+                            flat: true,
+                            clickable: false,
+                            icon: markerIcon
+                        });
+                    }
+                });
+                google.maps.event.addListener($scope.map, "mousemove", function (e)
+                {
+                    $scope.mouseFlag = false;
+                });
+                google.maps.event.addListener($scope.map, "mousedown", function (e)
+                {
+                    $scope.mouseFlag = true;
+                });
+            
+            }, 100);
+            
         });
     }
 
@@ -819,6 +829,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.saveActivity = function() {
       if($scope.activity.points && $scope.activity.radius)
        {
+
            $scope.activity.points = "{ \"type\": \"MultiPoint\", \"coordinates\": [ [ " + $scope.activity.points.coordinates[0][0] + "," + $scope.activity.points.coordinates[0][1] + " ] ] }";
            console.log($scope.map.getBounds());
            var bounds = $scope.map.getBounds();
@@ -826,7 +837,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            console.log(southWest);
            var northEast = bounds.getNorthEast();
            console.log(northEast);
-           $scope.activity.area = "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ " + southWest.A + ", " + southWest.k + " ], [ " + southWest.A + ", " + (southWest.k + 10) + " ], [ " + northEast.A + ", " + northEast.k + " ], [ " + southWest.A + ", " + southWest.k + " ] ] ] }";
+           $scope.activity.area = "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ " + southWest.A + ", " + southWest.k + " ], [ " + southWest.A + ", " + (southWest.k + 0.0000000001) + " ], [ " + northEast.A + ", " + northEast.k + " ], [ " + southWest.A + ", " + southWest.k + " ] ] ] }";
            $scope.disable_save_button = true;
            $scope.saved = false;
            if(!$routeParams.activityId)
