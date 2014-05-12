@@ -304,7 +304,7 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
            reward : "wena!",
            penalty : "mala!",
            activity_type : 'temporal',
-           image: "",
+           image: false,
            image_datetime: "",
            query_datetime: ""
         };
@@ -363,18 +363,26 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     };
     
     $scope.addImage = function() {
+        $scope.showButton=false;
         var f = document.getElementById('file').files[0],
         r = new FileReader();
         r.onloadend = function(e){
            $scope.activity.image = e.target.result;
            var img = document.getElementById("image");
+           $scope.baseURL ="";
            img.src = e.target.result;
         }
         r.readAsDataURL(f);
     };
     
     $scope.getCond = function() {   
-        return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer;
+        if( $scope.activity )
+        {
+            return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer;
+        }else
+        {
+            return false;
+        }
     };
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
