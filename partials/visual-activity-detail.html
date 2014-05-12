@@ -45,9 +45,9 @@
             <div class="m-template m-template-course">
             <input type="text" ng-model="activity.name" class="m-title" id="title-input"  maxlength="255" >
             <input class="m-description activity-query" id="description-input" ng-model="activity.query"  maxlength="255" >
-            <div class="m-content" style="overflow-y:auto">
-               <div id="carousel" style="width: 100%;margin-top: 10px; ">
-                    <div ng-show="inAnswers">
+            <div class="m-content" style="overflow-y:auto; ">
+               <div id="carousel" style="width: 100%;">
+                    <div ng-show="inAnswers" style="margin-top:10px">
                         <ul ng-repeat="answer in activity.real_answers" >
                             <li>
                                 <div class="carousel-card" style="padding-bottom: 5px;">
@@ -74,8 +74,8 @@
                         </ul>
                         
                     </div>
-                    <div ng-show="!inAnswers">
-                        <div style="height:162px;overflow-y: hidden;">
+                    <div ng-show="!inAnswers" style="height:100%">
+                        <div style="height:172px;overflow-y: hidden;">
                             <label for="file" >
                                 <img id="image" ng-src="{{baseURL}}{{activity.image}}" />
                                 <div id="image" ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 3px;width: 120px;margin-top: 45%;margin-left:45px;vertical-align:top;text-align:center;" ng-hide="activity.image">
