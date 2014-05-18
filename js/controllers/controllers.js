@@ -928,6 +928,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                 var markerIcon = new google.maps.MarkerImage('img/marker.png');
                 $scope.marker = new google.maps.Marker({
                     map: $scope.map,
+                   
                     position: target,
                     flat: true,
                     clickable: false,
@@ -999,7 +1000,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
           fillOpacity: 0.35,
           map: $scope.map,
           center: $scope.position,
-          radius: parseInt(radio)
+          radius: parseInt(radio),
+          clickable:false
         };
         // Add the circle for this city to the map.
         $scope.circle = new google.maps.Circle(populationOptions);
