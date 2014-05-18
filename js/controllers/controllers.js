@@ -195,7 +195,6 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
     var baseActivities = Restangular.all('editor/quiz');
     if(!$routeParams.activityId)
     {
-        console.log($cookieStore.courseName);
         $scope.courseName = $cookieStore.courseName;
         $scope.activity = {
            name : "Activity Name",
@@ -306,7 +305,6 @@ kurubeeApp.controller('RelationalActivityCtrl', ['Aux', '$scope', '$location', '
     var baseActivities = Restangular.all('editor/quiz');
     if(!$routeParams.activityId)
     {
-        console.log($cookieStore.courseName);
         $scope.courseName = $cookieStore.courseName;
         $scope.activity = {
            name : "Activity Name",
@@ -686,7 +684,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
            img.src = $scope.activity.image_base64;
 
            img.onload = function () {
-               console.log(img.clientHeight);
                document.getElementById("squares").style.height = img.clientHeight+"px";
            };
            $scope.refreshLockedText();
@@ -696,7 +693,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.query = "Type here Quiz Activity Query";
 
     $scope.refreshLockedText = function() {
-        console.log("ola");
         var textHide = " ";
         for (cont in $scope.activity.locked_text) {
             textHide += "_  ";
@@ -876,7 +872,6 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         var baseActivity = Restangular.one('editor/geospatial', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
             $scope.activity = Restangular.copy(activity1);
-            console.log($scope.activity.radius);
             $scope.radius = $scope.activity.radius;
             if($scope.radius>1000)
             {
@@ -946,6 +941,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                         }
                         var markerIcon = new google.maps.MarkerImage('img/marker.png');
                         $scope.position=e.latLng;
+                        $scope.activity.points= {coordinates:[""]};
+                        $scope.activity.points.coordinates[0]=[];
                         $scope.activity.points.coordinates[0][0] = e.latLng.A;
                         $scope.activity.points.coordinates[0][1] = e.latLng.k;
                         $scope.marker = new google.maps.Marker({
@@ -985,13 +982,11 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         if ($scope.circle) {
             $scope.circle.setMap(null);
         }
-        console.log($scope.position);
         var radio =$scope.radius;
         if($scope.magnitude=="km")
         {
             radio *=1000;
         }
-        console.log(radio);
         var populationOptions = {
           strokeColor: 'blue',
           strokeOpacity: 0.8,
@@ -1007,7 +1002,6 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         $scope.circle = new google.maps.Circle(populationOptions);
     };
     $scope.saveActivity = function() {
-      console.log($scope.magnitude);
       if($scope.magnitude=="km")
       {
           $scope.activity.radius =$scope.radius*1000;
@@ -1020,12 +1014,9 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
        {
 
            $scope.activity.points = "{ \"type\": \"MultiPoint\", \"coordinates\": [ [ " + $scope.activity.points.coordinates[0][0] + "," + $scope.activity.points.coordinates[0][1] + " ] ] }";
-           console.log($scope.map.getBounds());
            var bounds = $scope.map.getBounds();
            var southWest = bounds.getSouthWest();
-           console.log(southWest);
            var northEast = bounds.getNorthEast();
-           console.log(northEast);
            $scope.activity.area = "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ " + southWest.A + ", " + southWest.k + " ], [ " + southWest.A + ", " + (southWest.k + 0.0000000001) + " ], [ " + northEast.A + ", " + northEast.k + " ], [ " + southWest.A + ", " + southWest.k + " ] ] ] }";
            $scope.disable_save_button = true;
            $scope.saved = false;
