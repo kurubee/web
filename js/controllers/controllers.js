@@ -195,22 +195,26 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
     var baseActivities = Restangular.all('editor/quiz');
     if(!$routeParams.activityId)
     {
-        $scope.courseName = $cookieStore.courseName;
-        $scope.activity = {
-           name : "Activity Name",
-           query : "Activity Query",
-           answers : [],
-           real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
-           correct_answer : "",
-           career : "/api/v1/editor/career/" + $routeParams.courseId ,
-           language_code : "en",
-           level_type : $routeParams.levelId,
-           level_order : 0,
-           level_required : true,
-           reward : "wena!",
-           penalty : "mala!",
-           activity_type : 'quiz'
-        };
+        var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
+        baseCourse.get().then(function(course1){
+            $scope.course = Restangular.copy(course1);
+            $scope.courseName = $scope.course.name;
+            $scope.activity = {
+               name : "Activity Name",
+               query : "Activity Query",
+               answers : [],
+               real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
+               correct_answer : "",
+               career : "/api/v1/editor/career/" + $routeParams.courseId ,
+               language_code : "en",
+               level_type : $routeParams.levelId,
+               level_order : 0,
+               level_required : true,
+               reward : "wena!",
+               penalty : "mala!",
+               activity_type : 'quiz'
+            };
+         });
     }else
     {
         var baseActivity = Restangular.one('editor/quiz', $routeParams.activityId);
@@ -305,22 +309,27 @@ kurubeeApp.controller('RelationalActivityCtrl', ['Aux', '$scope', '$location', '
     var baseActivities = Restangular.all('editor/quiz');
     if(!$routeParams.activityId)
     {
-        $scope.courseName = $cookieStore.courseName;
-        $scope.activity = {
-           name : "Activity Name",
-           query : "Activity Query",
-           answers : [],
-           real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
-           correct_answer : "",
-           career : "/api/v1/editor/career/" + $routeParams.courseId ,
-           language_code : "en",
-           level_type : $routeParams.levelId,
-           level_order : 0,
-           level_required : true,
-           reward : "wena!",
-           penalty : "mala!",
-           activity_type : 'quiz'
-        };
+        var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
+        baseCourse.get().then(function(course1){
+            $scope.course = Restangular.copy(course1);
+            $scope.courseName = $scope.course.name;
+
+            $scope.activity = {
+               name : "Activity Name",
+               query : "Activity Query",
+               answers : [],
+               real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
+               correct_answer : "",
+               career : "/api/v1/editor/career/" + $routeParams.courseId ,
+               language_code : "en",
+               level_type : $routeParams.levelId,
+               level_order : 0,
+               level_required : true,
+               reward : "wena!",
+               penalty : "mala!",
+               activity_type : 'quiz'
+            };
+         });
     }else
     {
         var baseActivity = Restangular.one('editor/quiz', $routeParams.activityId);
@@ -413,22 +422,27 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     var baseActivities = Restangular.all('editor/temporal');
     if(!$routeParams.activityId)
     {
-        $scope.courseName = $cookieStore.courseName;
-        $scope.activity = {
-           name : "Activity Name",
-           query : "Activity Query",
-           career : "/api/v1/editor/career/" + $routeParams.courseId ,
-           language_code : "en",
-           level_type : $routeParams.levelId,
-           level_order : 0,
-           level_required : true,
-           reward : "wena!",
-           penalty : "mala!",
-           activity_type : 'temporal',
-           image: false,
-           image_datetime: "",
-           query_datetime: ""
-        };
+        var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
+        baseCourse.get().then(function(course1){
+            $scope.course = Restangular.copy(course1);
+            $scope.courseName = $scope.course.name;
+
+            $scope.activity = {
+               name : "Activity Name",
+               query : "Activity Query",
+               career : "/api/v1/editor/career/" + $routeParams.courseId ,
+               language_code : "en",
+               level_type : $routeParams.levelId,
+               level_order : 0,
+               level_required : true,
+               reward : "wena!",
+               penalty : "mala!",
+               activity_type : 'temporal',
+               image: false,
+               image_datetime: "",
+               query_datetime: ""
+            };
+         });
     }else
     {
         var baseActivity = Restangular.one('editor/temporal', $routeParams.activityId);
@@ -519,24 +533,29 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
     var baseActivities = Restangular.all('editor/visual');
     if(!$routeParams.activityId)
     {
-        $scope.courseName = $cookieStore.courseName;
-        $scope.activity = {
-           name : "Activity Name",
-           query : "Activity Query",
-           career : "/api/v1/editor/career/" + $routeParams.courseId ,
-           language_code : "en",
-           level_type : $routeParams.levelId,
-           level_order : 0,
-           level_required : true,
-           reward : "wena!",
-           penalty : "mala!",
-           activity_type : 'visual',
-           image: false,
-           answers : [],
-           real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
-           correct_answer : "",
-           time:5
-        };
+        var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
+        baseCourse.get().then(function(course1){
+            $scope.course = Restangular.copy(course1);
+            $scope.courseName = $scope.course.name;
+
+            $scope.activity = {
+               name : "Activity Name",
+               query : "Activity Query",
+               career : "/api/v1/editor/career/" + $routeParams.courseId ,
+               language_code : "en",
+               level_type : $routeParams.levelId,
+               level_order : 0,
+               level_required : true,
+               reward : "wena!",
+               penalty : "mala!",
+               activity_type : 'visual',
+               image: false,
+               answers : [],
+               real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
+               correct_answer : "",
+               time:5
+            };
+        })
     }else
     {
         var baseActivity = Restangular.one('editor/visual', $routeParams.activityId);
@@ -657,22 +676,27 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     var baseActivities = Restangular.all('editor/linguistic');
     if(!$routeParams.activityId)
     {
-        $scope.courseName = $cookieStore.courseName;
-        $scope.activity = {
-           name : "Activity Name",
-           query : "Activity Query",
-           career : "/api/v1/editor/career/" + $routeParams.courseId ,
-           language_code : "en",
-           level_type : $routeParams.levelId,
-           level_order : 0,
-           level_required : true,
-           reward : "wena!",
-           penalty : "mala!",
-           activity_type : 'linguistic',
-           locked_text : '',
-           image: false,
-           answer : '',
-        };
+        var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
+        baseCourse.get().then(function(course1){
+            $scope.course = Restangular.copy(course1);
+            $scope.courseName = $scope.course.name;
+
+            $scope.activity = {
+               name : "Activity Name",
+               query : "Activity Query",
+               career : "/api/v1/editor/career/" + $routeParams.courseId ,
+               language_code : "en",
+               level_type : $routeParams.levelId,
+               level_order : 0,
+               level_required : true,
+               reward : "wena!",
+               penalty : "mala!",
+               activity_type : 'linguistic',
+               locked_text : '',
+               image: false,
+               answer : '',
+            };
+        });
     }else
     {
         var baseActivity = Restangular.one('editor/linguistic', $routeParams.activityId);
@@ -766,104 +790,108 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
     var baseActivities = Restangular.all('editor/geospatial');
     if(!$routeParams.activityId)
     {
-        $scope.courseName = $cookieStore.courseName;
-        $scope.activity = {
-           name : "Activity Name",
-           query : "Activity Query",
-           career : "/api/v1/editor/career/" + $routeParams.courseId ,
-           language_code : "en",
-           level_type : $routeParams.levelId,
-           level_order : 0,
-           level_required : true,
-           reward : "wena!",
-           penalty : "mala!",
-           activity_type : 'geospatial',
-           points : { type: "MultiPoint", coordinates: [ [0,0 ] ] },
-           radius: 100,
-           area : "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -36.8697625630798, -33.67212899453614 ], [ -36.8697625630798, -33.672128994436136 ], [ 40.8255499369202, 33.77651858923237 ], [ -36.8697625630798, -33.67212899453614 ] ] ] }"
-           
-        };  
-            $scope.radius = $scope.activity.radius;
-            //$scope.activity.area = activity1.area;
-            window.setTimeout(function(){
-                var mapOptions = {
-                  mapTypeId: google.maps.MapTypeId.ROADMAP,
-                  panControl: false,
-                  zoomControl: false,
-                  mapTypeControl: false,
-                  scaleControl: false,
-                  streetViewControl: false,
-                  overviewMapControl: false,
-                  maxZoom: null
-                };
-                $scope.map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
-                //Getting first of target points as the only one valid
-                var googleOptions = {
-                        strokeColor: "#00FFFF",
-                        strokeWeight: 0,
-                        strokeOpacity: 0.5,
-                        fillOpacity: 0.2,
-                        fillColor: "#6699ff",
-                        clickable: false
-                };
-                var geoPoints = new GeoJSON($scope.activity.points, googleOptions);
-                var target = new google.maps.LatLng(geoPoints[0].position.lat(), geoPoints[0].position.lng());
-                $scope.position=target;
-                $scope.updateCircle();
-                var jsonfromserver = JSON.parse($scope.activity.area);
-                var googleVector = new GeoJSON(jsonfromserver, googleOptions);
-                googleVector.color = "#FFOOOO";
-                var puntosPoligono = googleVector.getPath();
-                var bounds = new google.maps.LatLngBounds();
-                for (var i = 0; i < puntosPoligono.j.length; i++) {
-                    bounds.extend(puntosPoligono.j[i]);
-                }
-                $scope.map.fitBounds(bounds);
-                var markerIcon = new google.maps.MarkerImage('img/marker.png');
-                $scope.marker = new google.maps.Marker({
-                    map: $scope.map,
-                    position: target,
-                    flat: true,
-                    clickable: false,
-                    icon: markerIcon
-                });
-                $scope.mouseFlag = false;
-                //Creating eventlisteners to set mark when click
-                google.maps.event.addListener($scope.map, "mouseup", function (e)
-                {
-                    //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
-                    if ($scope.mouseFlag === true) 
-                    {
-                        if ($scope.marker) {
-                            $scope.marker.setMap(null);
-                        }
-                        var markerIcon = new google.maps.MarkerImage('img/marker.png');
-                        $scope.activity.points.coordinates[0][0] = e.latLng.A;
-                        $scope.activity.points.coordinates[0][1] = e.latLng.k;
-                        $scope.position=e.latLng;
-                        $scope.marker = new google.maps.Marker({
-                            map: $scope.map,
-                            position: e.latLng,
-                            flat: true,
-                            clickable: false,
-                            icon: markerIcon
-                        });
-                        $scope.updateCircle();
-                       
-                    }
-                });
-                google.maps.event.addListener($scope.map, "mousemove", function (e)
-                {
-                    $scope.mouseFlag = false;
-                });
-                google.maps.event.addListener($scope.map, "mousedown", function (e)
-                {
-                    $scope.mouseFlag = true;
-                });
-            
-            }, 100);
-            
+        var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
+        baseCourse.get().then(function(course1){
+            $scope.course = Restangular.copy(course1);
+            $scope.courseName = $scope.course.name;
 
+            $scope.activity = {
+               name : "Activity Name",
+               query : "Activity Query",
+               career : "/api/v1/editor/career/" + $routeParams.courseId ,
+               language_code : "en",
+               level_type : $routeParams.levelId,
+               level_order : 0,
+               level_required : true,
+               reward : "wena!",
+               penalty : "mala!",
+               activity_type : 'geospatial',
+               points : { type: "MultiPoint", coordinates: [ [0,0 ] ] },
+               radius: 100,
+               area : "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -36.8697625630798, -33.67212899453614 ], [ -36.8697625630798, -33.672128994436136 ], [ 40.8255499369202, 33.77651858923237 ], [ -36.8697625630798, -33.67212899453614 ] ] ] }"
+               
+            };  
+                $scope.radius = $scope.activity.radius;
+                //$scope.activity.area = activity1.area;
+                window.setTimeout(function(){
+                    var mapOptions = {
+                      mapTypeId: google.maps.MapTypeId.ROADMAP,
+                      panControl: false,
+                      zoomControl: false,
+                      mapTypeControl: false,
+                      scaleControl: false,
+                      streetViewControl: false,
+                      overviewMapControl: false,
+                      maxZoom: null
+                    };
+                    $scope.map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+                    //Getting first of target points as the only one valid
+                    var googleOptions = {
+                            strokeColor: "#00FFFF",
+                            strokeWeight: 0,
+                            strokeOpacity: 0.5,
+                            fillOpacity: 0.2,
+                            fillColor: "#6699ff",
+                            clickable: false
+                    };
+                    var geoPoints = new GeoJSON($scope.activity.points, googleOptions);
+                    var target = new google.maps.LatLng(geoPoints[0].position.lat(), geoPoints[0].position.lng());
+                    $scope.position=target;
+                    $scope.updateCircle();
+                    var jsonfromserver = JSON.parse($scope.activity.area);
+                    var googleVector = new GeoJSON(jsonfromserver, googleOptions);
+                    googleVector.color = "#FFOOOO";
+                    var puntosPoligono = googleVector.getPath();
+                    var bounds = new google.maps.LatLngBounds();
+                    for (var i = 0; i < puntosPoligono.j.length; i++) {
+                        bounds.extend(puntosPoligono.j[i]);
+                    }
+                    $scope.map.fitBounds(bounds);
+                    var markerIcon = new google.maps.MarkerImage('img/marker.png');
+                    $scope.marker = new google.maps.Marker({
+                        map: $scope.map,
+                        position: target,
+                        flat: true,
+                        clickable: false,
+                        icon: markerIcon
+                    });
+                    $scope.mouseFlag = false;
+                    //Creating eventlisteners to set mark when click
+                    google.maps.event.addListener($scope.map, "mouseup", function (e)
+                    {
+                        //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
+                        if ($scope.mouseFlag === true) 
+                        {
+                            if ($scope.marker) {
+                                $scope.marker.setMap(null);
+                            }
+                            var markerIcon = new google.maps.MarkerImage('img/marker.png');
+                            $scope.activity.points.coordinates[0][0] = e.latLng.A;
+                            $scope.activity.points.coordinates[0][1] = e.latLng.k;
+                            $scope.position=e.latLng;
+                            $scope.marker = new google.maps.Marker({
+                                map: $scope.map,
+                                position: e.latLng,
+                                flat: true,
+                                clickable: false,
+                                icon: markerIcon
+                            });
+                            $scope.updateCircle();
+                           
+                        }
+                    });
+                    google.maps.event.addListener($scope.map, "mousemove", function (e)
+                    {
+                        $scope.mouseFlag = false;
+                    });
+                    google.maps.event.addListener($scope.map, "mousedown", function (e)
+                    {
+                        $scope.mouseFlag = true;
+                    });
+                
+                }, 100);
+                
+        });
 
 
 
@@ -963,12 +991,9 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                 {
                     $scope.mouseFlag = true;
                 });
-            
             }, 100);
-            
         });
     }
-
 
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
