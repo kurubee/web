@@ -49,7 +49,7 @@
                 <div class="m-content-level">
                     <textarea ng-model="course.description" class="m-description" id="description-input" style="height: 100px;"></textarea>
                     <div id="carousel" style="width: 221px;height:115px;">
-                        <ul rn-carousel  rn-carousel-indicator  rn-carousel-control style="width: 221px;height:115px;">
+                        <ul rn-carousel  rn-carousel-indicator  rn-carousel-control style="width: 221px;height:115px;" ng-carousel-index id="carousel" >
                             <li ng-repeat="level in course.levels" seleccionado='level' style="width: 221px;height:115px;">
                                 <div class="carousel-card" ng-click="toLevel($index)">
                                     
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="bottom-right">
-                        <button ng-class="{ 'button2':true}" style="text-transform:none;background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 120px;margin-right:6px;vertical-align:top" ng-click="toLevel($parent)">START</button> 
+                        <button ng-class="{ 'button2':true}" style="text-transform:none;background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 120px;margin-right:6px;vertical-align:top" ng-click="toLevel({{ carouselIndex }})">START</button> 
                     </div>
                 </div>
             </div>

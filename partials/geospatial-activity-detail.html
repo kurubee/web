@@ -30,7 +30,10 @@
                     <p id="description-description">              
                         <b>Radius:</b> 
                         <br>
-                        <input ng-model="activity.radius" type="text" class="input-code-cls">
+                        <slider floor="1" ceiling="1000" step="1" precision="1" ng-model="radius" class="geospatial-slider" ngChange="updateCircle()"></slider>
+                        {{radius}}
+                        <select ng-model="magnitude" ng-options="code as name for (code,name) in magnitudes">
+                        </select>
                     </p>
                 </div>
         </div>

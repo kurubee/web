@@ -7,6 +7,7 @@ var kurubeeApp = angular.module('kurubeeApp', [
   'kurubeeServices',
   'restangular',
   'angular-carousel',
+  'uiSlider',
 ]);
 
 

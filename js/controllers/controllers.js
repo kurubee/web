@@ -90,6 +90,10 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
         };
         
         $scope.toLevel = function(index) {
+           /*console.log(angular.element(document.querySelector('#carousel')).scope());
+           console.log(angular); 
+           console.log(index);
+           console.log($scope);*/
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
         };
         $scope.back = function() { 
@@ -757,6 +761,11 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
 kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
+    $scope.magnitudes = {
+        km : "km",
+        m : "m"
+    };
+    $scope.magnitude = "km";
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/geospatial');
     if(!$routeParams.activityId)
@@ -778,7 +787,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            area : "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -36.8697625630798, -33.67212899453614 ], [ -36.8697625630798, -33.672128994436136 ], [ 40.8255499369202, 33.77651858923237 ], [ -36.8697625630798, -33.67212899453614 ] ] ] }"
            
         };  
-
+            $scope.radius = $scope.activity.radius;
             //$scope.activity.area = activity1.area;
             window.setTimeout(function(){
                 var mapOptions = {
@@ -803,6 +812,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                 };
                 var geoPoints = new GeoJSON($scope.activity.points, googleOptions);
                 var target = new google.maps.LatLng(geoPoints[0].position.lat(), geoPoints[0].position.lng());
+                $scope.position=target;
+                $scope.updateCircle();
                 var jsonfromserver = JSON.parse($scope.activity.area);
                 var googleVector = new GeoJSON(jsonfromserver, googleOptions);
                 googleVector.color = "#FFOOOO";
@@ -833,6 +844,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                         var markerIcon = new google.maps.MarkerImage('img/marker.png');
                         $scope.activity.points.coordinates[0][0] = e.latLng.A;
                         $scope.activity.points.coordinates[0][1] = e.latLng.k;
+                        $scope.position=e.latLng;
                         $scope.marker = new google.maps.Marker({
                             map: $scope.map,
                             position: e.latLng,
@@ -840,6 +852,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                             clickable: false,
                             icon: markerIcon
                         });
+                        $scope.updateCircle();
+                       
                     }
                 });
                 google.maps.event.addListener($scope.map, "mousemove", function (e)
@@ -862,6 +876,18 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         var baseActivity = Restangular.one('editor/geospatial', $routeParams.activityId);
         baseActivity.get().then(function(activity1){
             $scope.activity = Restangular.copy(activity1);
+            console.log($scope.activity.radius);
+            $scope.radius = $scope.activity.radius;
+            if($scope.radius>1000)
+            {
+                $scope.radius = $scope.radius / 1000;
+                $scope.magnitude = "km";
+            }
+            else
+            {
+               $scope.magnitude = "m";
+            }
+
             $scope.courseName = $scope.activity.career;
             $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
             window.setTimeout(function(){
@@ -888,6 +914,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                 };
                 var geoPoints = new GeoJSON($scope.activity.points, googleOptions);
                 var target = new google.maps.LatLng(geoPoints[0].position.lat(), geoPoints[0].position.lng());
+                $scope.position=target;
+                $scope.updateCircle();
                 var jsonfromserver = JSON.parse($scope.activity.area);
                 var googleVector = new GeoJSON(jsonfromserver, googleOptions);
                 googleVector.color = "#FFOOOO";
@@ -916,6 +944,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                             $scope.marker.setMap(null);
                         }
                         var markerIcon = new google.maps.MarkerImage('img/marker.png');
+                        $scope.position=e.latLng;
                         $scope.activity.points.coordinates[0][0] = e.latLng.A;
                         $scope.activity.points.coordinates[0][1] = e.latLng.k;
                         $scope.marker = new google.maps.Marker({
@@ -925,6 +954,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                             clickable: false,
                             icon: markerIcon
                         });
+                        $scope.updateCircle();
                     }
                 });
                 google.maps.event.addListener($scope.map, "mousemove", function (e)
@@ -944,8 +974,46 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
 
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
-
+    $scope.$watch('radius', function(newValue, oldValue) {
+           $scope.updateCircle();
+    }, true);
+    $scope.$watch('magnitude', function(newValue, oldValue) {
+           $scope.updateCircle();
+    }, true);
+    $scope.updateCircle = function() {
+        if ($scope.circle) {
+            $scope.circle.setMap(null);
+        }
+        console.log($scope.position);
+        var radio =$scope.radius;
+        if($scope.magnitude=="km")
+        {
+            radio *=1000;
+        }
+        console.log(radio);
+        var populationOptions = {
+          strokeColor: 'blue',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: 'blue',
+          fillOpacity: 0.35,
+          map: $scope.map,
+          center: $scope.position,
+          radius: parseInt(radio)
+        };
+        // Add the circle for this city to the map.
+        $scope.circle = new google.maps.Circle(populationOptions);
+    };
     $scope.saveActivity = function() {
+      console.log($scope.magnitude);
+      if($scope.magnitude=="km")
+      {
+          $scope.activity.radius =$scope.radius*1000;
+      }
+      else
+      {
+          $scope.activity.radius =$scope.radius;
+      }
       if($scope.activity.points && $scope.activity.radius)
        {
 
