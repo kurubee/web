@@ -41,8 +41,13 @@ background-position: center; ">
                                     </font>
                                 </div>
                             </div>
-                            <div  style="color: #009bdb;
-font-size: 14px;margin-top:-15px;margin-left:12px;" ><div ng-click="removeActivity({{activity}})" style="float:left;cursor: pointer;">Remove</div><div style="margin-left:60px;cursor: pointer;"ng-click="accessActivity({{activity}})">Edit</div></div>
+                            <div  style="color: #009bdb;font-size: 14px;margin-top:-15px;margin-left:12px;" >
+                                <div ng-show="sure{{activity.id}}" ng-click="askRemoveActivity({{activity}})" style="float:left;cursor: pointer;">Are you sure?</div>
+                                <div ng-show="sure{{activity.id}}" ng-click="askRemoveActivity({{activity}})" style="float:left;cursor: pointer;">Yes</div>
+                                <div ng-show="sure{{activity.id}}" ng-click="askRemoveActivity({{activity}})" style="float:left;cursor: pointer;">No</div>
+                                <div ng-click="askRemoveActivity(sure{{activity}})" style="float:left;cursor: pointer;">Remove</div>
+                                <div style="margin-left:60px;cursor: pointer;"ng-click="accessActivity({{activity}})">Edit</div>
+                            </div>
                         </li>
                         <li>
                             <div class="carousel-card">
@@ -51,7 +56,6 @@ font-size: 14px;margin-top:-15px;margin-left:12px;" ><div ng-click="removeActivi
                                   <option value="visual">Visual</option>
                                   <option value="linguistic">Linguistic</option>
                                   <option value="geospatial">Geospatial</option>
-                                  <option value="relational">Relational</option>
                                   <option value="temporal">Temporal</option>
                                 </select>
                                 <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;margin-top: 13px;margin-bottom: 13px;vertical-align:top" ng-click="createActivity()">New Activity</button>      
