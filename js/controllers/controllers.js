@@ -671,6 +671,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
 kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.baseURL = 'http://0.0.0.0:8000';
     $scope.showButton = true;
+    $scope.hideGrid = true;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/linguistic');
@@ -708,6 +709,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
            img.src = $scope.activity.image_base64;
 
            img.onload = function () {
+               document.getElementById('squares').style.display = "block";
                document.getElementById("squares").style.height = img.clientHeight+"px";
            };
            $scope.refreshLockedText();
@@ -751,6 +753,8 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     };
         
     $scope.addImage = function() {
+        console.log('ola');
+        document.getElementById('squares').style.display = "block";
         $scope.showButton=false;
         var f = document.getElementById('file').files[0],
         r = new FileReader();
@@ -759,6 +763,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
            var img = document.getElementById("image");
            $scope.baseURL ="";
            img.src = e.target.result;
+           document.getElementById("squares").style.height = img.clientHeight+"px";
         }
         r.readAsDataURL(f);
     };

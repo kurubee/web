@@ -393,3 +393,7 @@ border: 1px solid;
 .geospatial-slider {
     width:150px;
 }
+
+.oculta {
+    display:none;
+}
