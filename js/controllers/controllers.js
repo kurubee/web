@@ -760,7 +760,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     };
         
     $scope.addImage = function() {
-        console.log('ola');
         document.getElementById('squares').style.display = "block";
         $scope.showButton=false;
         var f = document.getElementById('file').files[0],
