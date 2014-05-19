@@ -32,7 +32,7 @@ kurubeeApp.controller('topbar-controller', function($scope,$cookieStore) {
     $scope.user = $cookieStore.get("username");
 });
  
-kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStore) {
+kurubeeApp.controller('CourseListCtrl', function($location, $scope, Restangular,$cookieStore) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseCourses = Restangular.all('editor/career');
     // This will query /courses and return a promise.
@@ -40,7 +40,9 @@ kurubeeApp.controller('CourseListCtrl', function($scope, Restangular,$cookieStor
         $scope.courses = courses
     });
     $scope.orderProp = 'timestamp';
-    
+    $scope.newCourse = function() {
+       $location.path( "/courses/new");   
+    };    
 });
 
 kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
@@ -57,51 +59,103 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
         exam : "Exam"
     };
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
-    var baseKnowledges = Restangular.one('editor/knowledge');
-    baseKnowledges.getList().then(function(knowledges){
-        $scope.knowledges = {};
-        $scope.knowledges["prog"] = "programacion";
-        //$scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
-        var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
-        $scope.user = $cookieStore.get("username");
-        baseCourse.get().then(function(course1){
-            $scope.course = Restangular.copy(course1);
-            $scope.course.levels.push("new");
-            $scope.language = $scope.course.language_code;
-            $scope.career_type = $scope.course.career_type;
-            $scope.knowledge = $scope.course.knowledges[0];
-            $cookieStore.courseName = $scope.course.name;
-        });
+    if($routeParams.courseId=="new")
+    {
+        var baseKnowledges = Restangular.one('editor/knowledge');
+        baseKnowledges.getList().then(function(knowledges){
+            $scope.knowledges = {};
+            //$scope.knowledges["prog"] = "programacion";
+            $scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
+            $scope.course = {
+                activities: [],
+                career_type: "",
+                code: "",
+                description: "Type here the course description",
+                knowledges: [],
+                language_code: "",
+                levels: ["new"],
+                name: "Course Name",
+                published: false,
+            };
 
-        $scope.save = function() {
+        });      
+    }
+    else
+    {
+        var baseKnowledges = Restangular.one('editor/knowledge');
+        baseKnowledges.getList().then(function(knowledges){
+            $scope.knowledges = {};
+            //$scope.knowledges["prog"] = "programacion";
+            $scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
+            var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
+            $scope.user = $cookieStore.get("username");
+            baseCourse.get().then(function(course1){
+                $scope.course = Restangular.copy(course1);
+                $scope.course.levels.push("new");
+                $scope.language = $scope.course.language_code;
+                $scope.career_type = $scope.course.career_type;
+                $scope.knowledge = $scope.course.knowledges[0];
+                $cookieStore.courseName = $scope.course.name;
+            });
+        });  
+    }
+    $scope.save = function() {
+        console.log($scope.course);
+        if($scope.getCond())
+        {
             $scope.disable_save_button = true;
             $scope.saved = false;
             $scope.course.language_code = $scope.language;
             $scope.course.career_type = $scope.career_type;
-            $scope.course.knowledges = [$scope.knowledge];
-            $scope.course.put().then(function() 
+            $scope.course.activities=[];
+            if($routeParams.courseId=="new")
             {
-                $scope.disable_save_button = false;
-                $scope.saved = true;
-                setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-            }, function() {
-                setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-            });
-        };
-        
-        $scope.toLevel = function(index) {
-           /*console.log(angular.element(document.querySelector('#carousel')).scope());
-           console.log(angular); 
-           console.log(index);
-           console.log($scope);*/
-           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
-        };
-        $scope.back = function() { 
-            $location.path( "/courses/");   
-        };
-    });   
+               console.log($scope.knowledge);
+               $scope.course.knowledges=[$scope.knowledge];
+               var baseCourses = Restangular.all('editor/career');
+               baseCourses.post($scope.course).then(function ()
+               {
+                    $scope.disable_save_button = false;
+                    $scope.saved = true;
+                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+               });
+            }
+            else
+            {
+                $scope.course.put().then(function() 
+                {
+                    $scope.disable_save_button = false;
+                    $scope.saved = true;
+                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                }, function() {
+                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                });
+            }
+         }
+    };
+    
+    $scope.toLevel = function(index) {
+       /*console.log(angular.element(document.querySelector('#carousel')).scope());
+       console.log(angular); 
+       console.log(index);
+       console.log($scope);*/
+       $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
+    };
+    $scope.back = function() { 
+        $location.path( "/courses/");   
+    };
+    
+    $scope.getCond = function() {
+        if($scope.course)
+        {
+            return !$scope.disable_save_button && $scope.language && $scope.career_type && $scope.knowledge;
+        }
+        else
+        {
+          return false;
+        }
+    };
 }]);
-
 
 kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux, $route, $scope, $location, Restangular,$cookieStore, $routeParams) {
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
@@ -133,17 +187,14 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        {
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/linguistic/" + activity.id);
        }
-
        if(activity.activity_type=="geospatial")
        {
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/geospatial/" + activity.id);
        }
-       
        if(activity.activity_type=="relational")
        {
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/relational/" + activity.id);
        }
-
     };
     
     $scope.createActivity = function() {
@@ -189,7 +240,6 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
 
 kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
-
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/quiz');
@@ -303,7 +353,6 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
 
 kurubeeApp.controller('RelationalActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
-
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseActivities = Restangular.all('editor/quiz');
