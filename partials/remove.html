@@ -1,0 +1,13 @@
+<div class="container-fluid  margedTop">
+    <div ng-hide="course">
+        <img src="img/loading.gif" class="loading">
+    </div>
+    <div class="well white error-box" ng-show="course">
+        <p><b>Are you sure you want to delete {{course.name}}?</b></p>
+        <div style="margin-left:17%;">
+       <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 80px;vertical-align: top;background-image: linear-gradient(to bottom, #EB1010, #FF0000);background-color: red;" ng-click="yes()" ng-disabled="disable_save_button">Yes</button> 
+       <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 80px;vertical-align: top;" ng-click="no()" ng-disabled="disable_save_button">No</button> 
+       </div>
+    </div>
+</div>
+

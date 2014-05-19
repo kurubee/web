@@ -43,7 +43,27 @@ kurubeeApp.controller('CourseListCtrl', function($location, $scope, Restangular,
     $scope.newCourse = function() {
        $location.path( "/courses/new");   
     };    
+    $scope.removeCourse = function(index) {
+       $location.path( "/remove/"+index);   
+    }
 });
+
+kurubeeApp.controller('RemoveCtrl', function($location, $scope, Restangular,$cookieStore,$routeParams) {
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
+    var baseCourse = Restangular.one('editor/career',$routeParams.courseId);
+    baseCourse.get().then(function(course1){
+        $scope.course = Restangular.copy(course1);
+    });
+    $scope.yes = function(index) {
+       baseCourse.remove().then(function(){
+           $location.path( "/courses/");   
+       }); 
+    }
+    $scope.no = function(index) {
+       $location.path( "/courses/");   
+    }
+});
+
 
 kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;

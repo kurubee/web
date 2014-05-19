@@ -38,7 +38,10 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
         templateUrl: 'partials/course-detail.html',
         controller: 'CourseDetailCtrl'
       }).
-
+      when('/remove/:courseId', {
+        templateUrl: 'partials/remove.html',
+        controller: 'RemoveCtrl'
+      }).
       when('/courses/:courseId/levels/:levelId', {
         templateUrl: 'partials/level-detail.html',
         controller: 'LevelDetailCtrl'

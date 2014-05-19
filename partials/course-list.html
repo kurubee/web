@@ -19,6 +19,12 @@
                 <td>{{course.published | checkmark}}</td>
                 <td>{{course.description}}</td>
                 <td>{{course.total_downloads}}</td>
+                <td>
+                    <div id="image" ng-class="{'button2':true }" style="background-color: red;
+background-image: linear-gradient(to bottom, #EB1010, #FF0000);width:66px; padding: 5px;" ng-click="removeCourse({{course.id}})">
+                        Delete
+                    </div>
+                </td>
               </tr>
             </tbody>
         </table>
