@@ -721,7 +721,14 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.refreshLockedText = function() {
         var textHide = " ";
         for (cont in $scope.activity.locked_text) {
-            textHide += "_  ";
+            if($scope.activity.locked_text[cont]!=" ")
+            {
+                textHide += "_  ";
+            }
+            else
+            {
+                textHide += "&nbsp; ";
+            }
         }
         document.getElementById('hideText').innerHTML=textHide;
     };
