@@ -98,6 +98,9 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
         templateUrl: 'partials/course-list.html',
         controller: 'AuthCtrl'
       }).
+      when('/error', {
+        templateUrl: 'partials/error.html',
+      }).
       otherwise({
         redirectTo: '/courses'
       });
@@ -181,6 +184,19 @@ kurubeeApp.config(['$httpProvider', function($httpProvider) {
 					response.data = { 
 				 		status: false, 
 				 		description: 'Authentication required!'
+				 	};
+
+					return response;
+
+				}
+				
+				if (response.status === 500) {
+					// HTTP 401 Error: 
+					// The request requires user authentication
+                    $location.path( "/error" );
+					response.data = { 
+				 		status: false, 
+				 		description: 'Error!'
 				 	};
 
 					return response;

@@ -16,6 +16,15 @@ body {
     margin-top: -125px;
 }
 
+.error-box {
+    width:311px;
+    position: absolute;
+    top: 300px;
+    left: 50%;
+    margin-left: -125px;
+    margin-top: -125px;
+}
+
 .buttons-login
 {
     margin-left:14px;
