@@ -1048,7 +1048,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
           $scope.activity.radius =$scope.radius;
       }
       if($scope.activity.points && $scope.activity.radius)
-       {
+      {
 
            $scope.activity.points = "{ \"type\": \"MultiPoint\", \"coordinates\": [ [ " + $scope.activity.points.coordinates[0][0] + "," + $scope.activity.points.coordinates[0][1] + " ] ] }";
            var bounds = $scope.map.getBounds();

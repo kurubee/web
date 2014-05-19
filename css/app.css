@@ -62,7 +62,7 @@ body {
     width:40px;
     float:none;
     display:inline-block;
-    vertical-align:top;
+    margin-top:-13px;
     margin-left:5px;
 }
 
@@ -240,9 +240,8 @@ body {
     
 .saved-text-cls{
     float:none;
-    display:inline-block;
     vertical-align:top;
-    margin-left:5px;
+    margin-left:40px;
     margin-top:18px;
 }
 .fade-out {
