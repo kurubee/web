@@ -491,3 +491,24 @@ border: 1px solid;
     margin-bottom: 13px;
     vertical-align:top;
 }
+
+/*Linguistic Activity */
+
+.height175 {
+    height:175px;
+}
+
+.add-image-btn {
+    display: inline-block;
+    padding: 3px;
+    width: 120px;
+    margin-top: 45%;
+    margin-left:45px;
+    vertical-align:top;
+    text-align:center;
+}
+
+.hide-text-div {
+    -webkit-box-align: stretch; 
+    -webkit-box-pack: center;
+}
