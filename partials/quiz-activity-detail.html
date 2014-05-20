@@ -42,21 +42,8 @@
                     <ul ng-repeat="answer in activity.real_answers">
                         <li>
                             <div class="carousel-card" style="padding-bottom: 5px;">
-                               <input ng-model="answer.value" ngMouseover="{{index}}" style="-webkit-box-flex: 1;
-                               width: 80%;
-                                -webkit-box-align: center;
-                                white-space: nowrap;
-                                text-overflow: ellipsis;
-                                text-align: center;
-                                font-weight: bold;
-                                line-height: 1.2em;
-                                background-color: #ccc;
-                                overflow: hidden;
-                                font-weight: normal;
-                                -webkit-border-radius: 0.4em;
-                                border-radius: 0.0em;
-                                background-image: linear-gradient(#ffffff,#dedede 2%,#bababa);">
-                                <button type="button" style="margin-top: -5px;" class="btn btn-xs" ng-click="removeAnswer({{$index}})">
+                               <input ng-model="answer.value" ngMouseover="{{index}}" class="visual-answer">
+                                <button type="button" class="btn btn-xs remove-answer" ng-click="removeAnswer({{$index}})">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
                             </div>
@@ -73,12 +60,12 @@
                     </div>
                 </div>
                 <div class="bottom-right">
-                    <button ng-class="{ 'button2':true}" style="background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 120px;margin-right:6px;vertical-align:top" ng-click="addAnswer()">Add Answer</button> 
+                    <button ng-class="{ 'button2':true, 'start-level-btn':true}" ng-click="addAnswer()">Add Answer</button> 
                 </div>
             </div>
         </div>
         <div class="saveButton">
-            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;vertical-align: top;" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
+            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true, 'saveButton-inside':true }" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
             <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini">
             <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
         </div>
