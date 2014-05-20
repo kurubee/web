@@ -50,14 +50,22 @@
             <div class="m-template m-template-course">
                 <input type="text" ng-model="course.name" class="m-title" id="title-input">
                 <div class="m-content-level">
-                    <textarea ng-model="course.description" class="m-description" id="description-input" style="height: 100px;"></textarea>
-                    <div id="carousel" style="width: 221px;height:115px;">
-                        <ul rn-carousel  rn-carousel-indicator  rn-carousel-control style="width: 221px;height:115px;" ng-carousel-index id="carousel" >
-                            <li ng-repeat="level in course.levels" seleccionado='level' style="width: 221px;height:115px;">
+                    <textarea ng-model="course.description" class="m-description course-description" id="description-input"></textarea>
+                    <div id="carousel">
+                        <ul rn-carousel  rn-carousel-indicator  rn-carousel-control ng-carousel-index id="carousel" >
+                            <li ng-repeat="level in course.levels" style="height:115px;">
                                 <div class="carousel-card" ng-click="toLevel($index)">
-                                    
-                                    <div id="centro" align="middle"><p ng-show="level != 'new'" class="levelTitle">Level {{level}}</p><div><img ng-show="level != 'new'" style="-webkit-user-drag: none;width:auto;" ng-src="img/level_icons/{{level}}.png" align="bottom"><div ng-show="level == 'new'"><button ng-class="{ 'button2':true}" style="width:120px;background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);padding: 3px;margin-top: 33px;">ADD LEVEL</button> </div></div></div>
-
+                                    <div id="centro" align="middle">
+                                        <p ng-show="level != 'new'" class="levelTitle">
+                                            Level {{level}}
+                                        </p>
+                                    <div>
+                                    <img ng-show="level != 'new'" style="-webkit-user-drag: none;width:auto;" ng-src="img/level_icons/{{level}}.png" align="bottom">
+                                    <div ng-show="level == 'new'">
+                                        <button ng-class="{ 'button2':true,'new-level-btn':true}">
+                                            ADD LEVEL
+                                        </button> 
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -70,13 +78,13 @@
                         </div>
                     </div>
                     <div class="bottom-right">
-                        <button ng-class="{ 'button2':true}" style="text-transform:none;background-color: #11598c; background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);display: inline-block;padding: 3px;width: 120px;margin-right:6px;vertical-align:top" ng-click="toLevel({{ carouselIndex }})">START</button> 
+                        <button ng-class="{ 'button2':true, 'start-level-btn':true}"  ng-click="toLevel({{ carouselIndex }})">START</button> 
                     </div>
                 </div>
             </div>
             <div class="saveButton" style="MARGIN-LEFT: -400PX;">
-                <button ng-class="{'button-disabled': !getCond(),'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;vertical-align: top;" ng-click="save()" ng-disabled="disable_save_button">Save</button>            
-                <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini" style="float:none;display:inline-block;vertical-align:top;margin-left:5px;">
+                <button ng-class="{'button-disabled': !getCond(),'button2':getCond(), 'fade3':true, 'saveButton-inside':true }" ng-click="save()" ng-disabled="disable_save_button">Save</button>            
+                <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini">
                 <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
             </div>
         </div>
