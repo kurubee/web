@@ -4,33 +4,35 @@
         <div ng-show="!courses">
             <img src="img/loading.gif" class="loading">
         </div>
-        <table ng-show="courses" class="table table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Published</th>
-                <th>Description</th>
-                <th># Downloads</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="course in courses | filter:query | orderBy:orderProp" >
-                <td><a href="#/courses/{{course.id}}">{{course.name}}</a></td>
-                <td>{{course.published | checkmark}}</td>
-                <td>{{course.description}}</td>
-                <td>{{course.total_downloads}}</td>
-                <td>
-                    <div id="image" ng-class="{'button2':true }" style="background-color: rgb(155, 17, 17);
-background-image: linear-gradient(to bottom, #CC0A0A, #8F0A0A);width:66px; padding: 5px;" ng-click="removeCourse({{course.id}})">
-                        Delete
-                    </div>
-                </td>
-              </tr>
-            </tbody>
-        </table>
-        <div id="image" ng-class="{'button2':true }" style="width: 115px;   padding: 5px;" ng-click="newCourse()">
-            Add Course
-        </div>
+        <div ng-show="courses">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Published</th>
+                    <th>Description</th>
+                    <th># Downloads</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="course in courses | filter:query | orderBy:orderProp" >
+                    <td><a href="#/courses/{{course.id}}">{{course.name}}</a></td>
+                    <td>{{course.published | checkmark}}</td>
+                    <td>{{course.description}}</td>
+                    <td>{{course.total_downloads}}</td>
+                    <td>
+                        <div id="image" ng-class="{'button2':true }" style="background-color: rgb(155, 17, 17);
+    background-image: linear-gradient(to bottom, #CC0A0A, #8F0A0A);width:66px; padding: 5px;" ng-click="removeCourse({{course.id}})">
+                            Delete
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            <div id="image" ng-class="{'button2':true }" style="width: 115px;   padding: 5px;" ng-click="newCourse()">
+                Add Course
+            </div>
+        </div>            
     </div>
   </div>
 </div>
