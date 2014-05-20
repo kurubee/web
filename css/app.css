@@ -179,7 +179,7 @@ body {
 }
 
 .m-content-level {
-    height:241px;
+    height:239px;
     width:221px;
     overflow:hidden;
     overflow-y: auto;
@@ -305,10 +305,10 @@ body {
 
 .breadcumb {
     color: #303333;
-font: 30px 'latolight', sans-serif;
-text-transform: uppercase;
-padding-bottom: 10px;
-
+    font: 30px 'latolight', sans-serif;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    height:43px;
 }
 
 .element1-description-cls {
