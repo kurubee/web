@@ -26,7 +26,10 @@
             <div class="m-template m-template-course">
             <div class="m-title">{{courseName}}</div>
             <div class="m-content-level" style="background-image: url(img/level_icons/{{level}}B.png);">
-                <div class="activity-list" >
+                <div class="loading-activities"ng-show="loadAct">
+                    <img src="img/loading.gif" >
+                </div>
+                <div class="activity-list" ng-show="activities!==[]">
                     <ul>
                         <li ng-repeat="activity in activities">
                             <div ng-click="accessActivity({{activity}})" class="list-item-label">
@@ -40,12 +43,12 @@
                                 </div>
                             </div>
                             <div  class="mini-menu-activity">
-                                <div ng-click="askRemoveActivity(sure{{activity}})" class="remove-activity-btn">Remove</div>
+                                <div ng-click="removeActivity({{activity}})" class="remove-activity-btn">Remove</div>
                                 <div ng-click="accessActivity({{activity}})" class="edit-activity-btn">Edit</div>
                             </div>
                         </li>
                         <li>
-                            <div class="carousel-card">
+                            <div class="carousel-card" >
                                 <select ng-model="activityType" class="select-options select-activity-type">
                                   <option value="quiz">Quiz</option>
                                   <option value="visual">Visual</option>

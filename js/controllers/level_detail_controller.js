@@ -28,11 +28,19 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
     };
     
     $scope.removeActivity = function(activity) {
-       $scope.loaded = false;
+       $scope.activities= [];
+       $scope.loadAct=true;
        var baseActivity = Restangular.one('editor/activity', activity.id);
        baseActivity.remove().then(function(){
-           $scope.loaded = true;
-           $route.reload();
+        var baseActivities = Restangular.all('editor/activity/?level_type=' + $routeParams.levelId + '&career=' + $routeParams.courseId);
+        baseActivities.getList().then(function(activities){
+            for (var j=0;j<activities.length;j++)
+            {
+                console.log(activities[j]);
+                $scope.activities[j] = activities[j];
+            }    
+            $scope.loadAct=false;
+        });
        });    
     };
     $scope.back = function() { 

@@ -62,6 +62,10 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
             $scope.course.language_code = $scope.language;
             $scope.course.career_type = $scope.career_type;
             $scope.course.activities=[];
+            if($scope.course.levels==["new"])
+            {
+                $scope.course.levels=[];
+            }
             if($routeParams.courseId=="new")
             {
                console.log($scope.knowledge);
@@ -93,6 +97,10 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
        console.log(angular); 
        console.log(index);
        console.log($scope);*/
+       if($routeParams.courseId=="new")
+       {
+          $routeParams.courseId=$scope.course.id;
+       }
        $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
     };
     $scope.back = function() { 
