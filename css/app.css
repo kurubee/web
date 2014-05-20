@@ -512,3 +512,8 @@ border: 1px solid;
     -webkit-box-align: stretch; 
     -webkit-box-pack: center;
 }
+
+/* Geospatial Activity */
+.map-cls {
+    height:204px;
+}

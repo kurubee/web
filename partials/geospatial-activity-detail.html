@@ -42,7 +42,7 @@
             <input type="text" ng-model="activity.name" class="m-title" id="title-input"  maxlength="255" >
             <input class="m-description activity-query" id="description-input" ng-model="activity.query"  maxlength="255" >
             <div class="m-content">
-                <div id="map_canvas" style="221px; height:204px" ng-cloak></div>
+                <div id="map_canvas" class="map-cls" ng-cloak></div>
             </div>
             <div class="bottom-bar">
                     <div ng-click="back()" class="backButton pointer">
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="saveButton">
-            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true }" style="display: inline-block;padding: 5px;width: 150px;vertical-align: top;" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
+            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true, 'saveButton-inside':true}" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
             <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini">
             <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
         </div>
