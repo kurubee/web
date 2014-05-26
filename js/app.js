@@ -199,7 +199,7 @@ kurubeeApp.config(['$httpProvider', function($httpProvider) {
 				}
 				
 				if (response.status === 500) {
-					// HTTP 401 Error: 
+					// HTTP 500 Error: 
 					// The request requires user authentication
                     $location.path( "/error" );
 					response.data = { 

@@ -1,4 +1,3 @@
-
 kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
     $scope.disable_save_button = false;
     $scope.saved = false;
@@ -54,7 +53,6 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
         });  
     }
     $scope.save = function() {
-        console.log($scope.course);
         if($scope.getCond())
         {
             $scope.disable_save_button = true;
@@ -62,6 +60,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
             $scope.course.language_code = $scope.language;
             $scope.course.career_type = $scope.career_type;
             $scope.course.activities=[];
+            $scope.course.user={pk:0};
             if($scope.course.levels==["new"])
             {
                 $scope.course.levels=[];

@@ -66,8 +66,10 @@
         </div>
         <div class="saveButton">
             <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true, 'saveButton-inside':true }" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
-            <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini">
-            <div class="fade-out saved-text-cls" ng-show="saved" id="saved-text">✔ Saved!</div>
+            <div class="saved-text-cls">
+                <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini">
+                <div class="fade-out" ng-show="saved" id="saved-text">✔ Saved!</div>
+            </div>
         </div>
         </div>
     </div>
