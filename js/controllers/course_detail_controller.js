@@ -27,7 +27,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
                 description: "Type here the course description",
                 knowledges: [],
                 language_code: "",
-                levels: ["new"],
+                levels: [],
                 name: "Course Name",
                 published: false,
             };
@@ -45,7 +45,6 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
             $scope.user = $cookieStore.get("username");
             baseCourse.get().then(function(course1){
                 $scope.course = Restangular.copy(course1);
-                $scope.course.levels.push("new");
                 $scope.language = $scope.course.language_code;
                 $scope.career_type = $scope.course.career_type;
                 $scope.knowledge = $scope.course.knowledges[0];
@@ -62,10 +61,6 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
             $scope.course.career_type = $scope.career_type;
             $scope.course.activities=[];
             $scope.course.user={pk:0};
-            if($scope.course.levels==["new"])
-            {
-                $scope.course.levels=[];
-            }
             if($routeParams.courseId=="new")
             {
                $scope.course.knowledges=[$scope.knowledge];
@@ -96,7 +91,14 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
        {
           $routeParams.courseId=$scope.course.id;
        }
-       $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
+       if(index=="new")
+       {
+          $location.path( "/courses/"+$routeParams.courseId+"/levels/" +  ($scope.course.levels.length+1));   
+       }
+       else
+       {
+          $location.path( "/courses/"+$routeParams.courseId+"/levels/" + (index + 1));   
+       }
     };
     $scope.back = function() { 
         $location.path( "/courses/");   

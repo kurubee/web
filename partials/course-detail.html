@@ -60,12 +60,7 @@
                                             Level {{level}}
                                         </p>
                                     <div>
-                                    <img ng-show="level != 'new'" style="-webkit-user-drag: none;width:auto;" ng-src="img/level_icons/{{level}}.png" align="bottom">
-                                    <div ng-show="level == 'new'">
-                                        <button ng-class="{ 'button2':true,'new-level-btn':true}">
-                                            ADD LEVEL
-                                        </button> 
-                                    </div>
+                                    <img style="-webkit-user-drag: none;width:auto;" class="pointer" ng-src="img/level_icons/{{level}}.png" align="bottom">
                                 </div>
                             </li>
                         </ul>
@@ -78,7 +73,7 @@
                         </div>
                     </div>
                     <div class="bottom-right">
-                        <button ng-class="{ 'button2':true, 'start-level-btn':true}"  ng-click="toLevel({{ carouselIndex }})">START</button> 
+                        <button ng-class="{ 'button2':true, 'start-level-btn':true}"  ng-click="toLevel('new')">ADD LEVEL</button> 
                     </div>
                 </div>
             </div>
