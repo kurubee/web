@@ -1,4 +1,5 @@
 kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
+    $scope.changed = false;
     $scope.disable_save_button = false;
     $scope.saved = false;
     $scope.languages = {
@@ -67,7 +68,6 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
             }
             if($routeParams.courseId=="new")
             {
-               console.log($scope.knowledge);
                $scope.course.knowledges=[$scope.knowledge];
                var baseCourses = Restangular.all('editor/career');
                baseCourses.post($scope.course).then(function ()
@@ -92,10 +92,6 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
     };
     
     $scope.toLevel = function(index) {
-       /*console.log(angular.element(document.querySelector('#carousel')).scope());
-       console.log(angular); 
-       console.log(index);
-       console.log($scope);*/
        if($routeParams.courseId=="new")
        {
           $routeParams.courseId=$scope.course.id;
@@ -109,7 +105,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
     $scope.getCond = function() {
         if($scope.course)
         {
-            return !$scope.disable_save_button && $scope.language && $scope.career_type && $scope.knowledge;
+            return !$scope.disable_save_button && $scope.language && $scope.career_type && $scope.knowledge;// && $scope.changed;
         }
         else
         {
