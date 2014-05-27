@@ -38,7 +38,7 @@ body {
     font-size: 16px;
     background-repeat: repeat-x;
     width:100%;
-    cursor: pointer;
+    cursor: auto;
     border-radius: 7px;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     color: white;
@@ -455,6 +455,17 @@ border: 1px solid;
     width: 120px;
     margin-right:6px;
     vertical-align:top;
+}
+
+.start-level-btn-disabled{
+    padding:0px;    
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 2px;
+    width: 120px;
+    margin-right:6px;
+    vertical-align:top;
+    cursor:auto;
 }
 
 .start-level-btn:hover {

@@ -1,5 +1,6 @@
 kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
     $scope.changed = false;
+    $scope.fromSaved = false;
     $scope.disable_save_button = false;
     $scope.saved = false;
     $scope.languages = {
@@ -36,6 +37,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
     }
     else
     {
+        $scope.fromSaved = true;
         var baseKnowledges = Restangular.one('editor/knowledge');
         baseKnowledges.getList().then(function(knowledges){
             $scope.knowledges = {};
@@ -61,12 +63,15 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
             $scope.course.career_type = $scope.career_type;
             $scope.course.activities=[];
             $scope.course.user={pk:0};
+            console.log($routeParams.courseId);
             if($routeParams.courseId=="new")
             {
                $scope.course.knowledges=[$scope.knowledge];
                var baseCourses = Restangular.all('editor/career');
-               baseCourses.post($scope.course).then(function ()
+               baseCourses.post($scope.course).then(function (response)
                {
+                    $scope.course.id=response.id;
+                    $scope.fromSaved = true;
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
@@ -93,7 +98,10 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
        }
        if(index=="new")
        {
-          $location.path( "/courses/"+$routeParams.courseId+"/levels/" +  ($scope.course.levels.length+1));   
+            if($scope.fromSaved)
+            {
+                $location.path( "/courses/"+$routeParams.courseId+"/levels/" +  ($scope.course.levels.length+1));   
+            }
        }
        else
        {

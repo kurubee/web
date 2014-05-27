@@ -51,7 +51,7 @@
                 <input type="text" ng-model="course.name" class="m-title" id="title-input">
                 <div class="m-content-level">
                     <textarea ng-model="course.description" class="m-description course-description" id="description-input"></textarea>
-                    <div id="carousel">
+                    <div id="carousel" ng-show="course.levels">
                         <ul rn-carousel  rn-carousel-indicator  rn-carousel-control rn-carousel-index id="carousel" >
                             <li ng-repeat="level in course.levels" style="height:115px;">
                                 <div class="carousel-card" ng-click="toLevel($index)">
@@ -65,6 +65,9 @@
                             </li>
                         </ul>
                     </div>
+                    <div id="carousel" style="text-align:center; padding:5px;"ng-hide="course.levels">
+                        There is no levels yet in this course, save the course in order to create the first level.
+                    </div>
                 </div>
                 <div class="bottom-bar">
                     <div class="bottom-left">
@@ -73,7 +76,7 @@
                         </div>
                     </div>
                     <div class="bottom-right">
-                        <button ng-class="{ 'button2':true, 'start-level-btn':true}"  ng-click="toLevel('new')">ADD LEVEL</button> 
+                        <button ng-class="{ 'start-level-btn-disabled':!fromSaved, 'button-disabled':!fromSaved, 'button2':fromSaved, 'start-level-btn':fromSaved}"  ng-click="toLevel('new')">ADD LEVEL</button> 
                     </div>
                 </div>
             </div>
