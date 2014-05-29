@@ -1,11 +1,11 @@
 <div class="container-fluid margedTop">
   <div class="row-fluid">
     <div class="span10 margedTop">
-        <div ng-show="!courses">
+        <div ng-show="!loaded">
             <img src="img/loading.gif" class="loading">
         </div>
-        <div ng-show="courses">
-            <table class="table table-striped">
+        <div ng-show="loaded">
+            <table class="table table-striped" ng-show="courses">
                 <thead>
                   <tr>
                     <th>Name</th>
