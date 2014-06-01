@@ -109,6 +109,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
         console.log($scope.activity.image);
         console.log(!$scope.disable_save_button);
         console.log($scope.getCond());
+        $scope.activity.image = 1;
         document.getElementById('squares').style.display = "block";
         $scope.showButton=false;
         var f = document.getElementById('file').files[0],
