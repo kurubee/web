@@ -1,5 +1,5 @@
 kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
-    $scope.cambios = 0;
+    $scope.changes = 0;
     $scope.changed = false;
     $scope.fromSaved = false;
     $scope.disable_save_button = false;
@@ -98,13 +98,13 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
     };
     
     $scope.detectChange = function () {
-        console.log($scope.cambios);
-        if ($scope.cambios>3)
+        console.log($scope.changes);
+        if ($scope.changes>3)
         {
             console.log("cambio");
             $scope.changed = true;
         }
-        $scope.cambios ++;
+        $scope.changes ++;
     }
     $scope.toLevel = function(index) {
        if($routeParams.courseId=="new")

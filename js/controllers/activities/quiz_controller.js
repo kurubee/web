@@ -1,4 +1,6 @@
 kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.changed = false;
+    $scope.changes = 0;
     $scope.disable_save_button = false;
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
@@ -24,6 +26,7 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
                penalty : "mala!",
                activity_type : 'quiz'
             };
+            $scope.changed = true;
          });
     }else
     {
@@ -48,6 +51,9 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
                    $scope.correct_answer =  $scope.activity.real_answers[i];               
                }
            }
+           $scope.$watch("activity", $scope.detectChange ,true);
+           $scope.$watch("real_answers", $scope.detectChange ,true);
+           $scope.$watch("correct_answer", $scope.detectChange ,true);
         });
     }
     $scope.name = "Type here Activity Name";
@@ -67,7 +73,15 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
     $scope.removeAnswer = function(index) {   
         $scope.activity.real_answers.splice(index, 1);
     };
-    
+    $scope.detectChange = function () {
+        console.log($scope.changes);
+        if ($scope.changes>2)
+        {
+            console.log("cambio");
+            $scope.changed = true;
+        }
+        $scope.changes ++;
+    }    
     $scope.saveActivity = function() {
        if($scope.activity.answers && $scope.correct_answer)
        {
@@ -102,7 +116,7 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
        }
     };
     $scope.getCond = function() {   
-        return !$scope.disable_save_button && $scope.correct_answer;
+        return !$scope.disable_save_button && $scope.correct_answer && $scope.changed;
     };
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
