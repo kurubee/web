@@ -1,4 +1,6 @@
 kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.changed = false;
+    $scope.changes = 0;
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
     $scope.magnitudes = {
@@ -31,6 +33,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                area : "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ -36.8697625630798, -33.67212899453614 ], [ -36.8697625630798, -33.672128994436136 ], [ 40.8255499369202, 33.77651858923237 ], [ -36.8697625630798, -33.67212899453614 ] ] ] }"
                
             };  
+            $scope.changed = true;
                 $scope.radius = $scope.activity.radius;
                 //$scope.activity.area = activity1.area;
                 window.setTimeout(function(){
@@ -201,6 +204,9 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                             icon: markerIcon
                         });
                         $scope.updateCircle();
+                        $scope.$apply(function() {
+                          $scope.changed=true;
+                        });
                     }
                 });
                 google.maps.event.addListener($scope.map, "mousemove", function (e)
@@ -212,7 +218,9 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                     $scope.mouseFlag = true;
                 });
             }, 100);
+        $scope.$watch("activity", $scope.detectChange ,true);
         });
+
     }
 
     $scope.name = "Type here Activity Name";
@@ -246,6 +254,15 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         // Add the circle for this city to the map.
         $scope.circle = new google.maps.Circle(populationOptions);
     };
+    $scope.detectChange = function () {
+        console.log($scope.changes);
+        if ($scope.changes>0)
+        {
+            console.log("cambio");
+            $scope.changed = true;
+        }
+        $scope.changes ++;
+    }    
     $scope.saveActivity = function() {
       if($scope.magnitude=="km")
       {
@@ -290,7 +307,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.getCond = function() {   
         if($scope.activity)
         {
-            return !$scope.disable_save_button && $scope.activity.points && $scope.activity.radius;
+            return !$scope.disable_save_button && $scope.activity.points && $scope.activity.radius && $scope.changed;
         }
         else
         {

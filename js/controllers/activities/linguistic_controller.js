@@ -102,13 +102,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     };
         
     $scope.addImage = function() {    
-        console.log('asdasdasdasd');
-        $scope.changed = true;
-        console.log($scope.changed);
-        console.log($scope.activity.locked_text);
-        console.log($scope.activity.image);
-        console.log(!$scope.disable_save_button);
-        console.log($scope.getCond());
         $scope.activity.image = 1;
         document.getElementById('squares').style.display = "block";
         $scope.showButton=false;
@@ -120,7 +113,9 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
            $scope.baseURL ="";
            img.src = e.target.result;
            document.getElementById("squares").style.height = img.clientHeight+"px";
-
+           $scope.$apply(function() {
+              $scope.changed=true;
+           });
         }
         r.readAsDataURL(f);
     };
