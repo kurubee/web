@@ -1,4 +1,6 @@
 kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.changed = false;
+    $scope.changes = 0;
     $scope.baseURL = 'http://0.0.0.0:8000';
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
@@ -25,6 +27,7 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
                image_datetime: "",
                query_datetime: ""
             };
+            $scope.changed = true;
          });
     }else
     {
@@ -43,11 +46,21 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
            {
                 $scope.correct_answer = "after"
            }
+           $scope.$watch("activity", $scope.detectChange ,true);
+           $scope.$watch("correct_answer", $scope.detectChange ,true);
         });
     }
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Quiz Activity Query";
-
+    $scope.detectChange = function () {
+        console.log($scope.changes);
+        if ($scope.changes>1)
+        {
+            console.log("cambio");
+            $scope.changed = true;
+        }
+        $scope.changes ++;
+    }  
     $scope.saveActivity = function() {
        if($scope.correct_answer == "before")
        {
@@ -89,6 +102,9 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
            var img = document.getElementById("image");
            $scope.baseURL ="";
            img.src = e.target.result;
+           $scope.$apply(function() {
+              $scope.changed=true;
+           });
         }
         r.readAsDataURL(f);
     };
@@ -96,7 +112,7 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     $scope.getCond = function() {   
         if( $scope.activity )
         {
-            return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer;
+            return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.changed;
         }else
         {
             return false;
