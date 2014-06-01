@@ -1,4 +1,6 @@
 kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.changed = false;
+    $scope.changes = 0;
     $scope.baseURL = 'http://0.0.0.0:8000';
     $scope.showButton = true;
     $scope.hideGrid = true;
@@ -27,6 +29,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
                image: false,
                answer : '',
             };
+            $scope.changed = true;
         });
     }else
     {
@@ -43,6 +46,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
                document.getElementById("squares").style.height = img.clientHeight+"px";
            };
            $scope.refreshLockedText();
+           $scope.$watch("activity", $scope.detectChange ,true);
         });
     }
     $scope.name = "Type here Activity Name";
@@ -62,9 +66,17 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
         }
         document.getElementById('hideText').innerHTML=textHide;
     };
-
+    $scope.detectChange = function () {
+        console.log($scope.changes);
+        if ($scope.changes>0)
+        {
+            console.log("cambio");
+            $scope.changed = true;
+        }
+        $scope.changes ++;
+    }    
     $scope.saveActivity = function() {
-      if($scope.activity.locked_text && $scope.activity.image)
+      if($scope.getCond())
        {
            $scope.activity.answer = $scope.activity.locked_text;
            $scope.disable_save_button = true;
@@ -89,7 +101,14 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
        }
     };
         
-    $scope.addImage = function() {
+    $scope.addImage = function() {    
+        console.log('asdasdasdasd');
+        $scope.changed = true;
+        console.log($scope.changed);
+        console.log($scope.activity.locked_text);
+        console.log($scope.activity.image);
+        console.log(!$scope.disable_save_button);
+        console.log($scope.getCond());
         document.getElementById('squares').style.display = "block";
         $scope.showButton=false;
         var f = document.getElementById('file').files[0],
@@ -100,6 +119,7 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
            $scope.baseURL ="";
            img.src = e.target.result;
            document.getElementById("squares").style.height = img.clientHeight+"px";
+
         }
         r.readAsDataURL(f);
     };
@@ -107,7 +127,8 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.getCond = function() { 
         if( $scope.activity )
         {  
-            return !$scope.disable_save_button && $scope.activity.image && $scope.activity.locked_text;
+            console.log(!$scope.disable_save_button && $scope.activity.image && $scope.activity.locked_text && $scope.changed);
+            return !$scope.disable_save_button && $scope.activity.image && $scope.activity.locked_text && $scope.changed;
         }else
         {
             return false;
