@@ -1,4 +1,6 @@
 kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.changed = false;
+    $scope.changes = 0;
     $scope.baseURL = 'http://0.0.0.0:8000';
     $scope.inAnswers = false;
     $scope.showButton = true;
@@ -29,6 +31,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
                correct_answer : "",
                time:5
             };
+            $scope.changed = true;
         })
     }else
     {
@@ -55,11 +58,22 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
            }
            var img = document.getElementById("image");
            img.src = $scope.activity.image;
+           $scope.$watch("activity", $scope.detectChange ,true);
+           $scope.$watch("real_answers", $scope.detectChange ,true);
+           $scope.$watch("correct_answer", $scope.detectChange ,true);
         });
     }
     $scope.name = "Type here Activity Name";
     $scope.query = "Type here Visual Activity Query";
-
+    $scope.detectChange = function () {
+        console.log($scope.changes);
+        if ($scope.changes>2)
+        {
+            console.log("cambio");
+            $scope.changed = true;
+        }
+        $scope.changes ++;
+    } 
     $scope.saveActivity = function() {
       if($scope.activity.answers && $scope.correct_answer)
        {
@@ -120,6 +134,9 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
            var img = document.getElementById("image");
            $scope.baseURL ="";
            img.src = e.target.result;
+           $scope.$apply(function() {
+              $scope.changed=true;
+           });
         }
         r.readAsDataURL(f);
     };
@@ -129,7 +146,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
         {
             var img = document.getElementById("image");
             img.src = $scope.baseURL+$scope.activity.image;
-            return !$scope.disable_save_button && $scope.activity.time && $scope.correct_answer && $scope.activity.real_answers && $scope.activity.real_answers;
+            return !$scope.disable_save_button && $scope.activity.time && $scope.correct_answer && $scope.activity.real_answers && $scope.activity.real_answers && $scope.activity.image && $scope.changed;
         }
         else
         {
