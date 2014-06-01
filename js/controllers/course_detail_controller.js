@@ -1,4 +1,5 @@
 kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
+    $scope.cambios = 0;
     $scope.changed = false;
     $scope.fromSaved = false;
     $scope.disable_save_button = false;
@@ -32,7 +33,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
                 name: "Course Name",
                 published: false,
             };
-
+            $scope.changed = true;
         });      
     }
     else
@@ -51,9 +52,14 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
                 $scope.career_type = $scope.course.career_type;
                 $scope.knowledge = $scope.course.knowledges[0];
                 $cookieStore.courseName = $scope.course.name;
+                $scope.$watch("course", $scope.detectChange ,true);
+                $scope.$watch("language", $scope.detectChange ,true);
+                $scope.$watch("career_type", $scope.detectChange ,true);
+                $scope.$watch("knowledge", $scope.detectChange ,true);                
             });
         });  
     }
+
     $scope.save = function() {
         if($scope.getCond())
         {
@@ -91,6 +97,15 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
          }
     };
     
+    $scope.detectChange = function () {
+        console.log($scope.cambios);
+        if ($scope.cambios>3)
+        {
+            console.log("cambio");
+            $scope.changed = true;
+        }
+        $scope.cambios ++;
+    }
     $scope.toLevel = function(index) {
        if($routeParams.courseId=="new")
        {
@@ -115,7 +130,8 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
     $scope.getCond = function() {
         if($scope.course)
         {
-            return !$scope.disable_save_button && $scope.language && $scope.career_type && $scope.knowledge;// && $scope.changed;
+            //console.log($scope.changed);
+            return !$scope.disable_save_button && $scope.language && $scope.career_type && $scope.knowledge && $scope.changed;
         }
         else
         {
