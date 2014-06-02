@@ -29,26 +29,27 @@
                 <div class="activity-list" >
                     <ul>
                         <li ng-repeat="activity in activities">
-                            <div ng-click="accessActivity({{activity}})" class="list-item-label">
-                                <div class="list-item" ng-hide="activity.name=='caca'">
-                                    <div >
-                                        <b>{{activity.name}}</b>
+                            <div>
+                                <div ng-click="accessActivity({{activity}})" class="list-item-label">
+                                    <div class="list-item" ng-hide="activity.name=='caca'">
+                                        <div >
+                                            <b>{{activity.name}}</b>
+                                        </div>
+                                        <font size="3" color="grey">
+                                            {{activity.query}}
+                                        </font>
                                     </div>
-                                    <font size="3" color="grey">
-                                        {{activity.query}}
-                                    </font>
                                 </div>
-                                <div class="list-item" ng-show="activity.name=='caca'">
-                                      <img src="img/loading.gif" class="loading">
+                                <div  class="mini-menu-activity">
+                                    <div ng-click="removeActivity({{activity}},$event)" class="remove-activity-btn">Remove</div>
+                                   <div style="color:black;display:none;" >Are you sure? 
+                                        <div ng-click="removeSure({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Yes</div>                                <div ng-click="noRemove({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Back</div>
+                                    </div>
+                                    <div ng-click="accessActivity({{activity}})" class="edit-activity-btn">Edit</div>
                                 </div>
-
                             </div>
-                            <div  class="mini-menu-activity">
-                                <div ng-click="removeActivity({{activity}},$event)" class="remove-activity-btn">Remove</div>
-                               <div style="color:black;display:none;" >Are you sure? 
-                                    <div ng-click="removeSure({{activity}})" style="color:#009bdb;display:inline;cursor:pointer;">Yes</div>                                <div ng-click="noRemove({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Back</div>
-                                </div>
-                                <div ng-click="accessActivity({{activity}})" class="edit-activity-btn">Edit</div>
+                            <div style="display:none;margin-top:-55px;margin-bottom:-70px;">
+                                  <img src="img/loading.gif">
                             </div>
                         </li>
                         <li>

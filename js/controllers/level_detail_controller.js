@@ -37,18 +37,15 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        event.target.parentElement.parentElement.children[0].style.display="block";
        event.target.parentElement.parentElement.children[2].style.display="block";
     };
-    $scope.removeSure = function(activity) {
+    $scope.removeSure = function(activity,event) {
+       console.log(event);
+       event.target.parentElement.parentElement.parentElement.style.display="none";
+       event.target.parentElement.parentElement.parentElement.parentElement.children[1].style.display="block";
+       event.target.parentElement.parentElement.parentElement.style.display="none";
+
        var baseActivity = Restangular.one('editor/activity', activity.id);
        baseActivity.remove().then(function(){
-        var baseActivities = Restangular.all('editor/activity/?level_type=' + $routeParams.levelId + '&career=' + $routeParams.courseId);
-        baseActivities.getList().then(function(activities){
-            for (var j=0;j<activities.length;j++)
-            {
-                console.log(activities[j]);
-                $scope.activities[j] = activities[j];
-            }    
-            $scope.loadAct=false;
-        });
+            event.target.parentElement.parentElement.parentElement.parentElement.style.display="none";
        });   
     };
     $scope.back = function() { 
