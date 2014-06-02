@@ -75,3 +75,10 @@ kurubeeApp.controller('AuthCtrl',function($scope,$rootScope, $location, $routePa
     $location.path( "/courses" );
   });
 });
+
+kurubeeApp.controller('ErrorCtrl',function($scope,$rootScope, $location, $routeParams, $cookieStore, Restangular) {
+    $scope.back = function() {
+        console.log('asdasdasd');
+        history.back();
+    }
+});

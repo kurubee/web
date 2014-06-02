@@ -108,6 +108,7 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
       }).
       when('/error', {
         templateUrl: 'partials/error.html',
+        controller: 'ErrorCtrl'
       }).
       otherwise({
         redirectTo: '/courses'

@@ -288,7 +288,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
           {
               $scope.activity.radius =$scope.radius;
           }
-           $scope.activity.points = "{ \"tydpe\": \"MultiPoint\", \"coordinates\": [ [ " + $scope.activity.points.coordinates[0][0] + "," + $scope.activity.points.coordinates[0][1] + " ] ] }";
+           $scope.activity.points = "{ \"type\": \"MultiPoint\", \"coordinates\": [ [ " + $scope.activity.points.coordinates[0][0] + "," + $scope.activity.points.coordinates[0][1] + " ] ] }";
            if($scope.boundsChanged)
            {
                var bounds = $scope.map.getBounds();
