@@ -87,8 +87,6 @@ kurubeeApp.controller('CourseStatsCtrl',function($scope,$rootScope, $location, $
     var baseStats = Restangular.one('topscores',$routeParams.courseId);
     baseStats.get().then(function(scores){
         temp = Restangular.copy(scores);
-        console.log(temp);
         $scope.scores = temp.scores;
-        console.log($scope.scores);
     });
 });

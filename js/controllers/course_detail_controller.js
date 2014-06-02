@@ -98,7 +98,6 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
     };
     
     $scope.detectChange = function () {
-        console.log($scope.changes);
         if ($scope.changes>3)
         {
             console.log("cambio");
