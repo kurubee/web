@@ -1,0 +1,25 @@
+<div class="container-fluid margedTop">
+  <div class="row-fluid">
+    <div class="span10 margedTop">
+        <div ng-show="!scores">
+            <img src="img/loading.gif" class="loading">
+        </div>
+        <div ng-show="scores">
+            <table class="table table-striped" >
+                <thead>
+                  <tr>
+                    <th>Player</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="score in scores">
+                    <td>{{score}}</td>
+                    <td>{{score}}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>            
+    </div>
+  </div>
+</div>
