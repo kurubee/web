@@ -98,19 +98,42 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
            $scope.activity.correct_answer = $scope.correct_answer.value;
            if(!$routeParams.activityId)
            {
-               baseActivities.post($scope.activity).then(function ()
+               baseActivities.post($scope.activity).then(function (resp)
                {
+                if(resp)
+                {
+                    if(resp.status!=500) 
+                    {
+                        $scope.disable_save_button = false;
+                        $scope.saved = true;
+                        setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    }
+                }else
+                {
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                }
+                
                });
            }else
            {
-               $scope.activity.put().then(function ()
+               $scope.activity.put().then(function (resp)
                {
+                if(resp)
+                {
+                    if(resp.status!=500) 
+                    {
+                        $scope.disable_save_button = false;
+                        $scope.saved = true;
+                        setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    }
+                }else
+                {
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                }
                });
            }
        }

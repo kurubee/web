@@ -200,10 +200,10 @@ kurubeeApp.config(['$httpProvider', function($httpProvider) {
 				
 				if (response.status === 500) {
 					// HTTP 500 Error: 
-					// The request requires user authentication
-                    $location.path( "/error" );
+                    $location.path( "/error");
+                    
 					response.data = { 
-				 		status: false, 
+				 		status: 500, 
 				 		description: 'Error!'
 				 	};
 
@@ -226,4 +226,5 @@ kurubeeApp.config(['$httpProvider', function($httpProvider) {
 	}]);
 
 }]);
+
 

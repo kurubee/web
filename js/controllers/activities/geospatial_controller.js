@@ -1,4 +1,5 @@
 kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+
     $scope.boundsChanged = false;
     $scope.changed = false;
     $scope.changes = 0;
@@ -287,7 +288,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
           {
               $scope.activity.radius =$scope.radius;
           }
-           $scope.activity.points = "{ \"type\": \"MultiPoint\", \"coordinates\": [ [ " + $scope.activity.points.coordinates[0][0] + "," + $scope.activity.points.coordinates[0][1] + " ] ] }";
+           $scope.activity.points = "{ \"tydpe\": \"MultiPoint\", \"coordinates\": [ [ " + $scope.activity.points.coordinates[0][0] + "," + $scope.activity.points.coordinates[0][1] + " ] ] }";
            if($scope.boundsChanged)
            {
                var bounds = $scope.map.getBounds();
@@ -303,19 +304,42 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
            $scope.saved = false;
            if(!$routeParams.activityId)
            {
-               baseActivities.post($scope.activity).then(function ()
+               baseActivities.post($scope.activity).then(function (resp)
                {
+                if(resp)
+                {
+                    if(resp.status!=500) 
+                    {
+                        $scope.disable_save_button = false;
+                        $scope.saved = true;
+                        setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    }
+                }
+                else
+                {
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                }
                });
            }else
            {
-               $scope.activity.put().then(function ()
+               $scope.activity.put().then(function (resp)
                {
-                    $scope.disable_save_button = false;
-                    $scope.saved = true;
-                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                if(resp)
+                {
+                    if(resp.status!=500) 
+                    {
+                        $scope.disable_save_button = false;
+                        $scope.saved = true;
+                        setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                    }
+                }else
+                {
+                        $scope.disable_save_button = false;
+                        $scope.saved = true;
+                        setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                }
                });
            }
        }
