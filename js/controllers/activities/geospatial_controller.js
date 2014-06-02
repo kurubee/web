@@ -1,6 +1,8 @@
 kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    $scope.boundsChanged = false;
     $scope.changed = false;
     $scope.changes = 0;
+    $scope.boundsChanges = 0;
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
     $scope.magnitudes = {
@@ -12,6 +14,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
     var baseActivities = Restangular.all('editor/geospatial');
     if(!$routeParams.activityId)
     {
+        $scope.boundsChanged = true;
         var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
         baseCourse.get().then(function(course1){
             $scope.course = Restangular.copy(course1);
@@ -181,6 +184,17 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                     icon: markerIcon
                 });
                 $scope.mouseFlag = false;
+                google.maps.event.addListener($scope.map, 'bounds_changed', function() {
+                    if ($scope.boundsChanges>0)
+                    {
+                        $scope.$apply(function() {
+                            $scope.changed=true;
+                            $scope.boundsChanged = true;
+                        });
+                       
+                    }
+                    $scope.boundsChanges ++;
+                });
                 //Creating eventlisteners to set mark when click
                 google.maps.event.addListener($scope.map, "mouseup", function (e)
                 {
@@ -218,7 +232,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                     $scope.mouseFlag = true;
                 });
             }, 100);
-        $scope.$watch("activity", $scope.detectChange ,true);
+            $scope.$watch("radius", $scope.detectChange);
+            $scope.$watch("magnitude", $scope.detectChange);
         });
 
     }
@@ -255,31 +270,35 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         $scope.circle = new google.maps.Circle(populationOptions);
     };
     $scope.detectChange = function () {
-        console.log($scope.changes);
-        if ($scope.changes>0)
+        if ($scope.changes>2)
         {
-            console.log("cambio");
             $scope.changed = true;
         }
         $scope.changes ++;
     }    
     $scope.saveActivity = function() {
-      if($scope.magnitude=="km")
+      if($scope.getCond())
       {
-          $scope.activity.radius =$scope.radius*1000;
-      }
-      else
-      {
-          $scope.activity.radius =$scope.radius;
-      }
-      if($scope.activity.points && $scope.activity.radius)
-      {
-
+          if($scope.magnitude=="km")
+          {
+              $scope.activity.radius =$scope.radius*1000;
+          }
+          else
+          {
+              $scope.activity.radius =$scope.radius;
+          }
            $scope.activity.points = "{ \"type\": \"MultiPoint\", \"coordinates\": [ [ " + $scope.activity.points.coordinates[0][0] + "," + $scope.activity.points.coordinates[0][1] + " ] ] }";
-           var bounds = $scope.map.getBounds();
-           var southWest = bounds.getSouthWest();
-           var northEast = bounds.getNorthEast();
-           $scope.activity.area = "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ " + southWest.A + ", " + southWest.k + " ], [ " + southWest.A + ", " + (southWest.k + 0.0000000001) + " ], [ " + northEast.A + ", " + northEast.k + " ], [ " + southWest.A + ", " + southWest.k + " ] ] ] }";
+           if($scope.boundsChanged)
+           {
+               var bounds = $scope.map.getBounds();
+               var southWest = bounds.getSouthWest();
+               var northEast = bounds.getNorthEast();
+               $scope.activity.area = "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ " + southWest.A + ", " + southWest.k + " ], [ " + southWest.A + ", " + (southWest.k + 0.0000000001) + " ], [ " + northEast.A + ", " + northEast.k + " ], [ " + southWest.A + ", " + southWest.k + " ] ] ] }";
+           }else
+           {
+            $scope.activity.area = eval("(" + $scope.activity.area + ")");
+            $scope.activity.area = "{ \"type\": \"Polygon\", \"coordinates\": [ [ [ " + $scope.activity.area.coordinates[0][0][0] + ", " + $scope.activity.area.coordinates[0][0][1] + " ], [ " + $scope.activity.area.coordinates[0][1][0] + ", " + $scope.activity.area.coordinates[0][1][1] + " ], [ " + $scope.activity.area.coordinates[0][2][0] + ", " + $scope.activity.area.coordinates[0][2][1] + " ], [ " + $scope.activity.area.coordinates[0][3][0] + ", " + $scope.activity.area.coordinates[0][3][1] + " ] ] ] }";
+           }
            $scope.disable_save_button = true;
            $scope.saved = false;
            if(!$routeParams.activityId)
