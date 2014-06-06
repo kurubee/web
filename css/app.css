@@ -563,3 +563,8 @@ border: 1px solid;
     height:172px;
     overflow-y: hidden;
 }
+.high-light {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+}
