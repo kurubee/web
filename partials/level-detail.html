@@ -27,7 +27,7 @@
             <div class="m-title">{{courseName}}</div>
             <div class="m-content-level" style="background-image: url(img/level_icons/{{level}}B.png);">
                 <div class="activity-list" >
-                    <ul>
+                    <ul ng-show="activities">
                         <li ng-repeat="activity in activities | orderBy:level_order" ">
                             <div>
                                 <div ng-click="accessActivity({{activity}})" class="list-item-label">
@@ -47,7 +47,7 @@
                                         <div ng-click="noRemove({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Back</div>
                                     </div>
                                     <div ng-click="accessActivity({{activity}})" class="edit-activity-btn">Edit</div>
-                                    <div ng-click="upActivity({{activity}})" class="edit-activity-btn">Up</div>
+                                    <div ng-click="upActivity({{activity}})" class="edit-activity-btn" style="margin-right:5px">Up</div>
                                     <div ng-click="downActivity({{activity}})" class="edit-activity-btn" style="float:none;left:5px;">Down</div>
                                 </div>
                             </div>
@@ -70,6 +70,10 @@
                             </div>
                         </li>
                     </ul>
+                    <div ng-hide="activities">
+                        <img src="img/loading.gif">
+                    </div>
+
                 </div>
             </div>    
              <div class="bottom-bar">

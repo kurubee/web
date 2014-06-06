@@ -49,18 +49,33 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        });   
     };
     $scope.upActivity = function(activity) {
-        console.log('jau');
+       $scope.activities=[];
        var baseActivity = Restangular.one('editor/activity', activity.id);
+
        baseActivity.get().then(function(activity1){
             act = Restangular.copy(activity1);
             delete act.career;
             act.level_order--;
             act.put().then(function(){
                activity.level_order--; 
-               $location.path("/");
+               $route.reload();
             });
        });
     };
+    $scope.downActivity = function(activity) {
+       $scope.activities=[];
+       var baseActivity = Restangular.one('editor/activity', activity.id);
+       baseActivity.get().then(function(activity1){
+            act = Restangular.copy(activity1);
+            delete act.career;
+            act.level_order++;
+            act.put().then(function(){
+               activity.level_order++; 
+               $route.reload();
+            });
+       });
+    };
+
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId);   
     };
