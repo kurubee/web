@@ -54,13 +54,15 @@
                     <div id="carousel" ng-show="course.levels">
                         <ul rn-carousel  rn-carousel-indicator  rn-carousel-control rn-carousel-index id="carousel" >
                             <li ng-repeat="level in course.levels" style="height:115px;">
-                                <div class="carousel-card" ng-click="toLevel($index)">
-                                    <div id="centro" align="middle">
-                                        <p ng-show="level != 'new'" class="levelTitle">
+                                <div class="carousel-card">
+                                    <div id="centro" align="middle" >
+                                        <p ng-show="level != 'new'" class="levelTitle" >
                                             Level
                                         </p>
-                                    <div>
-                                    <img style="-webkit-user-drag: none;width:auto;" class="pointer" ng-src="img/level_icons/{{level}}.png" align="bottom">
+                                        <div>
+                                            <img style="-webkit-user-drag: none;width:auto;" class="pointer" ng-src="img/level_icons/{{level}}.png" align="bottom" ng-click="toLevel($index)">
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
