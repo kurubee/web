@@ -25,10 +25,11 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
                reward : "wena!",
                penalty : "mala!",
                activity_type : 'linguistic',
-               locked_text : '',
+               locked_text : 'your answer here',
                image: false,
                answer : '',
             };
+            $scope.refreshLockedText();
             $scope.changed = true;
         });
     }else
