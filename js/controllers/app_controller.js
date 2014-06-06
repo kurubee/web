@@ -84,9 +84,15 @@ kurubeeApp.controller('ErrorCtrl',function($scope,$rootScope, $location, $routeP
 });
 
 kurubeeApp.controller('CourseStatsCtrl',function($scope,$rootScope, $location, $routeParams, $cookieStore, Restangular) {
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseStats = Restangular.one('topscores',$routeParams.courseId);
     baseStats.get().then(function(scores){
         temp = Restangular.copy(scores);
+        console.log(temp.scores);
+        for (var i = 0; i < temp.scores.length; i++) {
+            temp.scores[i] = eval("("+temp.scores[i]+")");
+        }
         $scope.scores = temp.scores;
+        console.log($scope.scores);        
     });
 });
