@@ -48,6 +48,19 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
             event.target.parentElement.parentElement.parentElement.parentElement.style.display="none";
        });   
     };
+    $scope.upActivity = function(activity) {
+        console.log('jau');
+       var baseActivity = Restangular.one('editor/activity', activity.id);
+       baseActivity.get().then(function(activity1){
+            act = Restangular.copy(activity1);
+            delete act.career;
+            act.level_order--;
+            act.put().then(function(){
+               activity.level_order--; 
+               $location.path("/");
+            });
+       });
+    };
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId);   
     };

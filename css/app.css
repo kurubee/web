@@ -487,7 +487,8 @@ border: 1px solid;
 }
 
 .edit-activity-btn {
-    margin-left:60px;
+    float:left;
+    margin-left:5px;
     cursor: pointer;
 }
 

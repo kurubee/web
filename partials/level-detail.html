@@ -28,10 +28,10 @@
             <div class="m-content-level" style="background-image: url(img/level_icons/{{level}}B.png);">
                 <div class="activity-list" >
                     <ul>
-                        <li ng-repeat="activity in activities">
+                        <li ng-repeat="activity in activities | orderBy:level_order" ">
                             <div>
                                 <div ng-click="accessActivity({{activity}})" class="list-item-label">
-                                    <div class="list-item" ng-hide="activity.name=='caca'">
+                                    <div class="list-item">
                                         <div >
                                             <b>{{activity.name}}</b>
                                         </div>
@@ -41,11 +41,14 @@
                                     </div>
                                 </div>
                                 <div  class="mini-menu-activity">
-                                    <div ng-click="removeActivity({{activity}},$event)" class="remove-activity-btn">Remove</div>
+                                   <div ng-click="removeActivity({{activity}},$event)" class="remove-activity-btn">Remove</div>
                                    <div style="color:black;display:none;" >Are you sure? 
-                                        <div ng-click="removeSure({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Yes</div>                                <div ng-click="noRemove({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Back</div>
+                                        <div ng-click="removeSure({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Yes</div>
+                                        <div ng-click="noRemove({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Back</div>
                                     </div>
                                     <div ng-click="accessActivity({{activity}})" class="edit-activity-btn">Edit</div>
+                                    <div ng-click="upActivity({{activity}})" class="edit-activity-btn">Up</div>
+                                    <div ng-click="downActivity({{activity}})" class="edit-activity-btn" style="float:none;left:5px;">Down</div>
                                 </div>
                             </div>
                             <div style="display:none;margin-top:-55px;margin-bottom:-70px;">
@@ -78,8 +81,6 @@
                 <div class="bottom-right">
                 </div>
              </div>
-        </div>
-
         </div>
     </div>
 </div>
