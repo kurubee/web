@@ -235,6 +235,9 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
             }, 100);
             $scope.$watch("radius", $scope.detectChange);
             $scope.$watch("magnitude", $scope.detectChange);
+            $scope.$watch("activity.name", $scope.detectChange);
+            $scope.$watch("activity.query", $scope.detectChange);
+            
         });
 
     }
@@ -271,7 +274,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
         $scope.circle = new google.maps.Circle(populationOptions);
     };
     $scope.detectChange = function () {
-        if ($scope.changes>2)
+        if ($scope.changes>4)
         {
             $scope.changed = true;
         }
