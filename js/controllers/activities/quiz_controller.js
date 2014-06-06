@@ -83,7 +83,7 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
         $scope.changes ++;
     }    
     $scope.saveActivity = function() {
-       if($scope.activity.answers && $scope.correct_answer)
+       if($scope.getCond())
        {
            $scope.disable_save_button = true;
            $scope.saved = false;

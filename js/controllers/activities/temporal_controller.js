@@ -62,56 +62,59 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
         $scope.changes ++;
     }  
     $scope.saveActivity = function() {
-       if($scope.correct_answer == "before")
+       if($scope.getCond())
        {
-            $scope.activity.image_datetime = "1970-01-01 00:00";
-            $scope.activity.query_datetime = "1970-01-01 00:01";
-       }
-       else
-       {
-            $scope.activity.image_datetime = "1970-01-01 00:01";
-            $scope.activity.query_datetime = "1970-01-01 00:00";       
-       }
-       $scope.disable_save_button = true;
-       $scope.saved = false;
-       if(!$routeParams.activityId)
-       {
-           baseActivities.post($scope.activity).then(function (resp)
+           if($scope.correct_answer == "before")
            {
-                if(resp)
-                {
-                    if(resp.status!=500) 
+                $scope.activity.image_datetime = "1970-01-01 00:00";
+                $scope.activity.query_datetime = "1970-01-01 00:01";
+           }
+           else
+           {
+                $scope.activity.image_datetime = "1970-01-01 00:01";
+                $scope.activity.query_datetime = "1970-01-01 00:00";       
+           }
+           $scope.disable_save_button = true;
+           $scope.saved = false;
+           if(!$routeParams.activityId)
+           {
+               baseActivities.post($scope.activity).then(function (resp)
+               {
+                    if(resp)
+                    {
+                        if(resp.status!=500) 
+                        {
+                            $scope.disable_save_button = false;
+                            $scope.saved = true;
+                            setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                        }
+                    }else
                     {
                         $scope.disable_save_button = false;
                         $scope.saved = true;
                         setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
                     }
-                }else
-                {
-                    $scope.disable_save_button = false;
-                    $scope.saved = true;
-                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                }
-           });
-       }else
-       {
-           $scope.activity.put().then(function (resp)
+               });
+           }else
            {
-                if(resp)
-                {
-                    if(resp.status!=500) 
+               $scope.activity.put().then(function (resp)
+               {
+                    if(resp)
+                    {
+                        if(resp.status!=500) 
+                        {
+                            $scope.disable_save_button = false;
+                            $scope.saved = true;
+                            setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
+                        }
+                    }else
                     {
                         $scope.disable_save_button = false;
                         $scope.saved = true;
                         setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
                     }
-                }else
-                {
-                    $scope.disable_save_button = false;
-                    $scope.saved = true;
-                    setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);
-                }
-           });
+               });
+           }
        }
     };
     

@@ -31,11 +31,15 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        event.target.style.display="none";
        event.target.parentElement.children[1].style.display="block";
        event.target.parentElement.children[2].style.display="none";
+       event.target.parentElement.children[3].style.display="none";
+       event.target.parentElement.children[4].style.display="none";
     };
     $scope.noRemove = function(activity,event) {
        event.target.parentElement.style.display="none";
        event.target.parentElement.parentElement.children[0].style.display="block";
        event.target.parentElement.parentElement.children[2].style.display="block";
+       event.target.parentElement.parentElement.children[3].style.display="block";
+       event.target.parentElement.parentElement.children[4].style.display="block";
     };
     $scope.removeSure = function(activity,event) {
        console.log(event);
