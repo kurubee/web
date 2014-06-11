@@ -471,6 +471,7 @@ border: 1px solid;
 
 .start-level-btn:hover {
     background-color: #11598c; 
+    text-decoration:none;
 }
 
 /*Level Detail*/
@@ -567,4 +568,8 @@ border: 1px solid;
     outline: none;
     border-color: #9ecaed;
     box-shadow: 0 0 10px #9ecaed;
+}
+
+.activities-dropdown {
+    padding:4px;
 }

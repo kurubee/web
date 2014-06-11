@@ -55,20 +55,6 @@
                                   <img src="img/loading.gif">
                             </div>
                         </li>
-                        <li>
-                            <div class="carousel-card" >
-                                <select ng-model="activityType" class="select-options select-activity-type">
-                                  <option value="quiz">Quiz</option>
-                                  <option value="visual">Visual</option>
-                                  <option value="linguistic">Linguistic</option>
-                                  <option value="geospatial">Geospatial</option>
-                                  <option value="temporal">Temporal</option>
-                                </select>
-                                <button ng-class="{'button2':true, 'fade3':true, 'new-activity-btn':true }" ng-click="createActivity()">
-                                    New Activity
-                                </button>      
-                            </div>
-                        </li>
                     </ul>
                     <div ng-hide="activities">
                         <img src="img/loading.gif">
@@ -83,6 +69,18 @@
                     </div>
                 </div>
                 <div class="bottom-right">
+<div class="dropdown">
+  <a style="width:132px;margin-top:0px;margin-right:3px;padding:4px;" id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-class="{ 'fade3':true, 'start-level-btn':true ,'button2':true}">
+    New Activity <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      <li class="pointer activities-dropdown" ng-click="createActivity('quiz')">Quiz</li>
+      <li class="pointer activities-dropdown" ng-click="createActivity('visual')">Visual</li>
+      <li class="pointer activities-dropdown" ng-click="createActivity('linguistic')">Linguistic</li>
+      <li class="pointer activities-dropdown" ng-click="createActivity('geospatial')">Geospatial</li>
+      <li class="pointer activities-dropdown" ng-click="createActivity('temporal')">Temporal</li>
+  </ul>
+</div>
                 </div>
              </div>
         </div>

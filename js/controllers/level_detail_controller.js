@@ -17,8 +17,8 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
         $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/" + activity.activity_type +"/" + activity.id);    
     };
     
-    $scope.createActivity = function() {
-           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/"+$scope.activityType+"/" );       
+    $scope.createActivity = function(type) {
+           $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/"+type+"/" );       
     };
     
     $scope.askRemoveActivity = function(activity) {
