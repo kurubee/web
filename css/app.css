@@ -242,10 +242,6 @@ margin-bottom: -61px;
     margin-top: 18px;
 }
 
-.select-options {
-    width: 105px;
-}
-
 .input-code-cls {
     line-height: 1px;
 }
@@ -573,3 +569,9 @@ border: 1px solid;
 .activities-dropdown {
     padding:4px;
 }
+
+.out-box{
+    background: white;
+    padding: 2px;
+}
+min-width: 160px;
