@@ -13,8 +13,8 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
             $scope.courseName = $scope.course.name;
 
             $scope.activity = {
-               name : "Activity Name",
-               query : "Activity Query",
+               name : "",
+               query : "",
                career : "/api/v1/editor/career/" + $routeParams.courseId ,
                language_code : "en",
                level_type : $routeParams.levelId,
@@ -137,7 +137,7 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     $scope.getCond = function() {   
         if( $scope.activity )
         {
-            return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.changed;
+            return !$scope.disable_save_button && $scope.activity.image && $scope.correct_answer && $scope.changed && $scope.activity.name && $scope.activity.query;
         }else
         {
             return false;

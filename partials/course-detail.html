@@ -26,15 +26,15 @@
                         <b>Course options:</b>
                         <br>
                         Language: 
-                        <select ng-model="language"  ng-options="code as name for (code , name) in languages" class="select-options">
+                        <select ng-model="language"  ng-options="code as name for (code , name) in languages" class="high-light select-options out-box">
                         </select>
                         <br>
                         Knowledge Field: 
-                        <select ng-model="knowledge" ng-options="code as name for (code,name) in knowledges" class="select-options">
+                        <select ng-model="knowledge" ng-options="code as name for (code,name) in knowledges" class="high-light select-options out-box">
                         </select>
                         <br>
                         Course Modality: 
-                        <select ng-model="career_type" ng-options="code as name for (code,name) in career_types" class="select-options">
+                        <select ng-model="career_type" ng-options="code as name for (code,name) in career_types" class=" high-light select-options out-box">
                         </select>
                         <br>
                         Code: 
@@ -48,9 +48,9 @@
         </div>
         <div class="column-right">
             <div class="m-template m-template-course">
-                <input type="text" ng-model="course.name" class="m-title" id="title-input">
+                <input type="text" ng-model="course.name" class="m-title" id="title-input" placeholder="Course Name">
                 <div class="m-content-level">
-                    <textarea ng-model="course.description" class="m-description course-description" id="description-input"></textarea>
+                    <textarea ng-model="course.description" class="m-description course-description" id="description-input" placeholder="Course Description"></textarea>
                     <div id="carousel" ng-show="course.levels">
                         <ul rn-carousel  rn-carousel-indicator  rn-carousel-control rn-carousel-index id="carousel" >
                             <li ng-repeat="level in course.levels" style="height:115px;">

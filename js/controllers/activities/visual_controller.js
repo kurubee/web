@@ -15,8 +15,8 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
             $scope.courseName = $scope.course.name;
 
             $scope.activity = {
-               name : "Activity Name",
-               query : "Activity Query",
+               name : "",
+               query : "",
                career : "/api/v1/editor/career/" + $routeParams.courseId ,
                language_code : "en",
                level_type : $routeParams.levelId,
@@ -168,7 +168,7 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
         {
             var img = document.getElementById("image");
             img.src = $scope.baseURL+$scope.activity.image;
-            return !$scope.disable_save_button && $scope.activity.time && $scope.correct_answer && $scope.activity.real_answers && $scope.activity.real_answers && $scope.activity.image && $scope.changed;
+            return !$scope.disable_save_button && $scope.activity.time && $scope.correct_answer && $scope.activity.real_answers && $scope.activity.real_answers && $scope.activity.image && $scope.changed && $scope.activity.name && $scope.activity.query;
         }
         else
         {

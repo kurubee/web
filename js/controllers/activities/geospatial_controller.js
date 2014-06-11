@@ -22,8 +22,8 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
             $scope.courseName = $scope.course.name;
 
             $scope.activity = {
-               name : "Activity Name",
-               query : "Activity Query",
+               name : "",
+               query : "",
                career : "/api/v1/editor/career/" + $routeParams.courseId ,
                language_code : "en",
                level_type : $routeParams.levelId,
@@ -353,7 +353,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.getCond = function() {   
         if($scope.activity)
         {
-            return !$scope.disable_save_button && $scope.activity.points && $scope.activity.radius && $scope.changed;
+            return !$scope.disable_save_button && $scope.activity.points && $scope.activity.radius && $scope.changed && $scope.activity.name && $scope.activity.query;
         }
         else
         {

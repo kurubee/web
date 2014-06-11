@@ -12,8 +12,8 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
             $scope.course = Restangular.copy(course1);
             $scope.courseName = $scope.course.name;
             $scope.activity = {
-               name : "Activity Name",
-               query : "Activity Query",
+               name : "",
+               query : "",
                answers : [],
                real_answers : [{"value":"respuestano1"},{"value":"respuestano2"}],
                correct_answer : "",
@@ -139,7 +139,7 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
        }
     };
     $scope.getCond = function() {   
-        return !$scope.disable_save_button && $scope.correct_answer && $scope.changed;
+        return !$scope.disable_save_button && $scope.correct_answer && $scope.changed && $scope.activity.name && $scope.activity.query;
     };
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   

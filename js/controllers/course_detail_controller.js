@@ -26,11 +26,11 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
                 activities: [],
                 career_type: "",
                 code: "",
-                description: "Type here the course description",
+                description: "",
                 knowledges: [],
                 language_code: "",
                 levels: [],
-                name: "Course Name",
+                name: "",
                 published: false,
             };
             $scope.changed = true;
@@ -130,7 +130,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
         if($scope.course)
         {
             //console.log($scope.changed);
-            return !$scope.disable_save_button && $scope.language && $scope.career_type && $scope.knowledge && $scope.changed;
+            return !$scope.disable_save_button && $scope.language && $scope.career_type && $scope.knowledge && $scope.changed && $scope.course.name && $scope.course.description;
         }
         else
         {
