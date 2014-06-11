@@ -2,7 +2,7 @@ var kurubeeControllers  = angular.module('kurubeeControllers', []);
 
 kurubeeApp.controller('AppController', function($scope, $cookieStore) {
     if ($cookieStore.get("username"))
-    {        
+    {
         $scope.menuUrl = function() {
             return "partials/navIn.html";
          };
@@ -23,11 +23,11 @@ kurubeeApp.controller('AppController', function($scope, $cookieStore) {
          {
              $scope.menuUrl=function() {
                 return "partials/navOut.html";
-             };         
+             };
          }
      });
 });
-  
+
 kurubeeApp.controller('topbar-controller', function($scope,$cookieStore) {
     $scope.user = $cookieStore.get("username");
 });
@@ -40,11 +40,11 @@ kurubeeApp.controller('RemoveCtrl', function($location, $scope, Restangular,$coo
     });
     $scope.yes = function(index) {
        baseCourse.remove().then(function(){
-           $location.path( "/courses/");   
-       }); 
+           $location.path( "/courses/");
+       });
     }
     $scope.no = function(index) {
-       $location.path( "/courses/");   
+       $location.path( "/courses/");
     }
 });
 
@@ -87,12 +87,7 @@ kurubeeApp.controller('CourseStatsCtrl',function($scope,$rootScope, $location, $
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseStats = Restangular.one('topscores',$routeParams.courseId);
     baseStats.get().then(function(scores){
-        temp = Restangular.copy(scores);
-        console.log(temp.scores);
-        for (var i = 0; i < temp.scores.length; i++) {
-            temp.scores[i] = eval("("+temp.scores[i]+")");
-        }
-        $scope.scores = temp.scores;
-        console.log($scope.scores);        
+        $scope.scores = Restangular.copy(scores).scores;
+        console.log($scope.scores);
     });
 });
