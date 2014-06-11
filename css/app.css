@@ -581,5 +581,9 @@ label{
     width:150px;
 }
 
-
+.tooltip-cls{
+    border-radius: 20px;
+    padding: 0px 7px 0px 7px;
+    margin-top :-2px;
+}
 

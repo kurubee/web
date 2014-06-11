@@ -1,4 +1,7 @@
 kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {
+    $("#mod-tooltip").tooltip()
+    $("#code-tooltip").tooltip()
+    $("#pub-tooltip").tooltip()
     $scope.changes = 0;
     $scope.changed = false;
     $scope.fromSaved = false;
