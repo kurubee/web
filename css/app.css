@@ -244,6 +244,7 @@ margin-bottom: -61px;
 
 .input-code-cls {
     line-height: 1px;
+    width:160px;
 }
 
 .save-course-btn-cls {
@@ -573,5 +574,12 @@ border: 1px solid;
 .out-box{
     background: white;
     padding: 2px;
+    min-width: 160px;
 }
-min-width: 160px;
+
+label{
+    width:150px;
+}
+
+
+

@@ -22,28 +22,32 @@
                 <br>
                 <br>
                 <div>
-                    <p>
+                        <p>
                         <b>Course options:</b>
-                        <br>
-                        Language: 
+                        </p>
+                        <p>
+                        <label>Language: </label>
                         <select ng-model="language"  ng-options="code as name for (code , name) in languages" class="high-light select-options out-box">
                         </select>
-                        <br>
-                        Knowledge Field: 
+                        </p>
+                        <p>
+                        <label>Knowledge Field: </label>
                         <select ng-model="knowledge" ng-options="code as name for (code,name) in knowledges" class="high-light select-options out-box">
                         </select>
-                        <br>
-                        Course Modality: 
+                        </p>
+                        <p>
+                        <label>Course Modality: </label>
                         <select ng-model="career_type" ng-options="code as name for (code,name) in career_types" class=" high-light select-options out-box">
                         </select>
-                        <br>
-                        Code: 
+                        </p>
+                        <p>
+                        <label>Code: </label>
                         <input ng-model="course.code" type="text" class="input-code-cls">
-                        <br>
-                        Published: 
+                        </p>
+                        <p>
+                        <label>Published: </label>
                         <input type="checkbox" ng-model="course.published">
-                    </p>
-                    <br>
+                        </p>
                 </div>
         </div>
         <div class="column-right">
