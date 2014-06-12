@@ -26,28 +26,28 @@
                         <b>Course options:</b>
                         </p>
                         <p>
-                        <label>Language: </label>
+                        <label class="label-course">Language: </label>
                         <select ng-model="language"  ng-options="code as name for (code , name) in languages" class="high-light select-options out-box">
                         </select>
                         </p>
                         <p>
-                        <label>Knowledge Field: </label>
+                        <label class="label-course">Knowledge Field: </label>
                         <select ng-model="knowledge" ng-options="code as name for (code,name) in knowledges" class="high-light select-options out-box">
                         </select>
                         </p>
                         <p>
-                        <label>Course Modality: </label><i class="icon-ok-sign" data-toggle="tooltip" title="Key active" id="blah"></i>
+                        <label class="label-course">Course Modality: </label><i class="icon-ok-sign" data-toggle="tooltip" title="Key active" id="blah"></i>
                         <select ng-model="career_type" ng-options="code as name for (code,name) in career_types" class=" high-light select-options out-box">
                         </select>
                         <button id="mod-tooltip" type="button" class="tooltip-cls btn btn-default" data-toggle="tooltip" data-placement="right" title="Choose here the modality for your course, explore or exam!">?</button>
                         </p>
                         <p>
-                        <label>Code: </label>
+                        <label class="label-course">Code: </label>
                         <input ng-model="course.code" type="text" class="input-code-cls">
                         <button id="code-tooltip" type="button" class="tooltip-cls btn btn-default" data-toggle="tooltip" data-placement="right" title="Type a code if you want your course to be private!">?</button>
                         </p>
                         <p>
-                        <label>Published: </label>
+                        <label class="label-course">Published: </label>
                         <input type="checkbox" ng-model="course.published">
                         <button id="pub-tooltip" type="button" class="tooltip-cls btn btn-default" data-toggle="tooltip" data-placement="right" title="Is finished your course?">?</button>
                         </p>
