@@ -79,6 +79,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
                var baseCourses = Restangular.all('editor/career');
                baseCourses.post($scope.course).then(function (response)
                {
+                    $scope.changed=false;
                     $scope.course.id=response.id;
                     $scope.fromSaved = true;
                     $scope.disable_save_button = false;
@@ -90,6 +91,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
             {
                 $scope.course.put().then(function() 
                 {
+                    $scope.changed=false;
                     $scope.disable_save_button = false;
                     $scope.saved = true;
                     setTimeout(function(){angular.element(document.getElementById('saved-text')).addClass("vanish");},1000);

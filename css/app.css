@@ -587,3 +587,9 @@ border: 1px solid;
     margin-top :-2px;
 }
 
+.course-list-container{
+position: absolute;
+
+margin-left: 10%;
+width: 80%;
+}
