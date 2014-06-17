@@ -144,6 +144,9 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
     };
+    $scope.toCareer = function() { 
+        $location.path( "/courses/" + $routeParams.courseId);   
+    };
     
 }]);
 

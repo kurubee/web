@@ -5,11 +5,11 @@
         <div class="background-level" ng-show="loaded" >
             <div class="column-left">
                 <div class="breadcumb">
-                     
+                    <a ng-click="back()" href="">{{courseName}}</a> >> <a href="">level {{level}}</a>:
                 </div>
                 <!-- Title -->
                 <div class="title-description-cls">
-                    <h3 id="title-description">You are editing Level {{level}}.</h3>
+                    <!--<h3 id="title-description">You are editing Level {{level}}.</h3>--> &nbsp;
                 </div>
                 <!-- Content -->
                 <div class="activities-description-cls">
@@ -57,7 +57,7 @@
                         </li>
                     </ul>
                     <div ng-hide="activities">
-                        <img src="img/loading.gif">
+                        <!--<img src="img/loading.gif">-->
                     </div>
 
                 </div>

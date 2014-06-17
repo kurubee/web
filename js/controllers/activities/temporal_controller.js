@@ -146,4 +146,8 @@ kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Re
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
     };
+    $scope.toCareer = function() { 
+        $location.path( "/courses/" + $routeParams.courseId);   
+    };
+    
 }]);

@@ -5,7 +5,7 @@
     <div class="background-geospatial-activity" ng-show="activity">
         <div class="column-left">
                 <div class="breadcumb">
-                    {{courseName}} <font style="font-style: italic; ">level {{level}}:</font>
+                    <a ng-click="toCareer()" href="">{{courseName}}</a> >> <a ng-click="back()" href="">level {{level}}</a> >> {{activity.name}}:
                 </div>
                 <!-- Title -->
                 <div class="title-description-cls">

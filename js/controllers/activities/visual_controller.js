@@ -13,7 +13,6 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
         baseCourse.get().then(function(course1){
             $scope.course = Restangular.copy(course1);
             $scope.courseName = $scope.course.name;
-
             $scope.activity = {
                name : "",
                query : "",
@@ -178,4 +177,8 @@ kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Rest
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
     };
+    $scope.toCareer = function() { 
+        $location.path( "/courses/" + $routeParams.courseId);   
+    };
+    
 }]);

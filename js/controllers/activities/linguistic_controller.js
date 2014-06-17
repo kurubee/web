@@ -156,4 +156,8 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.back = function() { 
         $location.path( "/courses/" + $routeParams.courseId + "/levels/" + $routeParams.levelId);   
     };
+    $scope.toCareer = function() { 
+        $location.path( "/courses/" + $routeParams.courseId);   
+    };
+    
 }]);
