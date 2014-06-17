@@ -84,6 +84,7 @@ kurubeeApp.controller('ErrorCtrl',function($scope,$rootScope, $location, $routeP
 });
 
 kurubeeApp.controller('CourseStatsCtrl',function($scope,$rootScope, $location, $routeParams, $cookieStore, Restangular) {
+    $scope.courseName =  $cookieStore.courseName;        
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseStats = Restangular.one('topscores',$routeParams.courseId);
     baseStats.get().then(function(scores){
