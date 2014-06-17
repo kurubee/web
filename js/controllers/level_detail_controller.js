@@ -58,7 +58,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        });   
     };
     $scope.upActivity = function(activity) {
-       $scope.activities=[];
+       $scope.activities="loading";
        var baseActivity = Restangular.one('editor/activity', activity.id);
 
        baseActivity.get().then(function(activity1){
@@ -72,7 +72,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        });
     };
     $scope.downActivity = function(activity) {
-       $scope.activities=[];
+       $scope.activities="loading";
        var baseActivity = Restangular.one('editor/activity', activity.id);
        baseActivity.get().then(function(activity1){
             act = Restangular.copy(activity1);
