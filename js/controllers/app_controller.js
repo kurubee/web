@@ -88,7 +88,7 @@ kurubeeApp.controller('PlayerStatsCtrl',function($scope,$rootScope, $location, $
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseStats = Restangular.one('topscores',$routeParams.courseId);
     baseStats.get().then(function(scores){
-        $scope.scores = Restangular.copy(scores).scores;
+        //$scope.scores = Restangular.copy(scores).scores;
         console.log($scope.scores);
     });
 });
@@ -98,8 +98,9 @@ kurubeeApp.controller('HourStatsCtrl',function($scope,$rootScope, $location, $ro
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseStats = Restangular.one('topscores',$routeParams.courseId);
     baseStats.get().then(function(scores){
-        $scope.scores = Restangular.copy(scores).scores;
-        console.log($scope.scores);
+        //$scope.items = Restangular.copy(scores).scores;
+        console.log($scope.items);
+
     });
 });
 kurubeeApp.controller('DayStatsCtrl',function($scope,$rootScope, $location, $routeParams, $cookieStore, Restangular) {
@@ -108,7 +109,47 @@ kurubeeApp.controller('DayStatsCtrl',function($scope,$rootScope, $location, $rou
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseStats = Restangular.one('topscores',$routeParams.courseId);
     baseStats.get().then(function(scores){
-        $scope.scores = Restangular.copy(scores).scores;
-        console.log($scope.scores);
+        //$scope.items = Restangular.copy(scores).scores;
+        console.log($scope.items);
+
     });
+});
+
+
+kurubeeApp.controller("PaginationCtrl", function($scope) {
+    
+  $scope.itemsPerPage = 5;
+  $scope.currentPage = 0;
+  $scope.items = [];
+
+  for (var i=0; i<50; i++) {
+    $scope.items.push({
+      id: i, name: "name "+ i, description: "description " + i
+    });
+  }
+
+  $scope.prevPage = function() {
+    if ($scope.currentPage > 0) {
+      $scope.currentPage--;
+    }
+  };
+
+  $scope.prevPageDisabled = function() {
+    return $scope.currentPage === 0 ? "disabled" : "";
+  };
+
+  $scope.pageCount = function() {
+    return Math.ceil($scope.items.length/$scope.itemsPerPage)-1;
+  };
+
+  $scope.nextPage = function() {
+    if ($scope.currentPage < $scope.pageCount()) {
+      $scope.currentPage++;
+    }
+  };
+
+  $scope.nextPageDisabled = function() {
+    return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
+  };
+
 });

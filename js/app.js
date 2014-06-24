@@ -10,6 +10,14 @@ var kurubeeApp = angular.module('kurubeeApp', [
   'uiSlider',
 ]);
 
+kurubeeApp.filter('offset', function() {
+
+  return function(input, start) {
+    start = parseInt(start, 10);
+    return input.slice(start);
+  };
+});
+
 kurubeeApp.directive('focusOn', function() {
    return function(scope, elem, attr) {
       scope.$on('focusOn', function(e, name) {
