@@ -112,9 +112,17 @@ kurubeeApp.config(function($routeProvider,RestangularProvider) {
         templateUrl: 'partials/geospatial-activity-detail.html',
         controller: 'GeospatialActivityCtrl'
       }).
-      when('/stats/:courseId/', {
-        templateUrl: 'partials/course-stats.html',
-        controller: 'CourseStatsCtrl'
+      when('/players/:courseId/', {
+        templateUrl: 'partials/player-stats.html',
+        controller: 'PlayerStatsCtrl'
+      }).
+      when('/hours/:courseId/', {
+        templateUrl: 'partials/hour-stats.html',
+        controller: 'HourStatsCtrl'
+      }).
+      when('/days/:courseId/', {
+        templateUrl: 'partials/day-stats.html',
+        controller: 'DayStatsCtrl'
       }).
       when('/login', {
         templateUrl: 'partials/login.html',

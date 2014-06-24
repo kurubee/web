@@ -15,8 +15,8 @@ kurubeeApp.controller('CourseListCtrl', function($location, $scope, Restangular,
     $scope.removeCourse = function(index) {
        $location.path( "/remove/"+index);   
     }
-    $scope.goToStats = function(index) {
-       $location.path( "/stats/"+index);   
+    $scope.goToPlayerStats = function(index) {
+       $location.path( "/players/"+index);   
     }
 });
 

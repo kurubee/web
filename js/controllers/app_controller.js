@@ -82,8 +82,29 @@ kurubeeApp.controller('ErrorCtrl',function($scope,$rootScope, $location, $routeP
     }
 });
 
-kurubeeApp.controller('CourseStatsCtrl',function($scope,$rootScope, $location, $routeParams, $cookieStore, Restangular) {
+kurubeeApp.controller('PlayerStatsCtrl',function($scope,$rootScope, $location, $routeParams, $cookieStore, Restangular) {
     $scope.courseName =  $cookieStore.courseName;        
+    $scope.courseId =  $routeParams.courseId;    
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
+    var baseStats = Restangular.one('topscores',$routeParams.courseId);
+    baseStats.get().then(function(scores){
+        $scope.scores = Restangular.copy(scores).scores;
+        console.log($scope.scores);
+    });
+});
+kurubeeApp.controller('HourStatsCtrl',function($scope,$rootScope, $location, $routeParams, $cookieStore, Restangular) {
+    $scope.courseName =  $cookieStore.courseName;        
+    $scope.courseId =  $routeParams.courseId;        
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
+    var baseStats = Restangular.one('topscores',$routeParams.courseId);
+    baseStats.get().then(function(scores){
+        $scope.scores = Restangular.copy(scores).scores;
+        console.log($scope.scores);
+    });
+});
+kurubeeApp.controller('DayStatsCtrl',function($scope,$rootScope, $location, $routeParams, $cookieStore, Restangular) {
+    $scope.courseName =  $cookieStore.courseName;
+    $scope.courseId =  $routeParams.courseId;                
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
     var baseStats = Restangular.one('topscores',$routeParams.courseId);
     baseStats.get().then(function(scores){

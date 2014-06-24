@@ -32,7 +32,7 @@
                     <td>{{course.total_downloads}}</td>
                     <td>
                         <div ng-show="encima" id="image" ng-class="{'button2':true }" style="background-color:rgb(50, 17, 155);
-    background-image: linear-gradient(to bottom, #310ACC, #1F0A8F);width:28px; padding: 5px;" ng-click="goToStats({{course.id}})">
+    background-image: linear-gradient(to bottom, #310ACC, #1F0A8F);width:28px; padding: 5px;" ng-click="goToPlayerStats({{course.id}})">
                             <span class="glyphicon glyphicon-stats"></span>
                         </div>
                     </td>
@@ -48,10 +48,10 @@
             <div id="image" ng-class="{'button2':true }" style="width: 115px;   padding: 5px;" ng-click="newCourse()">
                 Add Course
             </div>
-            <div class="centered">
+            <!--<div class="centered">
 
             <h3>LEARN ❤ GAMES</h3>
-            </div>
+            </div>-->
         
         </div>            
     </div>
