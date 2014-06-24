@@ -57,9 +57,14 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
             event.target.parentElement.parentElement.parentElement.parentElement.style.display="none";
        });   
     };
-    $scope.upActivity = function(activity) {
-       $scope.activities="loading";
+    $scope.upActivity = function(activity,event) {
+       console.log(activity);
+       console.log($scope.activities);
+       console.log(event);
+
        var baseActivity = Restangular.one('editor/activity', activity.id);
+       console.log(activity.level_order);
+       $scope.loadingActivities=true; 
 
        baseActivity.get().then(function(activity1){
             act = Restangular.copy(activity1);
@@ -68,11 +73,12 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
             act.put().then(function(){
                activity.level_order--; 
                $route.reload();
+               $scope.loadingActivities=false; 
             });
        });
     };
     $scope.downActivity = function(activity) {
-       $scope.activities="loading";
+       $scope.loadingActivities=true; 
        var baseActivity = Restangular.one('editor/activity', activity.id);
        baseActivity.get().then(function(activity1){
             act = Restangular.copy(activity1);
@@ -81,6 +87,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
             act.put().then(function(){
                activity.level_order++; 
                $route.reload();
+               $scope.loadingActivities=false; 
             });
        });
     };

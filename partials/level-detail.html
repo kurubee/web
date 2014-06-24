@@ -5,7 +5,7 @@
         <div class="background-level" ng-show="loaded" >
             <div class="column-left">
                 <div class="breadcumb">
-                    <a ng-click="back()" href="">{{courseName}}</a> >> <a href="">level {{level}}</a>:
+                    <a ng-click="back()" href="">{{courseName}}</a> » level {{level}}:
                 </div>
                 <!-- Title -->
                 <div class="title-description-cls">
@@ -27,7 +27,7 @@
             <div class="m-title">{{courseName}}</div>
             <div class="m-content-level" style="background-image: url(img/level_icons/{{level}}B.png);">
                 <div class="activity-list" >
-                    <ul ng-show="activities!='loading'">
+                    <ul >
                         <li ng-repeat="activity in activities | orderBy:level_order" ">
                             <div>
                                 <div ng-click="accessActivity({{activity}})" class="list-item-label">
@@ -47,7 +47,7 @@
                                         <div ng-click="noRemove({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Back</div>
                                     </div>
                                     <div ng-click="accessActivity({{activity}})" class="edit-activity-btn">Edit</div>
-                                    <div ng-click="upActivity({{activity}})" class="edit-activity-btn" style="margin-right:5px">Up</div>
+                                    <div ng-click="upActivity({{activity}},$event)" class="edit-activity-btn" style="margin-right:5px">Up</div>
                                     <div ng-click="downActivity({{activity}})" class="edit-activity-btn" style="float:none;left:5px;">Down</div>
                                 </div>
                             </div>
@@ -56,8 +56,11 @@
                             </div>
                         </li>
                     </ul>
-                    <div ng-hide="activities!='loading' ">
-                        <img src="img/loading.gif">
+                    <div style="position: absolute;
+top: 139px;" ng-show="loadingActivities">
+                        <img src="img/loading.gif" style="background-color: rgba(190,190,190,0.5);
+height: 240px;
+width: 207px;">
                     </div>
 
                 </div>
@@ -69,18 +72,23 @@
                     </div>
                 </div>
                 <div class="bottom-right">
-<div class="dropdown">
-  <a style="width:132px;margin-top:0px;margin-right:3px;padding:4px;" id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-class="{ 'fade3':true, 'start-level-btn':true ,'button2':true}">
-    New Activity <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-      <li class="pointer activities-dropdown" ng-click="createActivity('quiz')">Quiz</li>
-      <li class="pointer activities-dropdown" ng-click="createActivity('visual')">Visual</li>
-      <li class="pointer activities-dropdown" ng-click="createActivity('linguistic')">Linguistic</li>
-      <li class="pointer activities-dropdown" ng-click="createActivity('geospatial')">Geospatial</li>
-      <li class="pointer activities-dropdown" ng-click="createActivity('temporal')">Temporal</li>
-  </ul>
-</div>
+                <div class="dropdown">
+                  <a style="width: 132px;
+margin-top: 1px;
+margin-right: 5px;
+padding: 3px;
+border: 1px solid black;
+height: 32px;" id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-class="{ 'fade3':true, 'start-level-btn':true ,'button2':true}">
+                    New Activity <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                      <li class="pointer activities-dropdown" ng-click="createActivity('quiz')">Quiz</li>
+                      <li class="pointer activities-dropdown" ng-click="createActivity('visual')">Visual</li>
+                      <li class="pointer activities-dropdown" ng-click="createActivity('linguistic')">Linguistic</li>
+                      <li class="pointer activities-dropdown" ng-click="createActivity('geospatial')">Geospatial</li>
+                      <li class="pointer activities-dropdown" ng-click="createActivity('temporal')">Temporal</li>
+                  </ul>
+                </div>
                 </div>
              </div>
         </div>

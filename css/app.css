@@ -312,6 +312,8 @@ margin-bottom: -61px;
 }
 
 .breadcumb {
+    float: left;
+    width: 450px;
     color: #303333;
     font: 25px 'latolight', sans-serif;
     text-transform: uppercase;

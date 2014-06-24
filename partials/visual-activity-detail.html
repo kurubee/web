@@ -5,7 +5,7 @@
     <div class="background-visual-activity" ng-show="activity">
         <div class="column-left">
                 <div class="breadcumb">
-                    <a ng-click="toCareer()" href="">{{courseName}}</a> >> <a ng-click="back()" href="">level {{level}}</a> >> {{activity.name}}:
+                    <a ng-click="toCareer()" href="">{{courseName}}</a> » <a ng-click="back()" href="">level {{level}}</a> » {{activity.name}}:
                 </div>        
                 <!-- Title -->
                 <div class="title-description-cls">
@@ -87,7 +87,11 @@
                     </div>
                 </div>
                 <div class="bottom-right">
-                    <button ng-class="{ 'button2':true, 'start-level-btn':true}" ng-click="inAnswers=true;" ng-show="!inAnswers">Edit Answers</button> 
+                    <button style="margin-top: 1px;
+margin-right: 5px;
+padding: 3px;
+border: 1px solid black;
+height: 32px;" ng-class="{ 'button2':true, 'start-level-btn':true}" ng-click="inAnswers=true;" ng-show="!inAnswers">Edit Answers</button> 
                     <button ng-class="{ 'button2':true, 'start-level-btn':true}" ng-click="addAnswer()" ng-show="inAnswers">Add Answer</button>
                 </div>
             </div>
