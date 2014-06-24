@@ -1,4 +1,4 @@
-kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {  
+kurubeeApp.controller('CourseDetailCtrl',['focus','Aux', '$scope', '$location','Restangular','$cookieStore', '$routeParams', function(focus,Aux, $scope, $location,Restangular,$cookieStore, $routeParams) {  
     $("#mod-tooltip").tooltip()
     $("#code-tooltip").tooltip()
     $("#pub-tooltip").tooltip()
@@ -37,6 +37,7 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
                 published: false,
             };
             $scope.changed = true;
+            focus('focusMe');
         });      
     }
     else
