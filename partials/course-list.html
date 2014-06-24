@@ -20,24 +20,24 @@
                     <th style="
     font-weight: bold;
 "># Downloads</th>
-                    <th></th>
-                    <th></th>
+                    <th style="width:50px"></th>
+                    <th style="width:50px"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="course in courses | filter:query | orderBy:orderProp" >
+                  <tr ng-repeat="course in courses | filter:query | orderBy:orderProp" ng-mouseover="encima=true" ng-mouseleave="encima=false" style="height:50px;">
                     <td><a href="#/courses/{{course.id}}"><b>{{course.name}}</b></a></td>
                     <td>{{course.published | checkmark}}</td>
                     <td>{{course.description}}</td>
                     <td>{{course.total_downloads}}</td>
                     <td>
-                        <div id="image" ng-class="{'button2':true }" style="background-color: rgb(155, 17, 17);
+                        <div ng-show="encima" id="image" ng-class="{'button2':true }" style="background-color: rgb(155, 17, 17);
     background-image: linear-gradient(to bottom, #CC0A0A, #8F0A0A);width:28px; padding: 5px;" ng-click="removeCourse({{course.id}})">
                             <span class="glyphicon glyphicon-trash"></span>
                         </div>
                     </td>
                     <td>
-                        <div id="image" ng-class="{'button2':true }" style="background-color:rgb(50, 17, 155);
+                        <div ng-show="encima" id="image" ng-class="{'button2':true }" style="background-color:rgb(50, 17, 155);
     background-image: linear-gradient(to bottom, #310ACC, #1F0A8F);width:28px; padding: 5px;" ng-click="goToStats({{course.id}})">
                             <span class="glyphicon glyphicon-stats"></span>
                         </div>
