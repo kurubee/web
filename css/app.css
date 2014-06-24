@@ -330,7 +330,10 @@ transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     font: 25px 'latolight', sans-serif;
     text-transform: uppercase;
     padding-bottom: 10px;
-    height:43px;
+    height:86px;
+    margin-top:-33px;
+    float: left;
+    width: 504px;
 }
 
 .element1-description-cls {
