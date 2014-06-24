@@ -31,15 +31,15 @@
                     <td>{{course.description}}</td>
                     <td>{{course.total_downloads}}</td>
                     <td>
-                        <div ng-show="encima" id="image" ng-class="{'button2':true }" style="background-color: rgb(155, 17, 17);
-    background-image: linear-gradient(to bottom, #CC0A0A, #8F0A0A);width:28px; padding: 5px;" ng-click="removeCourse({{course.id}})">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </div>
-                    </td>
-                    <td>
                         <div ng-show="encima" id="image" ng-class="{'button2':true }" style="background-color:rgb(50, 17, 155);
     background-image: linear-gradient(to bottom, #310ACC, #1F0A8F);width:28px; padding: 5px;" ng-click="goToStats({{course.id}})">
                             <span class="glyphicon glyphicon-stats"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-show="encima" id="image" ng-class="{'button2':true }" style="background-color: rgb(155, 17, 17);
+    background-image: linear-gradient(to bottom, #CC0A0A, #8F0A0A);width:28px; padding: 5px;margin-left:-10px;" ng-click="removeCourse({{course.id}})">
+                            <span class="glyphicon glyphicon-trash"></span>
                         </div>
                     </td>
                   </tr>
