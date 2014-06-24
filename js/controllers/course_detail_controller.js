@@ -44,22 +44,25 @@ kurubeeApp.controller('CourseDetailCtrl',['Aux', '$scope', '$location','Restangu
         $scope.fromSaved = true;
         var baseKnowledges = Restangular.one('editor/knowledge');
         baseKnowledges.getList().then(function(knowledges){
-            $scope.knowledges = {};
-            //$scope.knowledges["prog"] = "programacion";
-            $scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
-            var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
-            $scope.user = $cookieStore.get("username");
-            baseCourse.get().then(function(course1){
-                $scope.course = Restangular.copy(course1);
-                $scope.language = $scope.course.language_code;
-                $scope.career_type = $scope.course.career_type;
-                $scope.knowledge = $scope.course.knowledges[0];
-                $cookieStore.courseName = $scope.course.name;
-                $scope.$watch("course", $scope.detectChange ,true);
-                $scope.$watch("language", $scope.detectChange ,true);
-                $scope.$watch("career_type", $scope.detectChange ,true);
-                $scope.$watch("knowledge", $scope.detectChange ,true);                
-            });
+            if(knowledges)
+            {
+                $scope.knowledges = {};
+                //$scope.knowledges["prog"] = "programacion";
+                $scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
+                var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
+                $scope.user = $cookieStore.get("username");
+                baseCourse.get().then(function(course1){
+                    $scope.course = Restangular.copy(course1);
+                    $scope.language = $scope.course.language_code;
+                    $scope.career_type = $scope.course.career_type;
+                    $scope.knowledge = $scope.course.knowledges[0];
+                    $cookieStore.courseName = $scope.course.name;
+                    $scope.$watch("course", $scope.detectChange ,true);
+                    $scope.$watch("language", $scope.detectChange ,true);
+                    $scope.$watch("career_type", $scope.detectChange ,true);
+                    $scope.$watch("knowledge", $scope.detectChange ,true);                
+                });
+            }
         });  
     }
 

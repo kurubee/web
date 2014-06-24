@@ -190,7 +190,7 @@ kurubeeApp.config(['$httpProvider', function($httpProvider) {
 				 It's possible to use interceptors to handle 
 				 specific errors. For example:
 				*/
-				if (response.status === 401) {
+				if (response.status === 401 || response.status === 404) {
 					// HTTP 401 Error: 
 					// The request requires user authentication
                     $location.path( "/login" );
