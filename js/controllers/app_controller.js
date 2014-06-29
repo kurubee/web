@@ -52,7 +52,7 @@ kurubeeApp.controller('LoginCtrl', function($scope, $location, $routeParams,$coo
     $scope.login = function(username, password)
     {
 	    var encoded = Base64.encode(username+':'+password);
-        $cookieStore.put("username",username);
+        $cookieStore.put("usernameTemp",username);
         Restangular.setDefaultHeaders({'Authorization': 'Basic ' + encoded });
         $location.path( "/auth" );
     }
@@ -70,9 +70,15 @@ kurubeeApp.controller('AuthCtrl',function($scope,$rootScope, $location, $routePa
   baseToken.getList().then(function(token) {
     $cookieStore.put("token",token[0].key);
     Restangular.setDefaultHeaders({}) ;
-    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});
-    $rootScope.$broadcast('userLoggedChange',"in");
-    $location.path( "/courses" );
+    Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("usernameTemp")+":"+$cookieStore.get("token")});
+    console.log(token[0].key);
+    if(token[0].key)
+    {
+        $location.path( "/courses" );
+    }else
+    {
+        $location.path( "/login" );
+    }
   });
 });
 
