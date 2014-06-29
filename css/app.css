@@ -615,3 +615,7 @@ position: absolute;
 margin-left: 10%;
 width: 80%;
 }
+
+.breadcumb-element{
+    float:left;
+}
