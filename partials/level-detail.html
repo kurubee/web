@@ -28,7 +28,7 @@
             <div class="m-content-level" style="background-image: url(img/level_icons/{{level}}B.png);">
                 <div class="activity-list" >
                     <ul >
-                        <li ng-repeat="activity in activities | orderBy:level_order" ">
+                        <li ng-repeat="activity in activities | orderBy:'level_order'">
                             <div>
                                 <div ng-click="accessActivity({{activity}})" class="list-item-label">
                                     <div class="list-item">

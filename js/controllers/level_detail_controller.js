@@ -58,26 +58,32 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        });   
     };
     $scope.upActivity = function(activity,event) {
-       console.log(activity);
-       console.log($scope.activities);
-       console.log(event);
-
+       var tempId=activity.id;
        var baseActivity = Restangular.one('editor/activity', activity.id);
-       console.log(activity.level_order);
        $scope.loadingActivities=true; 
-
        baseActivity.get().then(function(activity1){
             act = Restangular.copy(activity1);
             delete act.career;
             act.level_order--;
             act.put().then(function(){
                activity.level_order--; 
-               $route.reload();
+               var newItems = [];
+               angular.forEach($scope.activities, function(obj){
+                    if(obj.id!=tempId)
+                    {
+                        this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order});
+                    }else
+                    {
+                       this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order-1});
+                    }
+               },newItems)
+               $scope.activities = newItems;               
                $scope.loadingActivities=false; 
             });
        });
     };
     $scope.downActivity = function(activity) {
+       var tempId=activity.id;
        $scope.loadingActivities=true; 
        var baseActivity = Restangular.one('editor/activity', activity.id);
        baseActivity.get().then(function(activity1){
@@ -86,7 +92,17 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
             act.level_order++;
             act.put().then(function(){
                activity.level_order++; 
-               $route.reload();
+               var newItems = [];
+               angular.forEach($scope.activities, function(obj){
+                    if(obj.id!=tempId)
+                    {
+                        this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order});
+                    }else
+                    {
+                       this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order+1});
+                    }
+               },newItems)
+               $scope.activities = newItems;
                $scope.loadingActivities=false; 
             });
        });
