@@ -9,32 +9,32 @@
                 </div>        
                 <!-- Title -->
                 <div class="title-description-cls">
-                    <p id="title-description" ><b>Activity Name:</b></p>
+                    <p id="title-description" ><b>Activity Name</b></p>
                 </div>
                 <!-- Content -->
                 <div class="description-description-cls">
                     <p id="description-description">
-                        <b>Activity Query:</b> 
+                        <b>Activity Query</b> 
                         <br>
                         Write here the query for this Visual Activity.
                     </p>
                 </div>
                 <div class="description-description-cls">
                     <p id="description-description">
-                        <b>Image:</b> 
+                        <b>Image</b> 
                         <br>
                         Upload an image to accompanying the question. When a image is loaded, Click to reupload a new one!                    
                     </p>
                 </div>
                 <div class="description-description-cls">  
                     <p id="description-description">              
-                        <b>Time Countdown:</b> 
+                        <b>Time Countdown</b> 
                         <br>
                         Type the number of seconds that the player will watch the image.
                     </p>
                 </div>
                 <div class="description-description-cls">                
-                    Correct Answer:                 
+                    Correct Answer                
                     <select ng-model="correct_answer"  ng-options="a.value for a in activity.real_answers" class="select-options high-light out-box">
                     </select>
                 </div>
@@ -71,7 +71,7 @@
                             <input onchange="angular.element(this).scope().addImage()" type="file" id="file" name="file" style="display:none;" multiple />
                         </div>
                         <div class="countdown">
-                            Countdown: 
+                            Countdown &nbsp;
                             <input ng-model="activity.time" type="text" style="line-height: 1px;" size="1" dir="rtl"> secs 
                         </div>
                     </div>
