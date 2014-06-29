@@ -29,7 +29,7 @@
                 </div>
                 <br>
                 Correct Answer                 
-                <select ng-model="correct_answer" class="select-options high-light out-box">
+                <select ng-model="correct_answer" class="select-options high-light out-box" tabindex=4>
                   <option value="before">Before</option>
                   <option value="after">After</option>
                 </select>
@@ -38,14 +38,14 @@
         </div>
         <div class="column-right">
             <div class="m-template m-template-course">
-            <input type="text" ng-model="activity.name" class="m-title" id="title-input" maxlength="255" placeholder="Activity Name">
-            <input class="m-description activity-query" id="description-input" ng-model="activity.query" maxlength="255" placeholder="Activity Query">
+            <input type="text" ng-model="activity.name" class="m-title" id="title-input" maxlength="255" placeholder="Activity Name" tabindex=1>
+            <input class="m-description activity-query" id="description-input" ng-model="activity.query" maxlength="255" placeholder="Activity Query" tabindex=2>
             <div class="m-content">
                 <div id="carousel" style="height=221px;">
 
                    <label for="file" >
                         <img id="image" ng-src="{{baseURL}}{{activity.image}}" />
-                        <div id="image" ng-class="{'button2':true, 'fade3':true, 'add-image-btn': true }" ng-hide="activity.image">
+                        <div id="image" ng-class="{'button2':true, 'fade3':true, 'add-image-btn': true }" ng-hide="activity.image" tabindex=3>
                            Add Image
                         </div>
                     </label>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="saveButton">
-            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true, 'saveButton-inside':true }" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
+            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true, 'saveButton-inside':true }" ng-click="saveActivity()" ng-disabled="disable_save_button" tabindex=5>Save</button>            
             <div class="saved-text-cls">
                 <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini">
                 <div class="fade-out" ng-show="saved" id="saved-text">✔ Saved!</div>

@@ -1,0 +1,46 @@
+<div class="container-fluid margedTop">
+  <div class="row-fluid">
+    <div class="span10 margedTop">
+        <ul class="nav nav-tabs">
+            <li ><a ng-href="#/players/{{courseId}}">Players</a></li>
+            <li ><a ng-href="#/hours/{{courseId}}">Hours</a></li>
+            <li class="active"><a ng-href="#">Days</a></li>
+        </ul>
+
+        <div >
+            <table class="table table-striped" >
+                <thead>
+                  <tr>
+                    <th>Day</th>
+                    <th>Number of attempts</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="day in days">
+                    <td>{{day.day}}</td>
+                    <td>{{day.num_attempts}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <td colspan="3">
+                    <div class="pagination">
+                      <ul>
+                        <li ng-class="prevPageDisabled()" style="float: left;">
+                          <a href ng-click="prevPage()">« Prev</a>
+                        </li>
+                        <li ng-repeat="n in range()"
+                          ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                          <a href="#">{{n+1}}</a>
+                        </li>
+                        <li ng-class="nextPageDisabled()" style="float: left;margin-left:10px;">
+                          <a href ng-click="nextPage()" >Next »</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tfoot>                
+            </table>
+        </div>            
+    </div>
+  </div>
+</div>

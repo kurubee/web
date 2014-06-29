@@ -30,14 +30,14 @@
                     <p id="description-description countdown">              
                         <b>Answer</b> 
                         <br>
-                        <input ng-change="refreshLockedText()" ng-model="activity.locked_text" type="text" class="input-code-cls high-light">
+                        <input ng-change="refreshLockedText()" ng-model="activity.locked_text" type="text" class="input-code-cls high-light"  tabindex=3>
                     </p>
                 </div>
         </div>
         <div class="column-right">
             <div class="m-template m-template-course">
-            <input type="text" ng-model="activity.name" class="m-title" id="title-input"  maxlength="255" placeholder="Activity Name">
-            <input class="m-description activity-query" id="description-input" ng-model="activity.query" maxlength="255" placeholder="Activity Query">
+            <input type="text" ng-model="activity.name" class="m-title" id="title-input"  maxlength="255" placeholder="Activity Name" tabindex=1>
+            <input class="m-description activity-query" id="description-input" ng-model="activity.query" maxlength="255" placeholder="Activity Query"  tabindex=2>
             <div class="m-content">
                 <div id="carousel" class="height175">
                     <label for="file" >
@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="saveButton">
-            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true, 'saveButton-inside':true}" ng-click="saveActivity()" ng-disabled="disable_save_button">Save</button>            
+            <button ng-class="{'button-disabled': !getCond(), 'button2':getCond(), 'fade3':true, 'saveButton-inside':true}" ng-click="saveActivity()" ng-disabled="disable_save_button"  tabindex=4>Save</button>            
             <div class="saved-text-cls">
                 <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini">
                 <div class="fade-out" ng-show="saved" id="saved-text">✔ Saved!</div>

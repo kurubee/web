@@ -1,0 +1,50 @@
+<div class="container-fluid margedTop">
+  <div class="row-fluid">
+    <div class="span10 margedTop">
+        <!--<div class="breadcumb">
+            <a ng-click="back()" href="">{{courseName}}</a> 
+        </div>-->
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#">Players</a></li>
+                <li><a ng-href="#/hours/{{courseId}}">Hours{{$routeParams.courseId}}</a></li>
+                <li><a ng-href="#/days/{{courseId}}">Days</a></li>
+            </ul>
+
+        <div ng-controller="PaginationCtrl">
+            <table class="table table-striped" >
+                <thead>
+                  <tr>
+                    <th>Player</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="score in items |   offset: currentPage*itemsPerPage |   limitTo: itemsPerPage">
+                    <td>{{score.name}}</td>
+                    <td>{{score.sum_score}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <td colspan="3">
+                    <div class="pagination">
+                      <ul>
+                        <li ng-class="prevPageDisabled()" style="float: left;">
+                          <a href ng-click="prevPage()">« Prev</a>
+                        </li>
+                        <li ng-repeat="n in range()"
+                          ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                          <a href="#">{{n+1}}</a>
+                        </li>
+                        <li ng-class="nextPageDisabled()" style="float: left;margin-left:10px;">
+                          <a href ng-click="nextPage()" >Next »</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tfoot>                
+            </table>
+        </div>            
+    </div>
+  </div>
+</div>
