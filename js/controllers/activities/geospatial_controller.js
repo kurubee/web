@@ -74,13 +74,11 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                         bounds.extend(puntosPoligono.j[i]);
                     }
                     $scope.map.fitBounds(bounds);
-                    var markerIcon = new google.maps.MarkerImage('img/marker.png');
                     $scope.marker = new google.maps.Marker({
                         map: $scope.map,
                         position: target,
                         flat: true,
                         clickable: false,
-                        icon: markerIcon
                     });
                     $scope.mouseFlag = false;
                     //Creating eventlisteners to set mark when click
@@ -92,7 +90,6 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                             if ($scope.marker) {
                                 $scope.marker.setMap(null);
                             }
-                            var markerIcon = new google.maps.MarkerImage('img/marker.png');
                             $scope.activity.points.coordinates[0][0] = e.latLng.A;
                             $scope.activity.points.coordinates[0][1] = e.latLng.k;
                             $scope.position=e.latLng;
@@ -101,7 +98,6 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                                 position: e.latLng,
                                 flat: true,
                                 clickable: false,
-                                icon: markerIcon
                             });
                             $scope.updateCircle();
                            
@@ -175,14 +171,12 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                     bounds.extend(puntosPoligono.j[i]);
                 }
                 $scope.map.fitBounds(bounds);
-                var markerIcon = new google.maps.MarkerImage('img/marker.png');
                 $scope.marker = new google.maps.Marker({
                     map: $scope.map,
                    
                     position: target,
                     flat: true,
                     clickable: false,
-                    icon: markerIcon
                 });
                 $scope.mouseFlag = false;
                 google.maps.event.addListener($scope.map, 'bounds_changed', function() {
@@ -205,7 +199,6 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                         if ($scope.marker) {
                             $scope.marker.setMap(null);
                         }
-                        var markerIcon = new google.maps.MarkerImage('img/marker.png');
                         $scope.position=e.latLng;
                         $scope.activity.points= {coordinates:[""]};
                         $scope.activity.points.coordinates[0]=[];
@@ -216,7 +209,6 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                             position: e.latLng,
                             flat: true,
                             clickable: false,
-                            icon: markerIcon
                         });
                         $scope.updateCircle();
                         $scope.$apply(function() {
