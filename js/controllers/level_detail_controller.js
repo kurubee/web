@@ -69,7 +69,6 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        });   
     };
     $scope.upActivity = function(activity,event) {
-       console.log($scope.activities);
        var indexAct;
        for(var i=0;i<$scope.activities.length;i++)
        {
