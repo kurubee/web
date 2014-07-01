@@ -1,5 +1,7 @@
 kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    //$scope.changed take in account if a change was made to the model , in order to set the save button enabled
     $scope.changed = false;
+    //$scope.changes take in account number of changes made to the model , in order to set the save button enabled
     $scope.changes = 0;
     $scope.disable_save_button = false;
     $scope.level = $routeParams.levelId;

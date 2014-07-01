@@ -3,10 +3,11 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
     var baseActivities = Restangular.all('editor/activity/?level_type=' + $routeParams.levelId + '&career=' + $routeParams.courseId);
     $scope.level = $routeParams.levelId;
     baseActivities.getList().then(function(activities){
+        //If there is activities in the course, take the course name from the first activity
         if(activities.length != 0)
         {
             $scope.courseName = activities[0].career;
-        }
+        }//If not, take course name from cookiestore
         else
         {
             $scope.courseName =  $cookieStore.courseName;        
@@ -25,13 +26,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
     $scope.createActivity = function(type) {
            $location.path( "/courses/"+$routeParams.courseId+"/levels/" + $routeParams.levelId + "/"+type+"/" );       
     };
-    
-    $scope.askRemoveActivity = function(activity) {
-      
-       console.log(activity);
-      
-    };
-    
+    //Next functions deploy the remove activity menu using evet and display css property
     $scope.removeActivity = function(activity,event) {
        event.target.style.display="none";
        event.target.parentElement.children[1].style.display="block";
@@ -47,7 +42,6 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        event.target.parentElement.parentElement.children[4].style.display="block";
     };
     $scope.removeSure = function(activity,event) {
-       console.log(event);
        event.target.parentElement.parentElement.parentElement.style.display="none";
        event.target.parentElement.parentElement.parentElement.parentElement.children[1].style.display="block";
        event.target.parentElement.parentElement.parentElement.style.display="none";
@@ -69,6 +63,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
                activity.level_order--; 
                var newItems = [];
                angular.forEach($scope.activities, function(obj){
+                    //I need to realad the whole array manually in order to make angular to notice the change
                     if(obj.id!=tempId)
                     {
                         this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order});
@@ -94,6 +89,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
                activity.level_order++; 
                var newItems = [];
                angular.forEach($scope.activities, function(obj){
+                    //I need to realad the whole array manually in order to make angular to notice the change
                     if(obj.id!=tempId)
                     {
                         this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order});

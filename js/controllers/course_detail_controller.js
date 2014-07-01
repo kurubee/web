@@ -2,10 +2,15 @@ kurubeeApp.controller('CourseDetailCtrl',['focus','Aux', '$scope', '$location','
     $("#mod-tooltip").tooltip()
     $("#code-tooltip").tooltip()
     $("#pub-tooltip").tooltip()
+    //$scope.changes take in account number of changes made to the model , in order to set the save button enabled
     $scope.changes = 0;
+    //$scope.changed take in account if a change was made to the model , in order to set the save button enabled
     $scope.changed = false;
+    //$scope.fromSaved is a flag to know that we are not creating a new course
     $scope.fromSaved = false;
+    //$scope.disable_save_button is a flag to disable save button
     $scope.disable_save_button = false;
+    //$scope.saved is a flag to show the saved! text
     $scope.saved = false;
     $scope.languages = {
         en : "English",
@@ -23,7 +28,6 @@ kurubeeApp.controller('CourseDetailCtrl',['focus','Aux', '$scope', '$location','
         var baseKnowledges = Restangular.one('editor/knowledge');
         baseKnowledges.getList().then(function(knowledges){
             $scope.knowledges = {};
-            //$scope.knowledges["prog"] = "programacion";
             $scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
             $scope.course = {
                 activities: [],
@@ -37,6 +41,7 @@ kurubeeApp.controller('CourseDetailCtrl',['focus','Aux', '$scope', '$location','
                 published: false,
             };
             $scope.changed = true;
+            //Calling focus directive for Title input
             focus('focusMe');
         });      
     }
@@ -48,7 +53,6 @@ kurubeeApp.controller('CourseDetailCtrl',['focus','Aux', '$scope', '$location','
             if(knowledges)
             {
                 $scope.knowledges = {};
-                //$scope.knowledges["prog"] = "programacion";
                 $scope.knowledges[knowledges[0].resource_uri] = knowledges[0].name;
                 var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
                 $scope.user = $cookieStore.get("username");
@@ -105,11 +109,10 @@ kurubeeApp.controller('CourseDetailCtrl',['focus','Aux', '$scope', '$location','
             }
          }
     };
-    
+    //Function called when a changed is done to the model, when loading page automatically three changes are made
     $scope.detectChange = function () {
         if ($scope.changes>3)
         {
-            console.log("cambio");
             $scope.changed = true;
         }
         $scope.changes ++;
@@ -138,7 +141,6 @@ kurubeeApp.controller('CourseDetailCtrl',['focus','Aux', '$scope', '$location','
     $scope.getCond = function() {
         if($scope.course)
         {
-            //console.log($scope.changed);
             return !$scope.disable_save_button && $scope.language && $scope.career_type && $scope.knowledge && $scope.changed && $scope.course.name && $scope.course.description;
         }
         else

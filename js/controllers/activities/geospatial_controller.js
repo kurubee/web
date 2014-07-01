@@ -1,8 +1,11 @@
 kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
-
+    //$scope.boundsChanged is a flag to detect when boounds have been changed
     $scope.boundsChanged = false;
+    //$scope.changed take in account if a change was made to the model , in order to set the save button enabled
     $scope.changed = false;
+    //$scope.changes take in account number of changes made to the model , in order to set the save button enabled
     $scope.changes = 0;
+    //$scope.boundsChanges counts how many changes have been made in bounds
     $scope.boundsChanges = 0;
     $scope.showButton = true;
     $scope.level = $routeParams.levelId;
@@ -39,7 +42,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
             };  
             $scope.changed = true;
                 $scope.radius = $scope.activity.radius;
-                //$scope.activity.area = activity1.area;
+                //Using setTimeout because map take a while to render
                 window.setTimeout(function(){
                     var mapOptions = {
                       mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -84,7 +87,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                     //Creating eventlisteners to set mark when click
                     google.maps.event.addListener($scope.map, "mouseup", function (e)
                     {
-                        //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
+                        //mouseFlag indicates if the map was moved when down/up mouse
                         if ($scope.mouseFlag === true) 
                         {
                             if ($scope.marker) {
@@ -136,6 +139,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
 
             $scope.courseName = $scope.activity.career;
             $scope.activity.career = "/api/v1/editor/career/" + $routeParams.courseId;
+            //Using setTimeout because map take a while to render
             window.setTimeout(function(){
                 var mapOptions = {
                   mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -193,7 +197,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                 //Creating eventlisteners to set mark when click
                 google.maps.event.addListener($scope.map, "mouseup", function (e)
                 {
-                    //ESTO SOLO DEBE EJECUTARSE SI NO SE HA MOVIDO, BANDERA nos indica si se ha movido el cursor mientras movíamos o no.
+                    //mouseFlag indicates if the map was moved when down/up mouse
                     if ($scope.mouseFlag === true) 
                     {
                         if ($scope.marker) {
@@ -262,7 +266,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
           radius: parseInt(radio),
           clickable:false
         };
-        // Add the circle for this city to the map.
+        // Add the circle 
         $scope.circle = new google.maps.Circle(populationOptions);
     };
     $scope.detectChange = function () {
@@ -283,7 +287,9 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
           {
               $scope.activity.radius =$scope.radius;
           }
+          
            $scope.activity.points = "{ \"type\": \"MultiPoint\", \"coordinates\": [ [ " + $scope.activity.points.coordinates[0][0] + "," + $scope.activity.points.coordinates[0][1] + " ] ] }";
+           //From here, we ned to construct points and area manually in order to convert visible area to a polygon (what server accepts)
            if($scope.boundsChanged)
            {
                var bounds = $scope.map.getBounds();

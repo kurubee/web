@@ -1,6 +1,9 @@
 kurubeeApp.controller('TemporalActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    //$scope.changed take in account if a change was made to the model , in order to set the save button enabled
     $scope.changed = false;
+    //$scope.changes take in account number of changes made to the model , in order to set the save button enabled
     $scope.changes = 0;
+    //$scope.baseURL need to be setted in order to lad images from server (see /partials(temporal-detail.html)
     $scope.baseURL = 'http://0.0.0.0:8000';
     $scope.level = $routeParams.levelId;
     Restangular.setDefaultHeaders({"Authorization": "ApiKey "+$cookieStore.get("username")+":"+$cookieStore.get("token")});

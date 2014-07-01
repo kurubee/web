@@ -1,6 +1,9 @@
 kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    //$scope.changed take in account if a change was made to the model , in order to set the save button enabled
     $scope.changed = false;
+    //$scope.changes take in account number of changes made to the model , in order to set the save button enabled
     $scope.changes = 0;
+    //$scope.baseURL need to be setted in order to lad images from server (see /partials(linguistic-detail.html)
     $scope.baseURL = 'http://0.0.0.0:8000';
     $scope.showButton = true;
     $scope.hideGrid = true;
@@ -68,10 +71,8 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
         document.getElementById('hideText').innerHTML=textHide;
     };
     $scope.detectChange = function () {
-        console.log($scope.changes);
         if ($scope.changes>0)
         {
-            console.log("cambio");
             $scope.changed = true;
         }
         $scope.changes ++;
@@ -125,7 +126,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     };
         
     $scope.addImage = function() {    
-        $scope.activity.image = 1;
         document.getElementById('squares').style.display = "block";
         $scope.showButton=false;
         var f = document.getElementById('file').files[0],
@@ -146,7 +146,6 @@ kurubeeApp.controller('LinguisticActivityCtrl', ['Aux', '$scope', '$location', '
     $scope.getCond = function() { 
         if( $scope.activity )
         {  
-            console.log(!$scope.disable_save_button && $scope.activity.image && $scope.activity.locked_text && $scope.changed);
             return !$scope.disable_save_button && $scope.activity.image && $scope.activity.locked_text && $scope.changed && $scope.activity.name && $scope.activity.query;
         }else
         {

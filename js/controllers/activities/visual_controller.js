@@ -1,6 +1,9 @@
 kurubeeApp.controller('VisualActivityCtrl', ['Aux', '$scope', '$location', 'Restangular','$cookieStore', '$routeParams', function(Aux,$scope, $location, Restangular,$cookieStore, $routeParams) {
+    //$scope.changed take in account if a change was made to the model , in order to set the save button enabled
     $scope.changed = false;
+    //$scope.changed take in account if a change was made to the model , in order to set the save button enabled
     $scope.changes = 0;
+    //$scope.baseURL need to be setted in order to lad images from server (see /partials(visual-detail.html)
     $scope.baseURL = 'http://0.0.0.0:8000';
     $scope.inAnswers = false;
     $scope.showButton = true;
