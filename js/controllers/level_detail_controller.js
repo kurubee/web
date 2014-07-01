@@ -52,56 +52,99 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        });   
     };
     $scope.upActivity = function(activity,event) {
-       var tempId=activity.id;
-       var baseActivity = Restangular.one('editor/activity', activity.id);
-       $scope.loadingActivities=true; 
-       baseActivity.get().then(function(activity1){
-            act = Restangular.copy(activity1);
-            delete act.career;
-            act.level_order--;
-            act.put().then(function(){
-               activity.level_order--; 
-               var newItems = [];
-               angular.forEach($scope.activities, function(obj){
-                    //I need to realad the whole array manually in order to make angular to notice the change
-                    if(obj.id!=tempId)
-                    {
-                        this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order});
-                    }else
-                    {
-                       this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order-1});
-                    }
-               },newItems)
-               $scope.activities = newItems;               
-               $scope.loadingActivities=false; 
-            });
-       });
+       if(activity.level_order>0)
+       {
+           var tempId=activity.id;
+           var baseActivity = Restangular.one('editor/activity', activity.id);
+           $scope.loadingActivities=true; 
+           baseActivity.get().then(function(activity1){
+                act = Restangular.copy(activity1);
+                //Server doesn't expect career attr in acitivty
+                delete act.career;
+                current_order = act.level_order
+                act.level_order--;
+                act.put().then(function(){
+                   activity.level_order--; 
+                   var newItems = [];
+                   angular.forEach($scope.activities, function(obj){
+                        //Is needed to reload the whole array manually in order to make angular to notice the change
+                        if(obj.id!=tempId)
+                        {
+                            //If obj is the previous one we need to exchange the level_order and send this exchange to the server
+                            if(obj.level_order==current_order-1)
+                            {
+                                this.push({name:obj.name,query:obj.query,id:obj.id,level_order:current_order});
+                                var baseActivity1 = Restangular.one('editor/activity', obj.id);
+                                baseActivity1.get().then(function(activity2){
+                                    act1 = Restangular.copy(activity2);
+                                    delete act1.career;
+                                    act1.level_order=current_order;
+                                    act1.put().then(function(){
+                                       $scope.loadingActivities=false;                                     
+                                    });
+                                });
+                                   
+                            }else
+                            {
+                                this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order});
+                            }
+                        }else
+                        {
+                           this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order-1});
+                        }
+                   },newItems)
+                   $scope.activities = newItems;               
+
+                });
+           });
+       }
     };
     $scope.downActivity = function(activity) {
-       var tempId=activity.id;
-       $scope.loadingActivities=true; 
-       var baseActivity = Restangular.one('editor/activity', activity.id);
-       baseActivity.get().then(function(activity1){
-            act = Restangular.copy(activity1);
-            delete act.career;
-            act.level_order++;
-            act.put().then(function(){
-               activity.level_order++; 
-               var newItems = [];
-               angular.forEach($scope.activities, function(obj){
-                    //I need to realad the whole array manually in order to make angular to notice the change
-                    if(obj.id!=tempId)
-                    {
-                        this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order});
-                    }else
-                    {
-                       this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order+1});
-                    }
-               },newItems)
-               $scope.activities = newItems;
-               $scope.loadingActivities=false; 
-            });
-       });
+       if(activity.level_order<$scope.activities.length-1)
+       {
+           var tempId=activity.id;
+           $scope.loadingActivities=true; 
+           var baseActivity = Restangular.one('editor/activity', activity.id);
+           baseActivity.get().then(function(activity1){
+                act = Restangular.copy(activity1);
+                //Server doesn't expect career attr in acitivty
+                delete act.career;
+                current_order = act.level_order;
+                act.level_order++;
+                act.put().then(function(){
+                   activity.level_order++; 
+                   var newItems = [];
+                   angular.forEach($scope.activities, function(obj){
+                        //Is needed to realad the whole array manually in order to make angular to notice the change
+                        if(obj.id!=tempId)
+                        {
+                           //If obj is the previous one we need to exchange the level_order and send this exchange to the server
+                            if(obj.level_order==current_order+1)
+                            {
+                                this.push({name:obj.name,query:obj.query,id:obj.id,level_order:current_order});
+                                var baseActivity1 = Restangular.one('editor/activity', obj.id);
+                                baseActivity1.get().then(function(activity2){
+                                    act1 = Restangular.copy(activity2);
+                                    delete act1.career;
+                                    act1.level_order=current_order;
+                                    act1.put().then(function(){
+                                       $scope.loadingActivities=false;                                     
+                                    });
+                                });
+                            }else
+                            {
+                                this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order});
+                            }
+                        }else
+                        {
+                           this.push({name:obj.name,query:obj.query,id:obj.id,level_order:obj.level_order+1});
+                        }
+                   },newItems)
+                   $scope.activities = newItems;
+                   $scope.loadingActivities=false; 
+                });
+           });
+       }
     };
 
     $scope.back = function() { 
