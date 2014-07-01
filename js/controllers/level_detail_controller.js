@@ -10,7 +10,12 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
         }//If not, take course name from cookiestore
         else
         {
-            $scope.courseName =  $cookieStore.courseName;        
+            var baseCourse = Restangular.one('editor/career', $routeParams.courseId);
+            baseCourse.get().then(function(course1){
+                 $scope.course = Restangular.copy(course1);
+                 $scope.courseName = $scope.course.name;
+            });
+            
         }
         $scope.loaded = true;
         $scope.activities = [];
