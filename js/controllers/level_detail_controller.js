@@ -59,10 +59,17 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
 
        var baseActivity = Restangular.one('editor/activity', activity.id);
        baseActivity.remove().then(function(){
-            event.target.parentElement.parentElement.parentElement.parentElement.style.display="none";
+            for(var i=0;i<$scope.activities.length;i++)
+            {
+                if($scope.activities[i].id==activity.id)
+                {
+                    $scope.activities.splice(i,1);
+                }
+            }
        });   
     };
     $scope.upActivity = function(activity,event) {
+       console.log($scope.activities);
        var indexAct;
        for(var i=0;i<$scope.activities.length;i++)
        {
