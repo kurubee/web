@@ -26,7 +26,7 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
                level_required : true,
                reward : "wena!",
                penalty : "mala!",
-               activity_type : 'quiz'
+               activity_type : 'quiz',
             };
             $scope.changed = true;
          });
