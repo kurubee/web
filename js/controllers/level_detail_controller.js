@@ -118,7 +118,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
                         //Is needed to realad the whole array manually in order to make angular to notice the change
                         if(obj.id!=tempId)
                         {
-                           //If obj is the previous one we need to exchange the level_order and send this exchange to the server
+                           //If obj is the next one we need to exchange the level_order and send this exchange to the server
                             if(obj.level_order==current_order+1)
                             {
                                 this.push({name:obj.name,query:obj.query,id:obj.id,level_order:current_order});
