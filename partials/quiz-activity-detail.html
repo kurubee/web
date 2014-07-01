@@ -38,10 +38,10 @@
             <input type="text" ng-model="activity.name" class="m-title" id="title-input" maxlength="255" placeholder="Activity Name" tabindex=1>
             <input class="m-description activity-query" id="description-input" ng-model="activity.query" maxlength="255" placeholder="Activity Query" tabindex=2>
             <div class="m-content" style="overflow-y:auto">
-                <div id="carousel" style="width: 100%;margin-top: 10px;">
+                <div id="carousel" class="quiz-carousel">
                     <ul ng-repeat="answer in activity.real_answers">
                         <li>
-                            <div class="carousel-card" style="padding-bottom: 5px;">
+                            <div class="carousel-card quiz-card" >
                                <input ng-model="answer.value" ngMouseover="{{index}}" class="visual-answer">
                                 <button type="button" class="btn btn-xs remove-answer" ng-click="removeAnswer({{$index}})">
                                     <span class="glyphicon glyphicon-trash"></span>
@@ -60,11 +60,7 @@
                     </div>
                 </div>
                 <div class="bottom-right">
-                    <button style="margin-top: 1px;
-margin-right: 5px;
-padding: 3px;
-border: 1px solid black;
-height: 32px;" ng-class="{'button2':true, 'start-level-btn':true}" ng-click="addAnswer()">Add Answer</button> 
+                    <button ng-class="{'add-answer-btn':true,'button2':true, 'start-level-btn':true}" ng-click="addAnswer()">Add Answer</button> 
                 </div>
             </div>
         </div>

@@ -42,25 +42,22 @@
                                 </div>
                                 <div  class="mini-menu-activity">
                                    <div ng-click="removeActivity({{activity}},$event)" class="remove-activity-btn">Remove</div>
-                                   <div style="color:black;display:none;" >Are you sure? 
-                                        <div ng-click="removeSure({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Yes</div>
-                                        <div ng-click="noRemove({{activity}},$event)" style="color:#009bdb;display:inline;cursor:pointer;">Back</div>
+                                   <div class="black" style="display:none;" >Are you sure? 
+                                        <div ng-click="removeSure({{activity}},$event)" class="remove-opts" style="display:inline;">Yes</div>
+                                        <div ng-click="noRemove({{activity}},$event)" class="remove-opts"  style="display:inline;">Back</div>
                                     </div>
                                     <div ng-click="accessActivity({{activity}})" class="edit-activity-btn">Edit</div>
-                                    <div ng-click="upActivity({{activity}},$event)" class="edit-activity-btn" style="margin-right:5px">Up</div>
-                                    <div ng-click="downActivity({{activity}})" class="edit-activity-btn" style="float:none;left:5px;">Down</div>
+                                    <div ng-click="upActivity({{activity}},$event)" class="edit-activity-btn up-btn">Up</div>
+                                    <div ng-click="downActivity({{activity}})" class="edit-activity-btn down-btn">Down</div>
                                 </div>
                             </div>
-                            <div style="display:none;margin-top:-55px;margin-bottom:-70px;">
+                            <div class="loading-activity-list">
                                   <img src="img/loading.gif">
                             </div>
                         </li>
                     </ul>
-                    <div style="position: absolute;
-top: 139px;" ng-show="loadingActivities">
-                        <img src="img/loading.gif" style="background-color: rgba(190,190,190,0.5);
-height: 240px;
-width: 207px;">
+                    <div style="position: absolute;top: 139px;" ng-show="loadingActivities">
+                        <img src="img/loading.gif" class="loading-activity-move" >
                     </div>
 
                 </div>
@@ -73,12 +70,7 @@ width: 207px;">
                 </div>
                 <div class="bottom-right">
                 <div class="dropdown">
-                  <a style="width: 132px;
-margin-top: 1px;
-margin-right: 5px;
-padding: 3px;
-border: 1px solid black;
-height: 32px;" id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-class="{ 'fade3':true, 'start-level-btn':true ,'button2':true}">
+                  <a  id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-class="{ 'fade3':true, 'new-act-btn':true }">
                     New Activity <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

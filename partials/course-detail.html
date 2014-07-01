@@ -21,7 +21,7 @@
                 </div>
                 <br>
                 <br>
-                <div style="width:500px;">
+                <div>
                         <p>
                         <b>Course options</b>
                         </p>
@@ -60,21 +60,21 @@
                     <textarea ng-model="course.description" class="m-description course-description" id="description-input" placeholder="Course Description" tabindex=2></textarea>
                     <div id="carousel" ng-show="course.levels">
                         <ul rn-carousel  rn-carousel-indicator  rn-carousel-control rn-carousel-index id="carousel" >
-                            <li ng-repeat="level in course.levels" style="height:115px;">
+                            <li ng-repeat="level in course.levels" class="levels-carousel">
                                 <div class="carousel-card">
                                     <div id="centro" align="middle" >
                                         <p ng-show="level != 'new'" class="levelTitle" >
                                             Level
                                         </p>
                                         <div>
-                                            <img style="-webkit-user-drag: none;width:auto;" class="pointer" ng-src="img/level_icons/{{level}}.png" align="bottom" ng-click="toLevel($index)">
+                                            <img class="pointer level-icon" ng-src="img/level_icons/{{level}}.png" align="bottom" ng-click="toLevel($index)">
                                         </div>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <div id="carousel" style="text-align:center; padding:5px;"ng-hide="course.levels">
+                    <div id="carousel" class="no-levels-msg" ng-hide="course.levels">
                         There is no levels yet in this course, save the course in order to create the first level.
                     </div>
                 </div>
@@ -85,15 +85,11 @@
                         </div>
                     </div>
                     <div class="bottom-right">
-                        <button style="margin-top: 1px;
-margin-right: 5px;
-padding: 3px;
-border: 1px solid black;
-height: 32px;" ng-class="{ 'start-level-btn-disabled':!fromSaved, 'button-disabled':!fromSaved, 'button2':fromSaved, 'start-level-btn':fromSaved}"  ng-click="toLevel('new')">ADD LEVEL</button> 
+                        <button ng-class="{ 'add-level-btn':true,'start-level-btn-disabled':!fromSaved, 'button-disabled':!fromSaved, 'button2':fromSaved, 'start-level-btn':fromSaved}"  ng-click="toLevel('new')">ADD LEVEL</button> 
                     </div>
                 </div>
             </div>
-            <div class="saveButton" style="MARGIN-LEFT: -400PX;">
+            <div class="saveButton">
                 <button ng-class="{'button-disabled': !getCond(),'button2':getCond(), 'fade3':true, 'saveButton-inside':true }" ng-click="save()" ng-disabled="disable_save_button" tabindex=8>Save</button>            
                 <div class="saved-text-cls">
                     <img ng-show="disable_save_button" src="img/loading-mini.gif" class="loadingMini">

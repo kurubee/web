@@ -68,14 +68,14 @@
                             <div class="square"></div>
                             <div class="square"></div>
                         </div class="squares">
-                        <img id="image" ng-src="{{baseURL}}{{activity.image}}" style="max-height:172px"/>
+                        <img id="image" ng-src="{{baseURL}}{{activity.image}}" class="image-max-height"/>
                         <div id="image" ng-class="{'button2':true, 'fade3':true, 'add-image-btn': true}" ng-hide="activity.image">
                            Add Image
                         </div>
                     </label>
                     <input onchange="angular.element(this).scope().addImage();" type="file" id="file" name="file" style="display:none;" multiple />
                 </div>
-                <div style="text-align:center;">
+                <div class="align-center">
                     <div class="hide-text-div">
                         <div>
                             <div class="x-innerhtml " id="ext-element-740">

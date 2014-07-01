@@ -5,9 +5,8 @@
     <div class="well white error-box" ng-show="course">
         <p><b>Are you sure you want to delete {{course.name}}?</b></p>
         <div style="margin-left:17%;">
-       <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 80px;vertical-align: top;background-color: rgb(155, 17, 17);
-background-image: linear-gradient(to bottom, #CC0A0A, #8F0A0A);" ng-click="no()" ng-disabled="disable_save_button">No</button> 
-       <button ng-class="{'button2':true, 'fade3':true }" style="display: inline-block;padding: 5px;width: 80px;vertical-align: top;" ng-click="yes()" ng-disabled="disable_save_button">Yes</button> 
+       <button ng-class="{'no-btn':true, 'fade3':true }" ng-click="no()" ng-disabled="disable_save_button">No</button> 
+       <button ng-class="{'yes-btn':true,'fade3':true }"  ng-click="yes()" ng-disabled="disable_save_button">Yes</button> 
 
        </div>
     </div>

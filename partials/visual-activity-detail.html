@@ -50,7 +50,7 @@
                     <div ng-show="inAnswers" style="margin-top:10px">
                         <ul ng-repeat="answer in activity.real_answers" >
                             <li>
-                                <div class="carousel-card" style="padding-bottom: 5px;">
+                                <div class="carousel-card quiz-card" >
                                    <input type="text" ng-model="answer.value" ngMouseover="{{index}}" class="visual-answer">
                                     <button type="button" class="btn btn-xs remove-answer" ng-click="removeAnswer({{$index}})">
                                         <span class="glyphicon glyphicon-trash"></span>
@@ -87,12 +87,8 @@
                     </div>
                 </div>
                 <div class="bottom-right">
-                    <button style="margin-top: 1px;
-margin-right: 5px;
-padding: 3px;
-border: 1px solid black;
-height: 32px;" ng-class="{ 'button2':true, 'start-level-btn':true}" ng-click="inAnswers=true;" ng-show="!inAnswers">Edit Answers</button> 
-                    <button ng-class="{ 'button2':true, 'start-level-btn':true}" ng-click="addAnswer()" ng-show="inAnswers">Add Answer</button>
+                    <button ng-class="{'add-answer-btn':true, 'button2':true, 'start-level-btn':true}" ng-click="inAnswers=true;" ng-show="!inAnswers">Edit Answers</button> 
+                    <button ng-class="{'add-answer-btn':true, 'button2':true, 'start-level-btn':true}" ng-click="addAnswer()" ng-show="inAnswers">Add Answer</button>
                 </div>
             </div>
         </div>

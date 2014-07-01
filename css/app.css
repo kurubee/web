@@ -610,12 +610,212 @@ border: 1px solid;
 }
 
 .course-list-container{
-position: absolute;
-
-margin-left: 10%;
-width: 80%;
+    position: absolute;
+    margin-left: 10%;
+    width: 80%;
 }
 
 .breadcumb-element{
     float:left;
+}
+
+.level-icon{
+    -webkit-user-drag: none;
+    width:auto;
+}
+
+.no-levels-msg{
+    text-align:center; 
+    padding:5px;
+}
+.add-level-btn{
+    margin-top: 1px;
+    margin-right: 5px;
+    padding: 3px;
+    border: 1px solid black;
+    height: 32px;
+}
+
+.levels-carousel{
+    height:115px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.empty-th{
+    width:50px
+}
+
+.course-row{
+    height:50px;
+}
+
+.stats-icon{
+    background-color:rgb(50, 17, 155);
+    background-image: linear-gradient(to bottom, #310ACC, #1F0A8F);
+    width:28px; 
+    padding: 5px;
+}
+.delete-icon{
+    background-color: rgb(155, 17, 17);
+    background-image: linear-gradient(to bottom, #CC0A0A, #8F0A0A);
+    width:28px; 
+    padding: 5px;
+    margin-left:-10px;"
+}
+
+.prev-page{
+    float: left;
+}
+
+.next-page{
+    float: left;
+    margin-left:10px;
+}
+
+.activity-query{
+    text-shadow: rgba(255, 255, 255, 1) 0px 0 5px;
+}
+
+.black{
+    color:black;
+}
+.loading-activity-list{
+    display:none;
+    margin-top:-55px;
+    margin-bottom:-70px;
+}
+.new-act-btn{
+    width: 132px;
+    margin-top: 1px;
+    margin-right: 5px;
+    padding: 3px;
+    border: 1px solid black;
+    height: 32px;
+    text-transform: uppercase;
+    background-color: #11598c; 
+    background-image: linear-gradient(#4ca9e9,#156eac 2%,#0d456c);
+    display: inline-block;
+    vertical-align:top;
+    border-radius: 7px;
+    font-family: 'latolight', sans-serif;
+    font-size: 16px;
+    background-repeat: repeat-x;
+    cursor: pointer;
+    color:white;
+}
+
+.new-act-btn:hover {
+    color: #FFFFFF;
+    background-position: 0 -15px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    text-decoration:none;
+}
+
+.black{
+    color:black;
+}
+
+.remove-opts{
+    color:#009bdb;
+    cursor:pointer;
+}
+
+.up-btn{
+    margin-right:5px;
+}
+
+.down-btn{
+    float:none;
+    left:5px;
+}
+
+.loading-activity-move{
+    background-color: rgba(190,190,190,0.5);
+    height: 240px; 
+    width: 207px;
+}
+
+.image-max-height{
+    max-height:172px;
+}
+.align-center{
+    text-align:center;
+}
+
+.quiz-carousel{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.quiz-card{
+    padding-bottom: 5px;
+}
+
+.add-answer-btn{
+    margin-top: 1px;
+    margin-right: 5px;
+    padding: 3px;
+    border: 1px solid black;
+    height: 32px;
+}
+
+.no-btn{
+    display: inline-block;
+    padding: 5px;
+    width: 80px;
+    vertical-align: top;
+    background-color: rgb(155, 17, 17);
+    background-image: linear-gradient(to bottom, #CC0A0A, #8F0A0A);
+    font-family: 'latolight', sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    background-repeat: repeat-x;
+    cursor: pointer;
+    border-radius: 7px;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+}
+
+.no-btn:hover {
+    color: #FFFFFF;
+    background-position: 0 -15px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.yes-btn{
+    display: inline-block;
+    padding: 5px;
+    width: 80px;
+    vertical-align: top;
+    background-color: #5BB75B;
+    background-image: linear-gradient(to bottom, #62C462, #51A351);
+    font-family: 'latolight', sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    background-repeat: repeat-x;
+    cursor: pointer;
+    border-radius: 7px;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+}
+
+.yes-btn:hover {
+    color: #FFFFFF;
+    background-position: 0 -15px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
