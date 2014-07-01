@@ -82,6 +82,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                         position: target,
                         flat: true,
                         clickable: false,
+                        icon: "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png",
                     });
                     $scope.mouseFlag = false;
                     //Creating eventlisteners to set mark when click
@@ -101,6 +102,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                                 position: e.latLng,
                                 flat: true,
                                 clickable: false,
+                                icon: "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png",
                             });
                             $scope.updateCircle();
                            
@@ -177,7 +179,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                 $scope.map.fitBounds(bounds);
                 $scope.marker = new google.maps.Marker({
                     map: $scope.map,
-                   
+                    icon: "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png",
                     position: target,
                     flat: true,
                     clickable: false,
@@ -213,6 +215,7 @@ kurubeeApp.controller('GeospatialActivityCtrl', ['Aux', '$scope', '$location', '
                             position: e.latLng,
                             flat: true,
                             clickable: false,
+                            icon: "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png"
                         });
                         $scope.updateCircle();
                         $scope.$apply(function() {
