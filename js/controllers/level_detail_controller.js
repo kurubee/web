@@ -69,6 +69,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        });   
     };
     $scope.upActivity = function(activity,event) {
+       //We need to swap the activities positions in the array and the level_order propery between selected activity and previous one in the array
        var indexAct;
        for(var i=0;i<$scope.activities.length;i++)
        {
@@ -109,6 +110,7 @@ kurubeeApp.controller('LevelDetailCtrl', ['Aux', '$route', '$scope', '$location'
        }
     };
     $scope.downActivity = function(activity,event) {
+       //We need to swap the activities positions in the array and the level_order propery between selected activity and next one in the array
        var indexAct;
        for(var i=0;i<$scope.activities.length;i++)
        {
