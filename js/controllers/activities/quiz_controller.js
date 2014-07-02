@@ -76,10 +76,8 @@ kurubeeApp.controller('QuizActivityCtrl', ['Aux', '$scope', '$location', 'Restan
         $scope.activity.real_answers.splice(index, 1);
     };
     $scope.detectChange = function () {
-        console.log($scope.changes);
         if ($scope.changes>2)
         {
-            console.log("cambio");
             $scope.changed = true;
         }
         $scope.changes ++;

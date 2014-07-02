@@ -338,7 +338,16 @@ body {
     padding-bottom: 10px;
     height:86px;
     margin-top:-33px;
-    float: left;
+    width: 504px;
+}
+
+.breadcumb-stats {
+    width: 450px;
+    color: #303333;
+    font: 25px 'latolight', sans-serif;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    height:86px;
     width: 504px;
 }
 

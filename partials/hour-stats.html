@@ -1,45 +1,53 @@
 <div class="container-fluid margedTop">
-  <div class="row-fluid">
+  <div ng-show="!course">
+      <img src="img/loading.gif" class="loading">
+  </div>
+  <div class="row-fluid" ng-show="course">
     <div class="span10 margedTop">
-        <ul class="nav nav-tabs">
-            <li ><a ng-href="#/players/{{courseId}}">Players</a></li>
-            <li class="active"><a >Hours</a></li>
-            <li><a ng-href="#/days/{{courseId}}">Days</a></li>
-        </ul>
+        <div class="breadcumb-stats">
+            <div class="breadcumb-element"><a ng-click="toCareer()" href="">{{courseName}}</a> » </div><div class="breadcumb-element">stats</div>
+        </div>
+        <div>
+            <ul class="nav nav-tabs">
+                <li ><a ng-href="#/players/{{courseId}}">Players</a></li>
+                <li class="active"><a >Hours</a></li>
+                <li><a ng-href="#/days/{{courseId}}">Days</a></li>
+            </ul>
 
-        <div  ng-controller="PaginationCtrl" >
-            <table class="table table-striped" >
-                <thead>
-                  <tr>
-                    <th>Hour</th>
-                    <th>Number of Attempts</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="hour in items |   offset: currentPage*itemsPerPage |   limitTo: itemsPerPage">
-                    <td>{{hour.time}}</td>
-                    <td>{{hour.num_attempts}}</td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <td colspan="3">
-                    <div class="pagination">
-                      <ul>
-                        <li ng-class="prevPageDisabled()" class="prev-page">
-                          <a href ng-click="prevPage()">« Prev</a>
-                        </li>
-                        <li ng-repeat="n in range()"
-                          ng-class="{active: n == currentPage}" ng-click="setPage(n)">
-                          <a href="#">{{n+1}}</a>
-                        </li>
-                        <li ng-class="nextPageDisabled()" class="next-page">
-                          <a href ng-click="nextPage()" >Next »</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
-                </tfoot>                
-            </table>
+            <div  ng-controller="PaginationCtrl" >
+                <table class="table table-striped" >
+                    <thead>
+                      <tr>
+                        <th>Hour</th>
+                        <th>Number of Attempts</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="hour in items |   offset: currentPage*itemsPerPage |   limitTo: itemsPerPage">
+                        <td>{{hour.time}}</td>
+                        <td>{{hour.num_attempts}}</td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <td colspan="3">
+                        <div class="pagination">
+                          <ul>
+                            <li ng-class="prevPageDisabled()" class="prev-page">
+                              <a href ng-click="prevPage()">« Prev</a>
+                            </li>
+                            <li ng-repeat="n in range()"
+                              ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                              <a href="#">{{n+1}}</a>
+                            </li>
+                            <li ng-class="nextPageDisabled()" class="next-page">
+                              <a href ng-click="nextPage()" >Next »</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tfoot>                
+                </table>
+            </div>
         </div>            
     </div>
   </div>
